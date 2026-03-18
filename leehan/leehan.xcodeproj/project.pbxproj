@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXFileReference section */
+		677CFB5F2F6A7799007618A6 /* leehan-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "leehan-Info.plist"; sourceTree = "<group>"; };
 		67CA49722F6A29660052B48F /* leehan.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = leehan.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -37,6 +38,7 @@
 		67CA49692F6A29660052B48F = {
 			isa = PBXGroup;
 			children = (
+				677CFB5F2F6A7799007618A6 /* leehan-Info.plist */,
 				677CF9892F6A4D04007618A6 /* UMC_Megabox */,
 				67CA49802F6A2A660052B48F /* Practice */,
 				67CA49732F6A29660052B48F /* Products */,
@@ -260,6 +262,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "leehan-Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -291,6 +294,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "leehan-Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

@@ -16,8 +16,6 @@ extension Font {
         case medium
         case regular
         case light
-        case extraLight
-        case thin
 
         var value: String {
             switch self {
@@ -33,10 +31,6 @@ extension Font {
                 return "Pretendard-Regular"
             case .light:
                 return "Pretendard-Light"
-            case .extraLight:
-                return "Pretendard-ExtraLight"
-            case .thin:
-                return "Pretendard-Thin"
             }
         }
     }
@@ -68,16 +62,7 @@ extension Font {
     static func PretendardLight(size: CGFloat) -> Font {
         return .pretend(type: .medium, size: size)
     }
-
-    static func PretendardExtraLight(size: CGFloat) -> Font {
-        return .pretend(type: .extraLight, size: size)
-    }
-
-    static func PretendardThin(size: CGFloat) -> Font {
-        return .pretend(type: .thin, size: size)
-    }
-
-
+    
     /*
      나중에 사용할 때에는 이렇게 씀
 

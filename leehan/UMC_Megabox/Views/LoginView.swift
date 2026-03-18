@@ -20,7 +20,7 @@ struct LoginView: View {
             Spacer()
             
             TextField("아이디", text: $id)
-            Divider().padding(.bottom, 40)
+            Divider().padding(.bottom, 30)
             TextField("비밀번호", text: $pw)
             Divider()
             
