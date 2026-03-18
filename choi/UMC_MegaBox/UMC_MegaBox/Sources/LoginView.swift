@@ -4,7 +4,7 @@ public struct LoginView: View {
     public init() {}
     
     public var body: some View {
-        VStack() { // 각 하위 뷰 사이의 간격
+        VStack() {
             
             customNavBar
             Spacer()
@@ -40,17 +40,17 @@ public struct LoginView: View {
             VStack(alignment: .leading, spacing: 10) {
                 Text("아이디")
                     .font(.pretendardMedium16)
-                    .foregroundColor(.gray)
+                    .foregroundColor(Color(.gray03))
                 Divider()
-                    .background(Color(red: 0.84, green: 0.84, blue: 0.84))
+                    .background(Color(.gray02))
             }
             
             VStack(alignment: .leading, spacing: 10) {
                 Text("비밀번호")
                     .font(.pretendardMedium16)
-                    .foregroundColor(.gray)
+                    .foregroundColor(Color(.gray03))
                 Divider()
-                    .background(Color(red: 0.84, green: 0.84, blue: 0.84))
+                    .background(Color(.gray02))
             }
         }
     }
@@ -62,16 +62,16 @@ public struct LoginView: View {
                 Spacer()
                 Text("로그인")
                     .font(.pretendardBold18)
-                    .foregroundColor(.white)
+                    .foregroundColor(Color(.white))
                 Spacer()
             }
             .padding(.vertical, 15)
-            .background(Color(red: 0.4, green: 0.05, blue: 0.85))
+            .background(Color(.purple03))
             .cornerRadius(10)
             
             Text("회원가입")
                 .font(.pretendardMedium13)
-                .foregroundColor(.gray)
+                .foregroundColor(Color(.gray03))
         }
     }
     
@@ -96,7 +96,6 @@ public struct LoginView: View {
             .aspectRatio(contentMode: .fill)
             .frame(maxWidth: .infinity)
             .frame(height: 103)
-            .clipped()
     }
 }
 
