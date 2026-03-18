@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		023C6E917EA8377C6DE12B9D /* Pretendard-ExtraBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = F01B842CCBE8B66A655ABCB0 /* Pretendard-ExtraBold.otf */; };
-		11BD11BB3CD80F6CBFEF26EE /* Fonts.swift in Resources */ = {isa = PBXBuildFile; fileRef = BD93735F50C2FA5630BAB4D8 /* Fonts.swift */; };
 		2387049BFF67D7C8BC4717B5 /* TuistBundle+Week1Practice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 056A575D038CFBB70D0476EE /* TuistBundle+Week1Practice.swift */; };
 		3F1DEB788DF60D379EDC2BDB /* Pretendard-Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = DBE05B981688CC86B3495CBF /* Pretendard-Thin.otf */; };
 		415B27505860EE59C30F3778 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5A632D426294194CE612C91D /* Assets.xcassets */; };
@@ -17,6 +16,7 @@
 		84CF7E29F5FD01794B231418 /* Pretendard-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 7B632914663F7389E8A3C755 /* Pretendard-Regular.otf */; };
 		85639106AB26870AF8E3BD9B /* Pretendard-ExtraLight.otf in Resources */ = {isa = PBXBuildFile; fileRef = 9622013C1085DD92570D7ABB /* Pretendard-ExtraLight.otf */; };
 		90C55468BEDC13B701634A7F /* Pretendard-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = FF74CCD5025B800CB01B9343 /* Pretendard-SemiBold.otf */; };
+		9436B005C21350AF9D923BF3 /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57ECDC4DA8698B785FCDD954 /* Fonts.swift */; };
 		B988B21F45857A8786AFA859 /* TicketView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D604594EA74E93169FC2CA07 /* TicketView.swift */; };
 		C04F638E9FBD6A82C3C5175A /* TuistFonts+Week1Practice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4950FB8F7E0B1289390CE90C /* TuistFonts+Week1Practice.swift */; };
 		C494E8C14E9B9FE1FA1E35A1 /* Pretendard-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = BB79752CC54DF7C5721E3814 /* Pretendard-Black.otf */; };
@@ -40,10 +40,11 @@
 
 /* Begin PBXFileReference section */
 		056A575D038CFBB70D0476EE /* TuistBundle+Week1Practice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TuistBundle+Week1Practice.swift"; sourceTree = "<group>"; };
-		0CA04BD4776BC5EB3C789CB9 /* Week1-Practice-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Week1-Practice-Info.plist"; sourceTree = "<group>"; };
 		27F5A5E01F80B7EA9CA12CAD /* Week1_PracticeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Week1_PracticeApp.swift; sourceTree = "<group>"; };
 		2A9FB1C834B93CC4A54CE3AC /* TuistAssets+Week1Practice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TuistAssets+Week1Practice.swift"; sourceTree = "<group>"; };
 		4950FB8F7E0B1289390CE90C /* TuistFonts+Week1Practice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TuistFonts+Week1Practice.swift"; sourceTree = "<group>"; };
+		55817949BBEB65BD19814BD6 /* Week1_Practice-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Week1_Practice-Info.plist"; sourceTree = "<group>"; };
+		57ECDC4DA8698B785FCDD954 /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
 		5A632D426294194CE612C91D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5DCAF5B7CB932481CD1D9BF2 /* Pretendard-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Bold.otf"; sourceTree = "<group>"; };
 		7B632914663F7389E8A3C755 /* Pretendard-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Regular.otf"; sourceTree = "<group>"; };
@@ -51,7 +52,6 @@
 		9622013C1085DD92570D7ABB /* Pretendard-ExtraLight.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-ExtraLight.otf"; sourceTree = "<group>"; };
 		9DFD68905B7FB77C61A43488 /* Week1_Practice.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Week1_Practice.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BB79752CC54DF7C5721E3814 /* Pretendard-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Black.otf"; sourceTree = "<group>"; };
-		BD93735F50C2FA5630BAB4D8 /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
 		D0234A430A62C385ECF5ADDE /* Pretendard-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Light.otf"; sourceTree = "<group>"; };
 		D604594EA74E93169FC2CA07 /* TicketView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicketView.swift; sourceTree = "<group>"; };
 		DBE05B981688CC86B3495CBF /* Pretendard-Thin.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Thin.otf"; sourceTree = "<group>"; };
@@ -83,7 +83,6 @@
 			children = (
 				F19F2EBB2140A8D68FC39840 /* Derived */,
 				4612E71390ADBFDF8A4DE6BE /* Week1_Practice */,
-				0CA04BD4776BC5EB3C789CB9 /* Week1-Practice-Info.plist */,
 			);
 			name = Project;
 			sourceTree = "<group>";
@@ -100,6 +99,7 @@
 		3F6370A7C963A165B7E62D0F /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				57ECDC4DA8698B785FCDD954 /* Fonts.swift */,
 				D604594EA74E93169FC2CA07 /* TicketView.swift */,
 				27F5A5E01F80B7EA9CA12CAD /* Week1_PracticeApp.swift */,
 			);
@@ -126,7 +126,6 @@
 		57FCD599D70C8B0FEFAA3E96 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
-				BD93735F50C2FA5630BAB4D8 /* Fonts.swift */,
 				BB79752CC54DF7C5721E3814 /* Pretendard-Black.otf */,
 				5DCAF5B7CB932481CD1D9BF2 /* Pretendard-Bold.otf */,
 				F01B842CCBE8B66A655ABCB0 /* Pretendard-ExtraBold.otf */,
@@ -150,9 +149,18 @@
 			path = Sources;
 			sourceTree = "<group>";
 		};
+		9AD3651187967822ABF80530 /* InfoPlists */ = {
+			isa = PBXGroup;
+			children = (
+				55817949BBEB65BD19814BD6 /* Week1_Practice-Info.plist */,
+			);
+			path = InfoPlists;
+			sourceTree = "<group>";
+		};
 		F19F2EBB2140A8D68FC39840 /* Derived */ = {
 			isa = PBXGroup;
 			children = (
+				9AD3651187967822ABF80530 /* InfoPlists */,
 				62C9193673A4BE3C9B453824 /* Sources */,
 			);
 			path = Derived;
@@ -215,7 +223,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				415B27505860EE59C30F3778 /* Assets.xcassets in Resources */,
-				11BD11BB3CD80F6CBFEF26EE /* Fonts.swift in Resources */,
 				C494E8C14E9B9FE1FA1E35A1 /* Pretendard-Black.otf in Resources */,
 				6FB4D1CE3CDCB4097033DB67 /* Pretendard-Bold.otf in Resources */,
 				023C6E917EA8377C6DE12B9D /* Pretendard-ExtraBold.otf in Resources */,
@@ -238,6 +245,7 @@
 				F65758A47EBE89E830108604 /* TuistAssets+Week1Practice.swift in Sources */,
 				2387049BFF67D7C8BC4717B5 /* TuistBundle+Week1Practice.swift in Sources */,
 				C04F638E9FBD6A82C3C5175A /* TuistFonts+Week1Practice.swift in Sources */,
+				9436B005C21350AF9D923BF3 /* Fonts.swift in Sources */,
 				B988B21F45857A8786AFA859 /* TicketView.swift in Sources */,
 				FAA5B64627F1EF0517D3ACFF /* Week1_PracticeApp.swift in Sources */,
 			);
@@ -253,7 +261,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = "Week1-Practice-Info.plist";
+				INFOPLIST_FILE = "Derived/InfoPlists/Week1_Practice-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -282,7 +290,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = "Week1-Practice-Info.plist";
+				INFOPLIST_FILE = "Derived/InfoPlists/Week1_Practice-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
