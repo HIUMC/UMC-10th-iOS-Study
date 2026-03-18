@@ -11,7 +11,7 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		67CA49742F6A29660052B48F /* UMC_Megabox */ = {
+		677CF9892F6A4D04007618A6 /* UMC_Megabox */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = UMC_Megabox;
 			sourceTree = "<group>";
@@ -37,8 +37,8 @@
 		67CA49692F6A29660052B48F = {
 			isa = PBXGroup;
 			children = (
+				677CF9892F6A4D04007618A6 /* UMC_Megabox */,
 				67CA49802F6A2A660052B48F /* Practice */,
-				67CA49742F6A29660052B48F /* UMC_Megabox */,
 				67CA49732F6A29660052B48F /* Products */,
 			);
 			sourceTree = "<group>";
@@ -67,7 +67,7 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
-				67CA49742F6A29660052B48F /* UMC_Megabox */,
+				677CF9892F6A4D04007618A6 /* UMC_Megabox */,
 				67CA49802F6A2A660052B48F /* Practice */,
 			);
 			name = leehan;
