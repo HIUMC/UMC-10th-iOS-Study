@@ -1,7 +1,7 @@
 import Testing
-@testable import UMC_MegaBox
+@testable import Week2_Practice
 
-struct UMCMegaBoxTests {
+struct Week2PracticeTests {
 
     @Test func example() async throws {
         // Write your test here and use APIs like `#expect(...)` to check expected conditions.

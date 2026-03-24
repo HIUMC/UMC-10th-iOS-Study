@@ -45,7 +45,35 @@
                BlueprintIdentifier = "5D7E069981E7703632A5A0A1"
                BuildableName = "Week1_Practice.app"
                BlueprintName = "Week1_Practice"
-               ReferencedContainer = "container:Practice/Week1/Week1_Practice.xcodeproj">
+               ReferencedContainer = "container:Practice/Week1_Practice/Week1_Practice.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "FF5087D38CDA6A8A86F80490"
+               BuildableName = "Week2_Practice.app"
+               BlueprintName = "Week2_Practice"
+               ReferencedContainer = "container:Practice/Week2_Practice/Week2_Practice.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "BECA36A18530A80964DE874A"
+               BuildableName = "Week2_PracticeTests.xctest"
+               BlueprintName = "Week2_PracticeTests"
+               ReferencedContainer = "container:Practice/Week2_Practice/Week2_Practice.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -65,6 +93,17 @@
                BuildableName = "UMC_MegaBoxTests.xctest"
                BlueprintName = "UMC_MegaBoxTests"
                ReferencedContainer = "container:UMC_MegaBox/UMC_MegaBox.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO"
+            parallelizable = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "BECA36A18530A80964DE874A"
+               BuildableName = "Week2_PracticeTests.xctest"
+               BlueprintName = "Week2_PracticeTests"
+               ReferencedContainer = "container:Practice/Week2_Practice/Week2_Practice.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
