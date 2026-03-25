@@ -8,13 +8,13 @@
 import SwiftUI
 
 struct ProfileHeaderView: View {
-    @AppStorage("id") private var id: String = ""
-    
+    @AppStorage("name") private var name: String = ""
+
     var body: some View {
         HStack(alignment: .top) {
             VStack(alignment: .leading, spacing: 4) {
                 HStack(spacing: 8) {
-                    Text("\(id)님")
+                    Text("\(name)님")
                         .font(.pretendardBold24)
                     
                     Text("WELCOME")
