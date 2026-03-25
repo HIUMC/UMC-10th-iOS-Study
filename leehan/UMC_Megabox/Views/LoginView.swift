@@ -8,8 +8,9 @@
 import SwiftUI
 
 struct LoginView: View {
-    @State private var id = ""
-    @State private var pw = ""
+    @AppStorage("id") private var id = ""
+    @AppStorage("pwd") private var pwd = ""
+    @State private var vm = LoginViewModel()
     
     var body: some View {
         VStack {
@@ -21,12 +22,16 @@ struct LoginView: View {
             
             TextField("아이디", text: $id)
             Divider().padding(.bottom, 30)
-            TextField("비밀번호", text: $pw)
+            SecureField("비밀번호", text: $pwd)
             Divider()
             
             Spacer().frame(height: 65)
             
-            Button( action: {} ) {
+            Button(action: {
+                vm.loginId(id: id);
+                vm.loginpwd(pwd: pwd);
+                print("ID: \(id), PWD: \(pwd)")
+            }) {
                 ZStack {
                     RoundedRectangle(cornerRadius: 10)
                         .foregroundStyle(.purple03)
