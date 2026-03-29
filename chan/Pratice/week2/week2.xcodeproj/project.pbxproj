@@ -7,19 +7,19 @@
 	objects = {
 
 /* Begin PBXFileReference section */
-		5FBAF5092F6A6D9C00C12965 /* Megabox.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Megabox.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		5FBAF56C2F6E761300C12965 /* week2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = week2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		5FBAF50B2F6A6D9C00C12965 /* Megabox */ = {
+		5FBAF56E2F6E761300C12965 /* week2 */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			path = Megabox;
+			path = week2;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		5FBAF5062F6A6D9C00C12965 /* Frameworks */ = {
+		5FBAF5692F6E761300C12965 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -29,18 +29,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		5FBAF5002F6A6D9C00C12965 = {
+		5FBAF5632F6E761300C12965 = {
 			isa = PBXGroup;
 			children = (
-				5FBAF50B2F6A6D9C00C12965 /* Megabox */,
-				5FBAF50A2F6A6D9C00C12965 /* Products */,
+				5FBAF56E2F6E761300C12965 /* week2 */,
+				5FBAF56D2F6E761300C12965 /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		5FBAF50A2F6A6D9C00C12965 /* Products */ = {
+		5FBAF56D2F6E761300C12965 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				5FBAF5092F6A6D9C00C12965 /* Megabox.app */,
+				5FBAF56C2F6E761300C12965 /* week2.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -48,64 +48,64 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		5FBAF5082F6A6D9C00C12965 /* Megabox */ = {
+		5FBAF56B2F6E761300C12965 /* week2 */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 5FBAF5142F6A6D9E00C12965 /* Build configuration list for PBXNativeTarget "Megabox" */;
+			buildConfigurationList = 5FBAF5772F6E761600C12965 /* Build configuration list for PBXNativeTarget "week2" */;
 			buildPhases = (
-				5FBAF5052F6A6D9C00C12965 /* Sources */,
-				5FBAF5062F6A6D9C00C12965 /* Frameworks */,
-				5FBAF5072F6A6D9C00C12965 /* Resources */,
+				5FBAF5682F6E761300C12965 /* Sources */,
+				5FBAF5692F6E761300C12965 /* Frameworks */,
+				5FBAF56A2F6E761300C12965 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
-				5FBAF50B2F6A6D9C00C12965 /* Megabox */,
+				5FBAF56E2F6E761300C12965 /* week2 */,
 			);
-			name = Megabox;
+			name = week2;
 			packageProductDependencies = (
 			);
-			productName = Megabox;
-			productReference = 5FBAF5092F6A6D9C00C12965 /* Megabox.app */;
+			productName = week2;
+			productReference = 5FBAF56C2F6E761300C12965 /* week2.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		5FBAF5012F6A6D9C00C12965 /* Project object */ = {
+		5FBAF5642F6E761300C12965 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 2630;
 				LastUpgradeCheck = 2630;
 				TargetAttributes = {
-					5FBAF5082F6A6D9C00C12965 = {
+					5FBAF56B2F6E761300C12965 = {
 						CreatedOnToolsVersion = 26.3;
 					};
 				};
 			};
-			buildConfigurationList = 5FBAF5042F6A6D9C00C12965 /* Build configuration list for PBXProject "Megabox" */;
+			buildConfigurationList = 5FBAF5672F6E761300C12965 /* Build configuration list for PBXProject "week2" */;
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
 				Base,
 			);
-			mainGroup = 5FBAF5002F6A6D9C00C12965;
+			mainGroup = 5FBAF5632F6E761300C12965;
 			minimizedProjectReferenceProxies = 1;
 			preferredProjectObjectVersion = 77;
-			productRefGroup = 5FBAF50A2F6A6D9C00C12965 /* Products */;
+			productRefGroup = 5FBAF56D2F6E761300C12965 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				5FBAF5082F6A6D9C00C12965 /* Megabox */,
+				5FBAF56B2F6E761300C12965 /* week2 */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		5FBAF5072F6A6D9C00C12965 /* Resources */ = {
+		5FBAF56A2F6E761300C12965 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -115,7 +115,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		5FBAF5052F6A6D9C00C12965 /* Sources */ = {
+		5FBAF5682F6E761300C12965 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -125,7 +125,7 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
-		5FBAF5122F6A6D9E00C12965 /* Debug */ = {
+		5FBAF5752F6E761600C12965 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -188,7 +188,7 @@
 			};
 			name = Debug;
 		};
-		5FBAF5132F6A6D9E00C12965 /* Release */ = {
+		5FBAF5762F6E761600C12965 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -244,7 +244,7 @@
 			};
 			name = Release;
 		};
-		5FBAF5152F6A6D9E00C12965 /* Debug */ = {
+		5FBAF5782F6E761600C12965 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -253,7 +253,6 @@
 				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = Megabox/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -264,7 +263,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = chan.Megabox;
+				PRODUCT_BUNDLE_IDENTIFIER = chan.week2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
@@ -276,7 +275,7 @@
 			};
 			name = Debug;
 		};
-		5FBAF5162F6A6D9E00C12965 /* Release */ = {
+		5FBAF5792F6E761600C12965 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -285,7 +284,6 @@
 				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = Megabox/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -296,7 +294,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = chan.Megabox;
+				PRODUCT_BUNDLE_IDENTIFIER = chan.week2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
@@ -311,25 +309,25 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		5FBAF5042F6A6D9C00C12965 /* Build configuration list for PBXProject "Megabox" */ = {
+		5FBAF5672F6E761300C12965 /* Build configuration list for PBXProject "week2" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				5FBAF5122F6A6D9E00C12965 /* Debug */,
-				5FBAF5132F6A6D9E00C12965 /* Release */,
+				5FBAF5752F6E761600C12965 /* Debug */,
+				5FBAF5762F6E761600C12965 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		5FBAF5142F6A6D9E00C12965 /* Build configuration list for PBXNativeTarget "Megabox" */ = {
+		5FBAF5772F6E761600C12965 /* Build configuration list for PBXNativeTarget "week2" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				5FBAF5152F6A6D9E00C12965 /* Debug */,
-				5FBAF5162F6A6D9E00C12965 /* Release */,
+				5FBAF5782F6E761600C12965 /* Debug */,
+				5FBAF5792F6E761600C12965 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = 5FBAF5012F6A6D9C00C12965 /* Project object */;
+	rootObject = 5FBAF5642F6E761300C12965 /* Project object */;
 }

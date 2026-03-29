@@ -10,9 +10,22 @@
 		5FBAF5092F6A6D9C00C12965 /* Megabox.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Megabox.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		5FBAF54A2F6AE60800C12965 /* Exceptions for "Megabox" folder in "Megabox" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 5FBAF5082F6A6D9C00C12965 /* Megabox */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		5FBAF50B2F6A6D9C00C12965 /* Megabox */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				5FBAF54A2F6AE60800C12965 /* Exceptions for "Megabox" folder in "Megabox" target */,
+			);
 			path = Megabox;
 			sourceTree = "<group>";
 		};
