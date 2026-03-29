@@ -1,0 +1,455 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 55;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		023C6E917EA8377C6DE12B9D /* Pretendard-ExtraBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = F01B842CCBE8B66A655ABCB0 /* Pretendard-ExtraBold.otf */; };
+		2387049BFF67D7C8BC4717B5 /* TuistBundle+Week1Practice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 056A575D038CFBB70D0476EE /* TuistBundle+Week1Practice.swift */; };
+		3F1DEB788DF60D379EDC2BDB /* Pretendard-Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = DBE05B981688CC86B3495CBF /* Pretendard-Thin.otf */; };
+		415B27505860EE59C30F3778 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5A632D426294194CE612C91D /* Assets.xcassets */; };
+		61D5C4B1B9024F7F25A7CBE7 /* Pretendard-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = D0234A430A62C385ECF5ADDE /* Pretendard-Light.otf */; };
+		6FB4D1CE3CDCB4097033DB67 /* Pretendard-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 5DCAF5B7CB932481CD1D9BF2 /* Pretendard-Bold.otf */; };
+		84CF7E29F5FD01794B231418 /* Pretendard-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 7B632914663F7389E8A3C755 /* Pretendard-Regular.otf */; };
+		85639106AB26870AF8E3BD9B /* Pretendard-ExtraLight.otf in Resources */ = {isa = PBXBuildFile; fileRef = 9622013C1085DD92570D7ABB /* Pretendard-ExtraLight.otf */; };
+		90C55468BEDC13B701634A7F /* Pretendard-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = FF74CCD5025B800CB01B9343 /* Pretendard-SemiBold.otf */; };
+		9436B005C21350AF9D923BF3 /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57ECDC4DA8698B785FCDD954 /* Fonts.swift */; };
+		B988B21F45857A8786AFA859 /* TicketView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D604594EA74E93169FC2CA07 /* TicketView.swift */; };
+		C04F638E9FBD6A82C3C5175A /* TuistFonts+Week1Practice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4950FB8F7E0B1289390CE90C /* TuistFonts+Week1Practice.swift */; };
+		C494E8C14E9B9FE1FA1E35A1 /* Pretendard-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = BB79752CC54DF7C5721E3814 /* Pretendard-Black.otf */; };
+		F65758A47EBE89E830108604 /* TuistAssets+Week1Practice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A9FB1C834B93CC4A54CE3AC /* TuistAssets+Week1Practice.swift */; };
+		FA189F6A3E47671EB8E1457F /* Pretendard-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 7E11D1011A2C80CF8D48E27E /* Pretendard-Medium.otf */; };
+		FAA5B64627F1EF0517D3ACFF /* Week1_PracticeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27F5A5E01F80B7EA9CA12CAD /* Week1_PracticeApp.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		BC67F240E6F549EB9C252CA0 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		056A575D038CFBB70D0476EE /* TuistBundle+Week1Practice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TuistBundle+Week1Practice.swift"; sourceTree = "<group>"; };
+		27F5A5E01F80B7EA9CA12CAD /* Week1_PracticeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Week1_PracticeApp.swift; sourceTree = "<group>"; };
+		2A9FB1C834B93CC4A54CE3AC /* TuistAssets+Week1Practice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TuistAssets+Week1Practice.swift"; sourceTree = "<group>"; };
+		4950FB8F7E0B1289390CE90C /* TuistFonts+Week1Practice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TuistFonts+Week1Practice.swift"; sourceTree = "<group>"; };
+		55817949BBEB65BD19814BD6 /* Week1_Practice-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Week1_Practice-Info.plist"; sourceTree = "<group>"; };
+		57ECDC4DA8698B785FCDD954 /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
+		5A632D426294194CE612C91D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		5DCAF5B7CB932481CD1D9BF2 /* Pretendard-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Bold.otf"; sourceTree = "<group>"; };
+		7B632914663F7389E8A3C755 /* Pretendard-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Regular.otf"; sourceTree = "<group>"; };
+		7E11D1011A2C80CF8D48E27E /* Pretendard-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Medium.otf"; sourceTree = "<group>"; };
+		9622013C1085DD92570D7ABB /* Pretendard-ExtraLight.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-ExtraLight.otf"; sourceTree = "<group>"; };
+		9DFD68905B7FB77C61A43488 /* Week1_Practice.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Week1_Practice.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		BB79752CC54DF7C5721E3814 /* Pretendard-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Black.otf"; sourceTree = "<group>"; };
+		D0234A430A62C385ECF5ADDE /* Pretendard-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Light.otf"; sourceTree = "<group>"; };
+		D604594EA74E93169FC2CA07 /* TicketView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicketView.swift; sourceTree = "<group>"; };
+		DBE05B981688CC86B3495CBF /* Pretendard-Thin.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Thin.otf"; sourceTree = "<group>"; };
+		F01B842CCBE8B66A655ABCB0 /* Pretendard-ExtraBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-ExtraBold.otf"; sourceTree = "<group>"; };
+		FF74CCD5025B800CB01B9343 /* Pretendard-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-SemiBold.otf"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		FD21D6EC981203196D3F6960 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		00AABFA97832D43132F738D0 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				9DFD68905B7FB77C61A43488 /* Week1_Practice.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		1187C76A119307C74722E094 /* Project */ = {
+			isa = PBXGroup;
+			children = (
+				F19F2EBB2140A8D68FC39840 /* Derived */,
+				4612E71390ADBFDF8A4DE6BE /* Week1_Practice */,
+			);
+			name = Project;
+			sourceTree = "<group>";
+		};
+		204D9B9150DAF77F2987EB04 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				57FCD599D70C8B0FEFAA3E96 /* Fonts */,
+				5A632D426294194CE612C91D /* Assets.xcassets */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		3F6370A7C963A165B7E62D0F /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				57ECDC4DA8698B785FCDD954 /* Fonts.swift */,
+				D604594EA74E93169FC2CA07 /* TicketView.swift */,
+				27F5A5E01F80B7EA9CA12CAD /* Week1_PracticeApp.swift */,
+			);
+			path = Sources;
+			sourceTree = "<group>";
+		};
+		4612E71390ADBFDF8A4DE6BE /* Week1_Practice */ = {
+			isa = PBXGroup;
+			children = (
+				204D9B9150DAF77F2987EB04 /* Resources */,
+				3F6370A7C963A165B7E62D0F /* Sources */,
+			);
+			path = Week1_Practice;
+			sourceTree = "<group>";
+		};
+		538B80C7EA45B604795FC843 = {
+			isa = PBXGroup;
+			children = (
+				00AABFA97832D43132F738D0 /* Products */,
+				1187C76A119307C74722E094 /* Project */,
+			);
+			sourceTree = "<group>";
+		};
+		57FCD599D70C8B0FEFAA3E96 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				BB79752CC54DF7C5721E3814 /* Pretendard-Black.otf */,
+				5DCAF5B7CB932481CD1D9BF2 /* Pretendard-Bold.otf */,
+				F01B842CCBE8B66A655ABCB0 /* Pretendard-ExtraBold.otf */,
+				9622013C1085DD92570D7ABB /* Pretendard-ExtraLight.otf */,
+				D0234A430A62C385ECF5ADDE /* Pretendard-Light.otf */,
+				7E11D1011A2C80CF8D48E27E /* Pretendard-Medium.otf */,
+				7B632914663F7389E8A3C755 /* Pretendard-Regular.otf */,
+				FF74CCD5025B800CB01B9343 /* Pretendard-SemiBold.otf */,
+				DBE05B981688CC86B3495CBF /* Pretendard-Thin.otf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
+		62C9193673A4BE3C9B453824 /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				2A9FB1C834B93CC4A54CE3AC /* TuistAssets+Week1Practice.swift */,
+				056A575D038CFBB70D0476EE /* TuistBundle+Week1Practice.swift */,
+				4950FB8F7E0B1289390CE90C /* TuistFonts+Week1Practice.swift */,
+			);
+			path = Sources;
+			sourceTree = "<group>";
+		};
+		9AD3651187967822ABF80530 /* InfoPlists */ = {
+			isa = PBXGroup;
+			children = (
+				55817949BBEB65BD19814BD6 /* Week1_Practice-Info.plist */,
+			);
+			path = InfoPlists;
+			sourceTree = "<group>";
+		};
+		F19F2EBB2140A8D68FC39840 /* Derived */ = {
+			isa = PBXGroup;
+			children = (
+				9AD3651187967822ABF80530 /* InfoPlists */,
+				62C9193673A4BE3C9B453824 /* Sources */,
+			);
+			path = Derived;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		5D7E069981E7703632A5A0A1 /* Week1_Practice */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CE966B1F34F8EC2C389AEE67 /* Build configuration list for PBXNativeTarget "Week1_Practice" */;
+			buildPhases = (
+				DD354C3F29B5C0E576B26E94 /* Sources */,
+				9484B0342C9EC63F5B7F8D89 /* Resources */,
+				FD21D6EC981203196D3F6960 /* Frameworks */,
+				BC67F240E6F549EB9C252CA0 /* Embed Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Week1_Practice;
+			packageProductDependencies = (
+			);
+			productName = Week1_Practice;
+			productReference = 9DFD68905B7FB77C61A43488 /* Week1_Practice.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		48998A4A73590B0A19374231 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				TargetAttributes = {
+				};
+			};
+			buildConfigurationList = D1F9E89CF24E99C83234092D /* Build configuration list for PBXProject "Week1_Practice" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = 538B80C7EA45B604795FC843;
+			productRefGroup = 00AABFA97832D43132F738D0 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				5D7E069981E7703632A5A0A1 /* Week1_Practice */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		9484B0342C9EC63F5B7F8D89 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				415B27505860EE59C30F3778 /* Assets.xcassets in Resources */,
+				C494E8C14E9B9FE1FA1E35A1 /* Pretendard-Black.otf in Resources */,
+				6FB4D1CE3CDCB4097033DB67 /* Pretendard-Bold.otf in Resources */,
+				023C6E917EA8377C6DE12B9D /* Pretendard-ExtraBold.otf in Resources */,
+				85639106AB26870AF8E3BD9B /* Pretendard-ExtraLight.otf in Resources */,
+				61D5C4B1B9024F7F25A7CBE7 /* Pretendard-Light.otf in Resources */,
+				FA189F6A3E47671EB8E1457F /* Pretendard-Medium.otf in Resources */,
+				84CF7E29F5FD01794B231418 /* Pretendard-Regular.otf in Resources */,
+				90C55468BEDC13B701634A7F /* Pretendard-SemiBold.otf in Resources */,
+				3F1DEB788DF60D379EDC2BDB /* Pretendard-Thin.otf in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		DD354C3F29B5C0E576B26E94 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F65758A47EBE89E830108604 /* TuistAssets+Week1Practice.swift in Sources */,
+				2387049BFF67D7C8BC4717B5 /* TuistBundle+Week1Practice.swift in Sources */,
+				C04F638E9FBD6A82C3C5175A /* TuistFonts+Week1Practice.swift in Sources */,
+				9436B005C21350AF9D923BF3 /* Fonts.swift in Sources */,
+				B988B21F45857A8786AFA859 /* TicketView.swift in Sources */,
+				FAA5B64627F1EF0517D3ACFF /* Week1_PracticeApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		32217DE764D5F7F41EBE5D71 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = "Derived/InfoPlists/Week1_Practice-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-L$(DT_TOOLCHAIN_DIR)/usr/lib/swift/$(PLATFORM_NAME)",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.minheuk.Week1Practice;
+				PRODUCT_NAME = Week1_Practice;
+				SDKROOT = iphoneos;
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		704C036809FA91668B57C42E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = "Derived/InfoPlists/Week1_Practice-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-L$(DT_TOOLCHAIN_DIR)/usr/lib/swift/$(PLATFORM_NAME)",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.minheuk.Week1Practice;
+				PRODUCT_NAME = Week1_Practice;
+				SDKROOT = iphoneos;
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = (
+					"$(inherited)",
+					DEBUG,
+				);
+				SWIFT_COMPILATION_MODE = singlefile;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		8D304F611FE7189C1BBAD704 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		C981914C52A7AB3327BAA5AA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		CE966B1F34F8EC2C389AEE67 /* Build configuration list for PBXNativeTarget "Week1_Practice" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				704C036809FA91668B57C42E /* Debug */,
+				32217DE764D5F7F41EBE5D71 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D1F9E89CF24E99C83234092D /* Build configuration list for PBXProject "Week1_Practice" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C981914C52A7AB3327BAA5AA /* Debug */,
+				8D304F611FE7189C1BBAD704 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 48998A4A73590B0A19374231 /* Project object */;
+}
