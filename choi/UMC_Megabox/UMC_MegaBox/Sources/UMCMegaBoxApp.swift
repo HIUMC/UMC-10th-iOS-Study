@@ -6,6 +6,8 @@ struct UMCMegaBoxApp: App {
         WindowGroup {
             LoginView()
             SplashView()
+            MyPageView()
+            ProfileMangaeView()
         }
     }
 }

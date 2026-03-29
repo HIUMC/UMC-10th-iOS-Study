@@ -5,7 +5,10 @@
       location = "group:Practice"
       name = "Practice">
       <FileRef
-         location = "group:Week1/Week1_Practice.xcodeproj">
+         location = "group:Week1_Practice/Week1_Practice.xcodeproj">
+      </FileRef>
+      <FileRef
+         location = "group:Week2_Practice/Week2_Practice.xcodeproj">
       </FileRef>
    </Group>
    <FileRef

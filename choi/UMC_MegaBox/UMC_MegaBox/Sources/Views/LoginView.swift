@@ -1,13 +1,15 @@
 import SwiftUI
 
 public struct LoginView: View {
-    // 사용자가 입력하는 아이디와 비밀번호를 추적하기 위한 상태 변수
-    @State private var idText: String = ""
-    @State private var passwordText: String = ""
+    @State private var loginVM = LoginViewModel()  // 소유
     
+    @AppStorage("id") private var id: String = ""
+    @AppStorage("pwd") private var pwd: String = ""
+
     public init() {}
     
     public var body: some View {
+
         VStack() {
             customNavBar
             Spacer()
@@ -18,11 +20,11 @@ public struct LoginView: View {
             }
             .padding(.horizontal, 20) // 양옆 여백
             
+            Spacer()
             promoImageView
-                .padding(.top, 30)
                 .padding(.bottom, 250)
         }
-    }
+}
     
     // MARK: - 하위 뷰 (Sub-views)
     
@@ -38,11 +40,13 @@ public struct LoginView: View {
     }
     
     private var inputFieldView: some View {
-        VStack(spacing: 30) {
+        @Bindable var vm = loginVM
+
+        return VStack(spacing: 30) {
             // 아이디 영역
             VStack(alignment: .leading, spacing: 10) {
                 // Text를 TextField로 변경하고 idText 변수와 바인딩
-                TextField("아이디", text: $idText)
+                TextField("아이디", text: $vm.loginModel.id)
                     .font(.pretendardMedium16)
                     .foregroundColor(Color(.gray03))
                     .autocapitalization(.none) // 아이디 입력 시 첫 글자 대문자 자동 변환 방지
@@ -52,8 +56,7 @@ public struct LoginView: View {
             
             // 비밀번호 영역
             VStack(alignment: .leading, spacing: 10) {
-                // 비밀번호는 마스킹 처리가 필요하므로 SecureField를 사용
-                SecureField("비밀번호", text: $passwordText)
+                SecureField("비밀번호", text: $vm.loginModel.pwd)
                     .font(.pretendardMedium16)
                     .foregroundColor(Color(.gray03))
                 Divider()
@@ -63,11 +66,14 @@ public struct LoginView: View {
     }
     
     private var loginButtonView: some View {
+
         VStack(spacing: 20) {
             // 로그인 버튼
             Button(action: {
-                // 실제 로그인 로직이 들어갈 자리. 임시로 콘솔에 출력하도록 작성
-                 print("로그인 시도 - ID: \(idText), PW: \(passwordText)")
+                // ViewModel → AppStorage에 저장
+                id = loginVM.loginModel.id
+                pwd = loginVM.loginModel.pwd
+                print("로그인 시도 - ID: \(loginVM.loginModel.id), PW: \(loginVM.loginModel.pwd)")
             }) {
                 HStack {
                     Spacer()
