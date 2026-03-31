@@ -8,29 +8,32 @@
 import SwiftUI
 
 struct MyPageView: View {
+    @State private var router = NavigationRouter()
     
     var body: some View {
-        VStack(spacing: 0) {
-            // 프로필 헤더
-            ProfileHeaderView()
-                .padding(.top, 20)
-                .padding(.horizontal, 25)
-
-            // 클럽 멤버십 바
-            ClubMembershipButton()
-                .padding(.top, 10)
-                .padding(.horizontal, 20)
-            
-            // 쿠폰 / 스토어 교환권 / 모바일 티켓
-            StatsInfoView()
-                .padding(.top, 20)
-                .padding(.horizontal, 20)
-            
-            // 퀵 액션 버튼 4개
-            QuickActionsRow()
-                .padding(.top, 24)
-                .padding(.horizontal, 20)
-            Spacer()
+        NavigationStack(path: $router.path) {
+            VStack(spacing: 0) {
+                // 프로필 헤더
+                ProfileHeaderView()
+                    .padding(.top, 20)
+                    .padding(.horizontal, 25)
+                
+                // 클럽 멤버십 바
+                ClubMembershipButton()
+                    .padding(.top, 10)
+                    .padding(.horizontal, 20)
+                
+                // 쿠폰 / 스토어 교환권 / 모바일 티켓
+                StatsInfoView()
+                    .padding(.top, 20)
+                    .padding(.horizontal, 20)
+                
+                // 퀵 액션 버튼 4개
+                QuickActionsRow()
+                    .padding(.top, 24)
+                    .padding(.horizontal, 20)
+                Spacer()
+            }
             
         }
     }
