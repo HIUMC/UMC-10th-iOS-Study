@@ -2,12 +2,15 @@ import SwiftUI
 
 @main
 struct UMCMegaBoxApp: App {
+    @AppStorage("isLoggedIn") private var isLoggedIn: Bool = false
+
     var body: some Scene {
         WindowGroup {
-            LoginView()
-            SplashView()
-            MyPageView()
-            ProfileMangaeView()
+            if isLoggedIn {
+                MainTabView()
+            } else {
+                LoginView()
+            }
         }
     }
 }

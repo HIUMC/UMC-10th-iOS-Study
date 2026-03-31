@@ -5,6 +5,7 @@ public struct LoginView: View {
     
     @AppStorage("id") private var id: String = ""
     @AppStorage("pwd") private var pwd: String = ""
+    @AppStorage("isLoggedIn") private var isLoggedIn: Bool = false
 
     public init() {}
     
@@ -73,6 +74,7 @@ public struct LoginView: View {
                 // ViewModel → AppStorage에 저장
                 id = loginVM.loginModel.id
                 pwd = loginVM.loginModel.pwd
+                isLoggedIn = true
                 print("로그인 시도 - ID: \(loginVM.loginModel.id), PW: \(loginVM.loginModel.pwd)")
             }) {
                 HStack {

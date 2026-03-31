@@ -42,7 +42,7 @@ struct ProfileHeaderView: View {
             Spacer()
             
             // 회원정보 버튼
-            Button(action: {}) {
+            NavigationLink(destination: ProfileMangaeView()) {
                 Text("회원정보")
                     .font(.pretendardSemiBold14)
                     .foregroundColor(.white)
@@ -50,7 +50,6 @@ struct ProfileHeaderView: View {
                     .frame(width: 72, alignment: .center)
                     .background(Color(.gray07))
                     .cornerRadius(14)
-
             }
             .padding(.horizontal, 10)
 
