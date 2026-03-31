@@ -4,11 +4,11 @@ struct LoginView: View {
     // 사용자가 입력할 텍스트를 저장할 공간 (State)를 먼저 만들어야 한다.
     @State private var loginViewModel = LoginViewModel()
     
-    @AppStorage("savedId") private var savedId: String = ""
-    @AppStorage("savedPw") private var savedPw: String = ""
+    @AppStorage("savedId") private var savedId: String = "abc"
+    @AppStorage("savedPw") private var savedPw: String = "123"
     
     
-    
+    @AppStorage("isLoggedIn") private var isLoggedIn: Bool = false
     
     var body: some View {
             VStack { // 1. 모든 요소를 이 큰 바구니 하나에 담으세요!
@@ -63,23 +63,29 @@ struct LoginView: View {
     // LoginButton : 보라색 로그인 창
     
     private var loginButton: some View {
-        Button(action: {
-            savedId = loginViewModel.loginData.id
-            savedPw = loginViewModel.loginData.pw
-            print("아이디 : \(savedId), 비밀번호: \(savedPw)로 로그인을 시도합니다.")
-        }) {
-            Text("로그인")
-                .font(.megaboxBold20)
-                .foregroundColor(.white)
-                // 1. 먼저 영역을 잡는다 (가로 꽉 차게, 세로 54)
-                .frame(maxWidth: .infinity)
-                .frame(height: 54)
-                // 2. 그 다음 배경색을 칠한다
-                .background(Color.megaPurple)
-                // 3. 마지막으로 깎는다
-                .cornerRadius(10)
-        }.padding(.bottom, 20)
-    }
+            Button(action: {
+                // 아이디와 비밀번호 저장
+                savedId = loginViewModel.loginData.id
+                savedPw = loginViewModel.loginData.pw
+                
+                // ⭐️ 3. 로그인 성공 처리 (여기에 조건문을 달아도 좋고, 일단 버튼 누르면 성공하게 하려면 바로 true!)
+                // 예: 만약 아이디가 비어있지 않다면 로그인 성공으로 간주
+                if !savedId.isEmpty && !savedPw.isEmpty {
+                    print("로그인 성공: 탭뷰로 이동합니다.")
+                    isLoggedIn = true
+                }
+                
+            }) {
+                Text("로그인")
+                    .font(.megaboxBold20)
+                    .foregroundColor(.white)
+                    .frame(maxWidth: .infinity)
+                    .frame(height: 54)
+                    .background(Color.megaPurple)
+                    .cornerRadius(10)
+            }
+            .padding(.bottom, 20)
+        }
     // SignUpSection : 회원가입
     private var signUpSection : some View{
         Text("회원가입")
