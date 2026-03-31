@@ -9,7 +9,9 @@ import SwiftUI
 
 struct ProfileHeaderView: View {
     @AppStorage("name") private var name: String = ""
-
+    @Environment(NavigationRouter<MyPageRoute>.self) private var router
+    
+    
     var body: some View {
         HStack(alignment: .top) {
             VStack(alignment: .leading, spacing: 4) {
@@ -42,7 +44,7 @@ struct ProfileHeaderView: View {
             Spacer()
             
             // 회원정보 버튼
-            NavigationLink(destination: ProfileMangaeView()) {
+            Button(action:{router.push(.profileManage)} ) {
                 Text("회원정보")
                     .font(.pretendardSemiBold14)
                     .foregroundColor(.white)
@@ -59,4 +61,5 @@ struct ProfileHeaderView: View {
 }
 #Preview {
     ProfileHeaderView()
+        .environment(NavigationRouter<MyPageRoute>())
 }

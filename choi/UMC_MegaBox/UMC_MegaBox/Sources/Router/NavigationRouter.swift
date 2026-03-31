@@ -8,12 +8,13 @@
 import SwiftUI
 import Observation
 
+// <Destination: Hashable> : 어떤 타입이든 들어올 수 있다"는 뜻입니다.
 @Observable
-class NavigationRouter {
+class NavigationRouter<Destination: Hashable> {
     var path = NavigationPath()
 
     // 화면 추가 (Push)
-    func push(_ route: Route) {
+    func push(_ route: Destination) {
         path.append(route)
     }
 

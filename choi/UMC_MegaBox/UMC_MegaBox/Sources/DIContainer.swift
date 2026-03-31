@@ -11,6 +11,6 @@ import Observation
 @Observable
 class DIContainer {
     // 앱에서 사용할 라우터들
-    var homeRouter = NavigationRouter()
-    var myPageRouter = NavigationRouter()
+    var homeRouter = NavigationRouter<HomeRoute>()
+    var myPageRouter = NavigationRouter<MyPageRoute>()
 }

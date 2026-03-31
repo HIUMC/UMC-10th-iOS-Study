@@ -8,10 +8,14 @@
 import SwiftUI
 
 struct MyPageView: View {
-    @State private var router = NavigationRouter()
-    
+    @Environment(NavigationRouter<MyPageRoute>.self) private var router
+
     var body: some View {
-        NavigationStack(path: $router.path) {
+        // @Observable 매크로를 쓰는 클래스의 프로퍼티를 바인딩($) 하기 위해
+        // @Bindable 래퍼를 사용
+        @Bindable var bindableRouter = router
+        
+        NavigationStack(path: $bindableRouter.path) {
             VStack(spacing: 0) {
                 // 프로필 헤더
                 ProfileHeaderView()
@@ -34,7 +38,12 @@ struct MyPageView: View {
                     .padding(.horizontal, 20)
                 Spacer()
             }
-            
+            .navigationDestination(for: MyPageRoute.self) { route in
+                switch route {
+                case .profileManage:
+                    ProfileMangaeView()
+                }
+            }
         }
     }
 }
@@ -124,4 +133,5 @@ struct QuickActionsRow: View {
 
 #Preview {
     MyPageView()
+        .environment(NavigationRouter<MyPageRoute>())
 }
