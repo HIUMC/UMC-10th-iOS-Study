@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workspace
+   version = "1.0">
+   <Group
+      location = "group:Practice"
+      name = "Practice">
+      <FileRef
+         location = "group:Week1/Week1_Practice.xcodeproj">
+      </FileRef>
+   </Group>
+   <FileRef
+      location = "group:UMC_MegaBox/UMC_MegaBox.xcodeproj">
+   </FileRef>
+</Workspace>
