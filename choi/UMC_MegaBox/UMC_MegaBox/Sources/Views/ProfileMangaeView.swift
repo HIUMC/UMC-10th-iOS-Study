@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ProfileMangaeView: View {
-
+    
     var body: some View {
         VStack(spacing: 0) {
             BasicInfoText()
@@ -19,6 +19,8 @@ struct ProfileMangaeView: View {
                 .padding(.top, 10)
                 .padding(.horizontal, 25)
 
+            Spacer()
+            LogoutButton()
             Spacer()
         }
         .navigationTitle("회원 정보 관리")
@@ -90,6 +92,24 @@ struct MemberInfo: View {
         .onAppear {
             editName = name
         }
+    }
+}
+struct LogoutButton: View {
+    @AppStorage("isLoggedIn") private var isLoggedIn: Bool = false
+
+    var body: some View {
+        Button(action: {
+                        isLoggedIn = false // 값을 false로 바꾸면 앱이 즉시 로그인 화면으로 튕겨냅니다!
+                    }) {
+                        Text("로그아웃")
+                            .font(.pretendardSemiBold14)
+                            .foregroundColor(.white)
+                            .padding()
+                            .frame(maxWidth: .infinity)
+                            .background(Color(.gray04))
+                            .cornerRadius(10)
+                    }
+                    .padding(.horizontal, 20)
     }
 }
 

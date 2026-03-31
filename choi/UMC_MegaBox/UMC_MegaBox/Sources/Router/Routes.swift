@@ -11,7 +11,7 @@ import Observation
 
 
 enum HomeRoute: Hashable {
-    case movieDetail(title: String)
+    case movieDetail(MovieModel)
 }
 
 enum MyPageRoute: Hashable {
