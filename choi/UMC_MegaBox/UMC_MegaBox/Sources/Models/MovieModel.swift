@@ -2,10 +2,14 @@ import Foundation
 
 struct MovieModel: Identifiable, Hashable {
     let id = UUID()
+
+    // MARK: - 홈 화면 (카드)
     let title: String
-    let englishTitle: String
     let posterImage: String
     let audienceCount: Int
+    
+    // MARK: - 상세 화면
+    let englishTitle: String
     let quote: String
     let description: String
     let rating: String
