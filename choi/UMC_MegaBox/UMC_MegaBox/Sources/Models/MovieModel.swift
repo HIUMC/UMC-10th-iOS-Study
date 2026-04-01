@@ -19,7 +19,7 @@ struct MovieModel: Identifiable, Hashable {
     let director: String
     let cast: String
 
-    /// 관객수를 "누적관객수 1475만" 형식으로 포맷팅
+    /// 관객수를 "누적관객수 1000만" 형식으로 포맷팅
     var formattedAudienceCount: String {
         if audienceCount == 0 {
             return "누적관객수 0"

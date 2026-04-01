@@ -144,9 +144,9 @@ struct MovieDetailView: View {
     NavigationStack {
         MovieDetailView(movie: MovieModel(
             title: "왕과 사는 남자",
-            englishTitle: "The King's Warden",
             posterImage: "kingsWarden",
             audienceCount: 1475,
+            englishTitle: "The King's Warden",
             quote: "\"나는 이제 어디로 갈까요...\"",
             description: "계유정난이 조선을 뒤흔들고\n어린 왕 이유원은 왕위에서 쫓겨나 유배길에 오른다.",
             rating: "12세 이상 관람가",

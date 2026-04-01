@@ -46,14 +46,14 @@ struct HomeView: View {
             }
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {
-                    Image("meboxLogo 1")
+                    Image("meboxLogo 2")
                         .resizable()
-                        .scaledToFit()
-                        .frame(height: 24)
-                        .clipShape(Rectangle())
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 149, height: 30)
                 }
+                .sharedBackgroundVisibility(.hidden)
+
             }
-            .toolbarBackgroundVisibility(.hidden, for: .navigationBar)
             .safeAreaBar(edge: .top) {
                 headerSegment
             }
@@ -73,14 +73,14 @@ struct HomeView: View {
             ForEach(["홈", "이벤트", "스토어", "선호극장"], id: \.self) { tab in
                 Button(action: {}) {
                     Text(tab)
-                        .font(.pretendardSemiBold16)
+                        .font(.pretendardSemiBold24)
                         .foregroundStyle(tab == "홈" ? Color(.purple03) : Color(.gray03))
                 }
             }
             Spacer()
         }
         .padding(.horizontal, 20)
-        .padding(.vertical, 10)
+        .padding(.bottom, 10)
     }
 
     // MARK: - 무비차트 / 상영예정 토글

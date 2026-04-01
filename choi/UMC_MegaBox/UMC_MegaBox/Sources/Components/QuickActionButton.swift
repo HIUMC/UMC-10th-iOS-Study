@@ -21,6 +21,7 @@ struct QuickActionButton: View {
             .frame(maxWidth: .infinity)
         }
     }
+    
 }
 
 #Preview {
