@@ -88,6 +88,7 @@ extension PretendardStyle {
     static let medium18 = PretendardStyle(type: .medium, size: 18, lineSpacing: nil, tracking: -0.9)
     static let medium16 = PretendardStyle(type: .medium, size: 16, lineSpacing: nil, tracking: -0.8)
     static let medium13 = PretendardStyle(type: .medium, size: 13, lineSpacing: nil, tracking: -0.65)
+    static let medium14 = PretendardStyle(type: .medium, size: 14, lineSpacing: nil, tracking: -0.65)
     static let medium10 = PretendardStyle(type: .medium, size: 10, lineSpacing: 8, tracking: -0.3)
     static let medium08 = PretendardStyle(type: .medium, size: 8, lineSpacing: nil, tracking: -0.4)
 
