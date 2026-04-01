@@ -94,12 +94,15 @@ struct MemberInfo: View {
         }
     }
 }
+
 struct LogoutButton: View {
     @AppStorage("isLoggedIn") private var isLoggedIn: Bool = false
+    @Environment(DIContainer.self) private var container
 
     var body: some View {
         Button(action: {
-                        isLoggedIn = false // 값을 false로 바꾸면 앱이 즉시 로그인 화면으로 튕겨냅니다!
+                        container.resetAll()
+                        isLoggedIn = false
                     }) {
                         Text("로그아웃")
                             .font(.pretendardSemiBold14)
@@ -117,4 +120,5 @@ struct LogoutButton: View {
 
 #Preview {
     ProfileMangaeView()
+        .environment(DIContainer())
 }

@@ -6,23 +6,26 @@ struct MainTabView: View {
     @Environment(DIContainer.self) private var container
     
     var body: some View {
-        TabView {
-            Tab("홈", systemImage: "house") {
+        @Bindable var bindableContainer = container
+
+        TabView(selection: $bindableContainer.selectedTab) {
+            Tab("홈", systemImage: "house", value: 0) {
                 HomeView()
-                //DIContainer 안에서 '홈 라우터'만 꺼내서 홈 뷰에 주입
                     .environment(container.homeRouter)
+                    .environment(container)
             }
-            Tab("바로 예매", systemImage: "play.laptopcomputer") {
+            Tab("바로 예매", systemImage: "play.laptopcomputer", value: 1) {
                 ReservationView()
             }
-            
-            Tab("모바일 오더", systemImage: "popcorn") {
+
+            Tab("모바일 오더", systemImage: "popcorn", value: 2) {
                 MobileOrderView()
             }
-            
-            Tab("마이페이지", systemImage: "person") {
+
+            Tab("마이페이지", systemImage: "person", value: 3) {
                 MyPageView()
                     .environment(container.myPageRouter)
+                    .environment(container)
             }
         }
         .tint(Color(.purple03))

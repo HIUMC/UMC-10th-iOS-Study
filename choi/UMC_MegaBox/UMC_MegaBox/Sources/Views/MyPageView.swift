@@ -84,13 +84,13 @@ struct ClubMembershipButton: View {
 struct StatsInfoView: View {
     var body: some View {
         HStack(spacing: 0) {
-            StatItem(title: "상태 정보 텍스트 컴포넌트", value: "상태 정보 수치 텍스트")
+            StatItem(title: "쿠폰", value: "3")
             Divider()
                 .frame(height: 40)
-            StatItem(title: "상태 정보 텍스트 컴포넌트", value: "상태 정보 수치 텍스트")
+            StatItem(title: "스토어 교환권", value: "0")
             Divider()
                 .frame(height: 40)
-            StatItem(title: "상태 정보 텍스트 컴포넌트", value: "상태 정보 수치 텍스트")
+            StatItem(title: "모바일 티켓", value: "1")
         }
         .padding(.vertical, 16)
         .background(Color(.systemBackground))

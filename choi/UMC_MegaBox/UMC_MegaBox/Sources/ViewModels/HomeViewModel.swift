@@ -74,20 +74,6 @@ class HomeViewModel {
             cast: "염혜란, 최성은, 아린, 박호산"
         ),
         MovieModel(
-            title: "메소드연기",
-            posterImage: "method",
-            audienceCount: 0,
-            englishTitle: "Method Acting",
-            quote: "\"진짜 나를 연기하라!\"",
-            description: "코미디언 출신으로 정극 연기에 도전하지만 늘 한계에 부딪히는 무명 배우. 그가 인생 최고의 배역을 맡기 위해 일상에서도 메소드 연기를 펼치며 벌어지는 짠내 나는 휴먼 코미디.",
-            rating: "12세 이상 관람가",
-            releaseInfo: "2026 · 개봉 예정",
-            genre: "코미디, 드라마",
-            type: "2D",
-            director: "이기혁",
-            cast: "이동휘, 강찬희, 윤경호"
-        ),
-        MovieModel(
             title: "28년 후: 뼈의 사원",
             posterImage: "years",
             audienceCount: 300,
@@ -102,6 +88,28 @@ class HomeViewModel {
             cast: "킬리언 머피, 조디 코머, 애런 테일러존슨"
         )
     ]
+
+    var upcomingMovies: [MovieModel] = [
+        MovieModel(
+            title: "메소드연기",
+            posterImage: "method",
+            audienceCount: 0,
+            englishTitle: "Method Acting",
+            quote: "\"진짜 나를 연기하라!\"",
+            description: "코미디언 출신으로 정극 연기에 도전하지만 늘 한계에 부딪히는 무명 배우. 그가 인생 최고의 배역을 맡기 위해 일상에서도 메소드 연기를 펼치며 벌어지는 짠내 나는 휴먼 코미디.",
+            rating: "12세 이상 관람가",
+            releaseInfo: "2026 · 개봉 예정",
+            genre: "코미디, 드라마",
+            type: "2D",
+            director: "이기혁",
+            cast: "이동휘, 강찬희, 윤경호"
+        )
+    ]
+    
+    //segment 0이면 movies, 1이면 upcomingMovies 반환
+    func currentMovies(for segment: Int) -> [MovieModel] {
+        segment == 0 ? movies : upcomingMovies
+    }
 
     let theaters: [TheaterModel] = [
         TheaterModel(logo: "Dolby Cinema 로고", card: "Dolby Cinema", name: "Dolby Cinema", title: "DOLBY CINEMA", description: "완벽한 영화 관람을 완성하는\n하이엔드 시네마"),
