@@ -9,7 +9,9 @@ import Foundation
 
 enum Route: Hashable {
     case home
-    case yeahme // 바로예매
+    case ticket // 바로예매
     case order
     case profile
+    case editProfile
+    case movieSpec(MovieModel)
 }

@@ -12,7 +12,7 @@ struct MovieView: View {
     
     var body: some View {
         VStack {
-            Image(movieInfo.movieImage)
+            Image(movieInfo.moviePoster)
                 .resizable()
                 .scaledToFit()
                 .frame(height: 209)
@@ -50,6 +50,6 @@ struct MovieView: View {
 
 
 #Preview {
-    MovieView(movieInfo: MovieModel(movieImage: "movie_kingsWarden", movieName: "왕과 사는 남자", movieViews: 1500))
+    MovieView(movieInfo: MovieModel(moviePoster: "movie_kingsWarden", movieName: "왕과 사는 남자", movieViews: 1500))
 }
 

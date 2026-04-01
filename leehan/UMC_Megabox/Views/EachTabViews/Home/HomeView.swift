@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct HomeView: View {
-    @State private var homeVM: HomeViewModel = HomeViewModel()
+    @Environment(HomeViewModel.self) private var homeVM
+    @Environment(NavigationRouter.self) private var router
     @State private var isMovieChartSelected: Bool = true
     // 선택된 특별관 id를 저장하는 상태변수
     @State private var selectedId: UUID? = nil
@@ -36,6 +37,9 @@ struct HomeView: View {
                         ForEach(homeVM.movieDummyList) { movie in
                             MovieView(movieInfo: movie)
                                 .padding(.trailing)
+                                .onTapGesture {
+                                    router.push(.movieSpec(movie))
+                                }
                         }
                     }
                 }.scrollIndicators(.hidden)
@@ -94,61 +98,20 @@ struct HomeView: View {
                 }.sharedBackgroundVisibility(.hidden)
             }
             .safeAreaBar(edge: .top) {
-                HStack {
-                    Button( action: { } ) {
-                        Text("홈")
-                            .font(.PretendardSemiBold(size: 24))
-                            .foregroundStyle(.black)
-                            .padding(.trailing, 20)
-                    }
-                    
-                    Button( action: { } ) {
-                        Text("이벤트")
-                            .font(.PretendardSemiBold(size: 24))
-                            .foregroundStyle(.gray04)
-                            .padding(.trailing, 20)
-                    }
-                    
-                    Button( action: { } ) {
-                        Text("스토어")
-                            .font(.PretendardSemiBold(size: 24))
-                            .foregroundStyle(.gray04)
-                            .padding(.trailing, 20)
-                    }
-                    
-                    Button( action: { } ) {
-                        Text("선호극장")
-                            .font(.PretendardSemiBold(size: 24))
-                            .foregroundStyle(.gray04)
-                    }
-                    
-                    Spacer()
-                }
+                TopButtonSection()
             }
             .safeAreaPadding(.horizontal)
+        }.onAppear() {
+            self.isMovieChartSelected = true
+            self.selectedId = nil
         }
     }
 }
 
-struct Button1: View {
-    var text: String
-    var isMovieChartSelected: Bool
-    var onTap: () -> Void
-    
-    var body: some View {
-        Button( action: { onTap() } ) {
-            RoundedRectangle(cornerRadius: 24)
-                .frame(width: 84, height: 38)
-                .foregroundStyle(isMovieChartSelected ? .gray08 : .gray02)
-                .overlay(
-                    Text(text)
-                        .font(.PretendardSemiBold(size: 15))
-                        .foregroundStyle(isMovieChartSelected ? .white : .gray04)
-                )
-        }
-    }
-}
+
 
 #Preview {
     HomeView()
+        .environment(HomeViewModel())
+        .environment(NavigationRouter())
 }
