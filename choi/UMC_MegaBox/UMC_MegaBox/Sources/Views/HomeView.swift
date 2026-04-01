@@ -6,19 +6,6 @@ struct HomeView: View {
     @State private var selectedSegment: Int = 0
     @State private var selectedTheaterIndex: Int = 0
 
-    // 특별관 로고-카드 매핑 데이터
-    private let theaters: [(logo: String, card: String, name: String)] = [
-        ("Dolby Vision+Atmos 로고", "Dolby Cinema", "Dolby Cinema"),
-        ("Dolby Atmos 로고", "Dolby Vision+Atmos", "Dolby Atmos"),
-        ("MX4D 로고", "MX4D", "MX4D"),
-        ("LED 로고", "LED", "LED"),
-        ("Boutique Private 로고", "Boutique Private", "Boutique Private"),
-        ("Boutique Suite 로고", "Boutique Suite", "Boutique Suite"),
-        ("Boutique 로고", "Boutique", "Boutique"),
-        ("Le Recliner 로고", "Comfort", "Le Recliner"),
-        ("Comfort 로고", "Comfort", "Comfort"),
-    ]
-
     var body: some View {
         @Bindable var bindableRouter = router
 
@@ -177,8 +164,8 @@ struct HomeView: View {
         VStack(alignment: .leading, spacing: 12) {
             HStack {
                 Text("메가박스의 모든 특별관")
-                    .font(.pretendardBold18)
-                    .foregroundStyle(Color(.gray07))
+                    .font(.pretendardBold24)
+                    .foregroundStyle(Color(.black))
                 Spacer()
                 Image(systemName: "chevron.right")
                     .foregroundStyle(Color(.gray03))
@@ -187,16 +174,54 @@ struct HomeView: View {
 
             // 특별관 로고 가로 스크롤
             ScrollView(.horizontal, showsIndicators: false) {
-                LazyHStack(spacing: 16) {
-                    ForEach(Array(theaters.enumerated()), id: \.offset) { index, theater in
+                LazyHStack(spacing: 10) {
+                    ForEach(Array(viewModel.theaters.enumerated()), id: \.offset) { index, theater in
                         VStack(spacing: 4) {
+                            let isSelected = (selectedTheaterIndex == index)
+
                             Image(theater.logo)
                                 .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .frame(width: 50, height: 50)
-                                .background(selectedTheaterIndex == index ? Color.white : Color(.gray02))
-                                .cornerRadius(8)
-
+                                .scaledToFit()
+                                .frame(width: 60, height: 60)
+                                .padding(10)
+                                .background{
+                                    Image(theater.logo)
+                                            .resizable()
+                                            .scaledToFit()
+                                            .frame(width: 60, height: 60)
+                                            .padding(10)
+                                            .background {
+                                                if isSelected {
+                                                    //[선택됨] 밝은 색상(하얀색) + 볼록하게 튀어나온 느낌
+                                                    Circle()
+                                                        .fill(Color.white) 
+                                                        .shadow(color: Color.black.opacity(0.08), radius: 6, x: 4, y: 4)
+                                                        .shadow(color: Color.white.opacity(0.9), radius: 6, x: -4, y: -4)
+                                                } else {
+                                                    // 🔘 [선택 안 됨] 기존 회색 배경 + 오목하게 눌린 느낌
+                                                    Circle()
+                                                        .fill(
+                                                            Color(.gray02)
+                                                                .shadow(.inner(color: Color.black.opacity(0.2), radius: 5, x: 4, y: 4))
+                                                                .shadow(.inner(color: Color.white.opacity(0.9), radius: 5, x: -4, y: -4))
+                                                        )
+                                                }
+                                            }
+                                            .overlay(
+                                                Circle()
+                                                    .stroke(
+                                                        LinearGradient(
+                                                            colors: isSelected
+                                                                ? [Color.white.opacity(0.8), Color.clear, Color.black.opacity(0.05)]
+                                                                : [Color.black.opacity(0.15), Color.clear, Color.white.opacity(0.8)],
+                                                            startPoint: .topLeading,
+                                                            endPoint: .bottomTrailing
+                                                        ),
+                                                        lineWidth: 1.5
+                                                    )
+                                            )
+                                }
+                                 
                             // 선택 시 보라색 동그라미
                             Circle()
                                 .fill(selectedTheaterIndex == index ? Color(.purple03) : Color.clear)
@@ -218,18 +243,38 @@ struct HomeView: View {
 
     private var specialTheaterCard: some View {
         TabView(selection: $selectedTheaterIndex) {
-            ForEach(Array(theaters.enumerated()), id: \.offset) { index, theater in
-                Image(theater.card)
-                    .resizable()
-                    .aspectRatio(contentMode: .fill)
-                    .frame(height: 200)
-                    .clipped()
-                    .cornerRadius(12)
-                    .tag(index)
+            ForEach(Array(viewModel.theaters.enumerated()), id: \.offset) { index, theater in
+                ZStack(alignment: .topLeading) {
+                    GeometryReader { geo in
+                        Image(theater.card)
+                            .resizable()
+                            .aspectRatio(contentMode: .fill)
+                            .frame(width: geo.size.width, height: 408)
+                            .clipped()
+                    }
+
+                    LinearGradient(
+                        colors: [.black.opacity(0.7), .clear],
+                        startPoint: .top,
+                        endPoint: .center
+                    )
+
+                    VStack(alignment: .leading, spacing: 11) {
+                        Text(theater.title)
+                            .font(.pretendardBold28)
+                        Text(theater.description)
+                            .font(.pretendardMedium18)
+                    }
+                    .foregroundStyle(.white)
+                    .padding(20)
+                }
+                .frame(height: 408)
+                .clipShape(RoundedRectangle(cornerRadius: 12))
+                .tag(index)
             }
         }
         .tabViewStyle(.page(indexDisplayMode: .always))
-        .frame(height: 220)
+        .frame(height: 428)
         .onChange(of: selectedTheaterIndex) { _, _ in }
     }
 }

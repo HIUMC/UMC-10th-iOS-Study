@@ -46,6 +46,10 @@ extension Font {
     }
     
     // MARK: - Bold
+    static var pretendardBold28: Font {
+        return .pretend(type: .bold, size: 28)
+    }
+
     static var pretendardBold24: Font {
         return .pretend(type: .bold, size: 24)
     }
