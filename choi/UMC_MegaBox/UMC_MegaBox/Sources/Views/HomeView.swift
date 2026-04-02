@@ -4,7 +4,7 @@ struct HomeView: View {
     @Environment(NavigationRouter<HomeRoute>.self) private var router
     @Environment(DIContainer.self) private var container
     @State private var viewModel = HomeViewModel()
-    @State private var selectedSegment: Int = 0
+    @State private var selectedSegment: HomeViewModel.MovieChartType = .nowPlaying
     @State private var selectedTheaterIndex: Int = 0
 
     var body: some View {
@@ -75,35 +75,26 @@ struct HomeView: View {
 
     private var movieChartToggle: some View {
         HStack(spacing: 12) {
-            Button(action: { selectedSegment = 0 }) {
-                Text("무비차트")
-                    .font(.pretendardSemiBold14)
-                    .foregroundStyle(selectedSegment == 0 ? .white : Color(.gray03))
-                    .padding(.horizontal, 16)
-                    .padding(.vertical, 8)
-                    .background(selectedSegment == 0 ? Color(.purple03) : Color.clear)
-                    .cornerRadius(16)
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 16)
-                            .stroke(selectedSegment == 0 ? Color.clear : Color(.gray02), lineWidth: 1)
-                    )
-            }
-
-            Button(action: { selectedSegment = 1 }) {
-                Text("상영예정")
-                    .font(.pretendardSemiBold14)
-                    .foregroundStyle(selectedSegment == 1 ? .white : Color(.gray03))
-                    .padding(.horizontal, 16)
-                    .padding(.vertical, 8)
-                    .background(selectedSegment == 1 ? Color(.purple03) : Color.clear)
-                    .cornerRadius(16)
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 16)
-                            .stroke(selectedSegment == 1 ? Color.clear : Color(.gray02), lineWidth: 1)
-                    )
-            }
-
+            chartToggleButton(title: "무비차트", type: .nowPlaying)
+            chartToggleButton(title: "상영예정", type: .upcoming)
             Spacer()
+        }
+    }
+
+    // 토글 버튼 헬퍼 — 중복 코드 제거
+    private func chartToggleButton(title: String, type: HomeViewModel.MovieChartType) -> some View {
+        Button(action: { selectedSegment = type }) {
+            Text(title)
+                .font(.pretendardSemiBold14)
+                .foregroundStyle(selectedSegment == type ? .white : Color(.gray03))
+                .padding(.horizontal, 16)
+                .padding(.vertical, 8)
+                .background(selectedSegment == type ? Color(.purple03) : Color.clear)
+                .cornerRadius(16)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 16)
+                        .stroke(selectedSegment == type ? Color.clear : Color(.gray02), lineWidth: 1)
+                )
         }
     }
 
@@ -194,43 +185,34 @@ struct HomeView: View {
                                     .scaledToFit()
                                     .frame(width: 60, height: 60)
                                     .padding(10)
-                                    .background{
-                                        Image(theater.logo)
-                                                .resizable()
-                                                .scaledToFit()
-                                                .frame(width: 60, height: 60)
-                                                .padding(10)
-                                                .background {
-                                                    if isSelected {
-                                                        //[선택됨] 밝은 색상(하얀색) + 볼록하게 튀어나온 느낌
-                                                        Circle()
-                                                            .fill(Color.white)
-                                                            .shadow(color: Color.black.opacity(0.08), radius: 6, x: 4, y: 4)
-                                                            .shadow(color: Color.white.opacity(0.9), radius: 6, x: -4, y: -4)
-                                                    } else {
-                                                        // 🔘 [선택 안 됨] 기존 회색 배경 + 오목하게 눌린 느낌
-                                                        Circle()
-                                                            .fill(
-                                                                Color(.gray02)
-                                                                    .shadow(.inner(color: Color.black.opacity(0.2), radius: 5, x: 4, y: 4))
-                                                                    .shadow(.inner(color: Color.white.opacity(0.9), radius: 5, x: -4, y: -4))
-                                                            )
-                                                    }
-                                                }
-                                                .overlay(
-                                                    Circle()
-                                                        .stroke(
-                                                            LinearGradient(
-                                                                colors: isSelected
-                                                                    ? [Color.white.opacity(0.8), Color.clear, Color.black.opacity(0.05)]
-                                                                    : [Color.black.opacity(0.15), Color.clear, Color.white.opacity(0.8)],
-                                                                startPoint: .topLeading,
-                                                                endPoint: .bottomTrailing
-                                                            ),
-                                                            lineWidth: 1.5
-                                                        )
+                                    .background {
+                                        if isSelected {
+                                            Circle()
+                                                .fill(Color.white)
+                                                .shadow(color: Color.black.opacity(0.08), radius: 6, x: 4, y: 4)
+                                                .shadow(color: Color.white.opacity(0.9), radius: 6, x: -4, y: -4)
+                                        } else {
+                                            Circle()
+                                                .fill(
+                                                    Color(.gray02)
+                                                        .shadow(.inner(color: Color.black.opacity(0.2), radius: 5, x: 4, y: 4))
+                                                        .shadow(.inner(color: Color.white.opacity(0.9), radius: 5, x: -4, y: -4))
                                                 )
+                                        }
                                     }
+                                    .overlay(
+                                        Circle()
+                                            .stroke(
+                                                LinearGradient(
+                                                    colors: isSelected
+                                                        ? [Color.white.opacity(0.8), Color.clear, Color.black.opacity(0.05)]
+                                                        : [Color.black.opacity(0.15), Color.clear, Color.white.opacity(0.8)],
+                                                    startPoint: .topLeading,
+                                                    endPoint: .bottomTrailing
+                                                ),
+                                                lineWidth: 1.5
+                                            )
+                                    )
 
                                 // 선택 시 보라색 동그라미
                                 Circle()

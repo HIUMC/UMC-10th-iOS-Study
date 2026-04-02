@@ -24,3 +24,4 @@ class DIContainer {
         selectedTab = 0
     }
 }
+

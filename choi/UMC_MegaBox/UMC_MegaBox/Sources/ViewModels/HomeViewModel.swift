@@ -106,9 +106,18 @@ class HomeViewModel {
         )
     ]
     
-    //segment 0이면 movies, 1이면 upcomingMovies 반환
-    func currentMovies(for segment: Int) -> [MovieModel] {
-        segment == 0 ? movies : upcomingMovies
+    // 무비차트 / 상영예정 구분 enum
+    enum MovieChartType {
+        case nowPlaying
+        case upcoming
+    }
+
+    // 선택된 차트 타입에 따라 영화 목록 반환
+    func currentMovies(for type: MovieChartType) -> [MovieModel] {
+        switch type {
+        case .nowPlaying: return movies
+        case .upcoming: return upcomingMovies
+        }
     }
 
     let theaters: [TheaterModel] = [

@@ -96,13 +96,12 @@ struct MemberInfo: View {
 }
 
 struct LogoutButton: View {
-    @AppStorage("isLoggedIn") private var isLoggedIn: Bool = false
     @Environment(DIContainer.self) private var container
+    @Environment(AuthViewModel.self) private var authVM
 
     var body: some View {
         Button(action: {
-                        container.resetAll()
-                        isLoggedIn = false
+                        authVM.logout(container: container)
                     }) {
                         Text("로그아웃")
                             .font(.pretendardSemiBold14)
@@ -121,4 +120,5 @@ struct LogoutButton: View {
 #Preview {
     ProfileMangaeView()
         .environment(DIContainer())
+        .environment(AuthViewModel())
 }
