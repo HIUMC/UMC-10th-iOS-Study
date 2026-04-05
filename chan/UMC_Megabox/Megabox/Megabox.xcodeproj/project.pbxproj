@@ -21,6 +21,16 @@
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
+		5F87E34F2F79658200165839 /* MainTapView */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = MainTapView;
+			sourceTree = "<group>";
+		};
+		5F87E36A2F7BB04700165839 /* LiquidGlassComponent */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = LiquidGlassComponent;
+			sourceTree = "<group>";
+		};
 		5FBAF50B2F6A6D9C00C12965 /* Megabox */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
@@ -47,6 +57,8 @@
 			children = (
 				5FBAF50B2F6A6D9C00C12965 /* Megabox */,
 				5FBAF50A2F6A6D9C00C12965 /* Products */,
+				5F87E34F2F79658200165839 /* MainTapView */,
+				5F87E36A2F7BB04700165839 /* LiquidGlassComponent */,
 			);
 			sourceTree = "<group>";
 		};
@@ -74,6 +86,8 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
+				5F87E34F2F79658200165839 /* MainTapView */,
+				5F87E36A2F7BB04700165839 /* LiquidGlassComponent */,
 				5FBAF50B2F6A6D9C00C12965 /* Megabox */,
 			);
 			name = Megabox;
