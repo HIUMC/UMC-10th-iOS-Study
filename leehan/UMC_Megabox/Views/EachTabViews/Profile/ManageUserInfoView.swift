@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct ManageUserInfoView: View {
+    @Environment(NavigationRouter.self) private var router
     @AppStorage("id") private var id = ""
     @AppStorage("name") private var name = ""
     
@@ -41,7 +42,7 @@ struct ManageUserInfoView: View {
                 
                 Spacer()
                 
-                Button( action: { self.name = name } ) {
+                Button( action: {  } ) {
                     RoundedRectangle(cornerRadius: 20)
                         .stroke(.gray03, lineWidth: 1)
                         .foregroundStyle(.clear)
@@ -63,4 +64,5 @@ struct ManageUserInfoView: View {
 
 #Preview {
     ManageUserInfoView()
+        .environment(NavigationRouter())
 }

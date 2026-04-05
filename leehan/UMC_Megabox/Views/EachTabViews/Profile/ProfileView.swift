@@ -8,20 +8,23 @@
 import SwiftUI
 
 struct ProfileView: View {
+    @Environment(NavigationRouter.self) private var router
+    @AppStorage("name") private var name = ""
+    
     var body: some View {
         VStack {
             Spacer().frame(height: 60)
             HStack {
-                ProfileHeader()
+                ProfileHeader(name: self.name)
                 
                 Spacer()
                 
                 VStack {
-                    Button( action: { /* 회원 정보 View로 넘어감 */ } ) {
+                    Button( action: { router.push(.editProfile) } ) {
                         RoundedRectangle(cornerRadius: 20)
                             .foregroundStyle(.gray07)
                             .overlay(
-                                Text("회원가입")
+                                Text("회원정보")
                                     .foregroundStyle(.white)
                                     .font(.PretendardSemiBold(size: 14))
                             ).frame(width: 72)
@@ -87,4 +90,5 @@ struct ProfileView: View {
 
 #Preview {
     ProfileView()
+        .environment(NavigationRouter())
 }
