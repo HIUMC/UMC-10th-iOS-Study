@@ -1,10 +1,7 @@
 import SwiftUI
 
 public struct LoginView: View {
-    @State private var loginVM = LoginViewModel()  // 소유
-    
-    @AppStorage("id") private var id: String = ""
-    @AppStorage("pwd") private var pwd: String = ""
+    @Environment(AuthViewModel.self) private var authVM  // 인증 ViewModel (RootView에서 주입)
 
     public init() {}
     
@@ -40,12 +37,11 @@ public struct LoginView: View {
     }
     
     private var inputFieldView: some View {
-        @Bindable var vm = loginVM
+        @Bindable var vm = authVM
 
         return VStack(spacing: 30) {
             // 아이디 영역
             VStack(alignment: .leading, spacing: 10) {
-                // Text를 TextField로 변경하고 idText 변수와 바인딩
                 TextField("아이디", text: $vm.loginModel.id)
                     .font(.pretendardMedium16)
                     .foregroundColor(Color(.gray03))
@@ -70,10 +66,7 @@ public struct LoginView: View {
         VStack(spacing: 20) {
             // 로그인 버튼
             Button(action: {
-                // ViewModel → AppStorage에 저장
-                id = loginVM.loginModel.id
-                pwd = loginVM.loginModel.pwd
-                print("로그인 시도 - ID: \(loginVM.loginModel.id), PW: \(loginVM.loginModel.pwd)")
+                authVM.login()
             }) {
                 HStack {
                     Spacer()
@@ -141,4 +134,5 @@ public struct LoginView: View {
 
 #Preview {
     LoginView()
+        .environment(AuthViewModel())
 }

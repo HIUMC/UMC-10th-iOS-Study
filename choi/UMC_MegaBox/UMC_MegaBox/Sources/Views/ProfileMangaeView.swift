@@ -8,13 +8,9 @@
 import SwiftUI
 
 struct ProfileMangaeView: View {
-
+    
     var body: some View {
         VStack(spacing: 0) {
-            NavigationBar()
-                .padding(.top, 20)
-                .padding(.horizontal, 25)
-
             BasicInfoText()
                 .padding(.top, 50)
                 .padding(.horizontal, 25)
@@ -24,36 +20,15 @@ struct ProfileMangaeView: View {
                 .padding(.horizontal, 25)
 
             Spacer()
+            LogoutButton()
+            Spacer()
         }
+        .navigationTitle("회원 정보 관리")
+        .navigationBarTitleDisplayMode(.inline) // 타이틀을 가운데에 작게 표시
+
     }
 }
 
-
-struct NavigationBar: View {
-
-    var body: some View {
-        HStack {
-            Button(action: {}) {
-                Image(systemName: "arrow.left")
-                    .font(.system(size: 20))
-                    .foregroundColor(Color(.black))
-            }
-
-            Spacer()
-
-            Text("회원정보 관리")
-                .font(.pretendardMedium16)
-                .foregroundColor(Color(.black))
-
-            Spacer()
-
-            // 좌우 균형을 위한 투명 요소
-            Image(systemName: "arrow.left")
-                .font(.system(size: 20))
-                .opacity(0)
-        }
-    }
-}
 
 struct BasicInfoText: View {
     var body: some View {
@@ -120,8 +95,30 @@ struct MemberInfo: View {
     }
 }
 
+struct LogoutButton: View {
+    @Environment(DIContainer.self) private var container
+    @Environment(AuthViewModel.self) private var authVM
+
+    var body: some View {
+        Button(action: {
+                        authVM.logout(container: container)
+                    }) {
+                        Text("로그아웃")
+                            .font(.pretendardSemiBold14)
+                            .foregroundColor(.white)
+                            .padding()
+                            .frame(maxWidth: .infinity)
+                            .background(Color(.gray04))
+                            .cornerRadius(10)
+                    }
+                    .padding(.horizontal, 20)
+    }
+}
+
 
 
 #Preview {
     ProfileMangaeView()
+        .environment(DIContainer())
+        .environment(AuthViewModel())
 }

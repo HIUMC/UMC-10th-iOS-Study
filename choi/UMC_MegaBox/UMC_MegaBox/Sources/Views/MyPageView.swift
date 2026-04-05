@@ -8,30 +8,42 @@
 import SwiftUI
 
 struct MyPageView: View {
-    
-    var body: some View {
-        VStack(spacing: 0) {
-            // 프로필 헤더
-            ProfileHeaderView()
-                .padding(.top, 20)
-                .padding(.horizontal, 25)
+    @Environment(NavigationRouter<MyPageRoute>.self) private var router
 
-            // 클럽 멤버십 바
-            ClubMembershipButton()
-                .padding(.top, 10)
-                .padding(.horizontal, 20)
-            
-            // 쿠폰 / 스토어 교환권 / 모바일 티켓
-            StatsInfoView()
-                .padding(.top, 20)
-                .padding(.horizontal, 20)
-            
-            // 퀵 액션 버튼 4개
-            QuickActionsRow()
-                .padding(.top, 24)
-                .padding(.horizontal, 20)
-            Spacer()
-            
+    var body: some View {
+        // @Observable 매크로를 쓰는 클래스의 프로퍼티를 바인딩($) 하기 위해
+        // @Bindable 래퍼를 사용
+        @Bindable var bindableRouter = router
+        
+        NavigationStack(path: $bindableRouter.path) {
+            VStack(spacing: 0) {
+                // 프로필 헤더
+                ProfileHeaderView()
+                    .padding(.top, 20)
+                    .padding(.horizontal, 25)
+                
+                // 클럽 멤버십 바
+                ClubMembershipButton()
+                    .padding(.top, 10)
+                    .padding(.horizontal, 20)
+                
+                // 쿠폰 / 스토어 교환권 / 모바일 티켓
+                StatsInfoView()
+                    .padding(.top, 20)
+                    .padding(.horizontal, 20)
+                
+                // 퀵 액션 버튼 4개
+                QuickActionsRow()
+                    .padding(.top, 24)
+                    .padding(.horizontal, 20)
+                Spacer()
+            }
+            .navigationDestination(for: MyPageRoute.self) { route in
+                switch route {
+                case .profileManage:
+                    ProfileMangaeView()
+                }
+            }
         }
     }
 }
@@ -72,13 +84,13 @@ struct ClubMembershipButton: View {
 struct StatsInfoView: View {
     var body: some View {
         HStack(spacing: 0) {
-            StatItem(title: "상태 정보 텍스트 컴포넌트", value: "상태 정보 수치 텍스트")
+            StatItem(title: "쿠폰", value: "3")
             Divider()
                 .frame(height: 40)
-            StatItem(title: "상태 정보 텍스트 컴포넌트", value: "상태 정보 수치 텍스트")
+            StatItem(title: "스토어 교환권", value: "0")
             Divider()
                 .frame(height: 40)
-            StatItem(title: "상태 정보 텍스트 컴포넌트", value: "상태 정보 수치 텍스트")
+            StatItem(title: "모바일 티켓", value: "1")
         }
         .padding(.vertical, 16)
         .background(Color(.systemBackground))
@@ -121,4 +133,5 @@ struct QuickActionsRow: View {
 
 #Preview {
     MyPageView()
+        .environment(NavigationRouter<MyPageRoute>())
 }
