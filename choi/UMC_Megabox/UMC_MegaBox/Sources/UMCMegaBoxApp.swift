@@ -4,8 +4,7 @@ import SwiftUI
 struct UMCMegaBoxApp: App {
     var body: some Scene {
         WindowGroup {
-            LoginView()
-            SplashView()
+            RootView()
         }
     }
 }

@@ -1,5 +1,5 @@
 import Testing
-@testable import UMCMegaBox
+@testable import UMC_MegaBox
 
 struct UMCMegaBoxTests {
 

@@ -45,7 +45,91 @@
                BlueprintIdentifier = "5D7E069981E7703632A5A0A1"
                BuildableName = "Week1_Practice.app"
                BlueprintName = "Week1_Practice"
-               ReferencedContainer = "container:Practice/Week1/Week1_Practice.xcodeproj">
+               ReferencedContainer = "container:Practice/Week1_Practice/Week1_Practice.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "FF5087D38CDA6A8A86F80490"
+               BuildableName = "Week2_Practice.app"
+               BlueprintName = "Week2_Practice"
+               ReferencedContainer = "container:Practice/Week2_Practice/Week2_Practice.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "BECA36A18530A80964DE874A"
+               BuildableName = "Week2_PracticeTests.xctest"
+               BlueprintName = "Week2_PracticeTests"
+               ReferencedContainer = "container:Practice/Week2_Practice/Week2_Practice.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "EE1E44B811D57537B7A967D7"
+               BuildableName = "Week3_Practice.app"
+               BlueprintName = "Week3_Practice"
+               ReferencedContainer = "container:Practice/Week3_Practice/Week3_Practice.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "166A38D89CBC9DF4671A21FC"
+               BuildableName = "Week3_PracticeTests.xctest"
+               BlueprintName = "Week3_PracticeTests"
+               ReferencedContainer = "container:Practice/Week3_Practice/Week3_Practice.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "A0DF919DD1E8655B46B704AA"
+               BuildableName = "iOS_Workbook_3rd.app"
+               BlueprintName = "iOS_Workbook_3rd"
+               ReferencedContainer = "container:iOS_Workbook/iOS_Workbook_3rd/iOS_Workbook_3rd.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "48357795E8895943857D0C97"
+               BuildableName = "iOS_Workbook_3rdTests.xctest"
+               BlueprintName = "iOS_Workbook_3rdTests"
+               ReferencedContainer = "container:iOS_Workbook/iOS_Workbook_3rd/iOS_Workbook_3rd.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -65,6 +149,39 @@
                BuildableName = "UMC_MegaBoxTests.xctest"
                BlueprintName = "UMC_MegaBoxTests"
                ReferencedContainer = "container:UMC_MegaBox/UMC_MegaBox.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO"
+            parallelizable = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "BECA36A18530A80964DE874A"
+               BuildableName = "Week2_PracticeTests.xctest"
+               BlueprintName = "Week2_PracticeTests"
+               ReferencedContainer = "container:Practice/Week2_Practice/Week2_Practice.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO"
+            parallelizable = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "166A38D89CBC9DF4671A21FC"
+               BuildableName = "Week3_PracticeTests.xctest"
+               BlueprintName = "Week3_PracticeTests"
+               ReferencedContainer = "container:Practice/Week3_Practice/Week3_Practice.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO"
+            parallelizable = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "48357795E8895943857D0C97"
+               BuildableName = "iOS_Workbook_3rdTests.xctest"
+               BlueprintName = "iOS_Workbook_3rdTests"
+               ReferencedContainer = "container:iOS_Workbook/iOS_Workbook_3rd/iOS_Workbook_3rd.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>

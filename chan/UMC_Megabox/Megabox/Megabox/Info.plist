@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>UIAppFonts</key>
+	<array>
+		<string>Pretendard_Black.otf</string>
+		<string>Pretendard_Bold.otf</string>
+		<string>Pretendard_ExtraBold.otf</string>
+		<string>Pretendard_xtraLight.otf</string>
+		<string>Pretendard_Light.otf</string>
+		<string>Pretendard_Medium.otf</string>
+		<string>Pretendard_Regular.otf</string>
+		<string>Pretendard_SemiBold.otf</string>
+		<string>Pretendard_Thin.otf</string>
+	</array>
+</dict>
+</plist>
