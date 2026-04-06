@@ -13,6 +13,9 @@
       <FileRef
          location = "group:Week3_Practice/Week3_Practice.xcodeproj">
       </FileRef>
+      <FileRef
+         location = "group:Week4_Practice/Week4_Practice.xcodeproj">
+      </FileRef>
    </Group>
    <FileRef
       location = "group:UMC_MegaBox/UMC_MegaBox.xcodeproj">

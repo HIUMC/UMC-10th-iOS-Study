@@ -12,7 +12,6 @@ struct MainTabView: View {
             Tab("홈", systemImage: "house", value: 0) {
                 HomeView()
                     .environment(container.homeRouter)
-                    .environment(container)
             }
             Tab("바로 예매", systemImage: "play.laptopcomputer", value: 1) {
                 ReservationView()
@@ -25,7 +24,6 @@ struct MainTabView: View {
             Tab("마이페이지", systemImage: "person", value: 3) {
                 MyPageView()
                     .environment(container.myPageRouter)
-                    .environment(container)
             }
         }
         .tint(Color(.purple03))
