@@ -76,7 +76,7 @@ struct ProfileView: View {
             RoundedRectangle(cornerRadius: 12)
                 .fill(
                     LinearGradient(
-                        gradient: Gradient(colors:[.gradStart,.gradMiddle,.graEnd]), // 피그마 색상으로 변경하세요!
+                        gradient: Gradient(colors:[.gradStart,.gradMiddle,.graEnd]),
                     startPoint: .leading,
                     endPoint: .trailing
                 ))
