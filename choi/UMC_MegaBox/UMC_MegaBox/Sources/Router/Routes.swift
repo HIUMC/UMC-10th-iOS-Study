@@ -17,3 +17,7 @@ enum HomeRoute: Hashable {
 enum MyPageRoute: Hashable {
     case profileManage
 }
+
+enum ReservationRoute: Hashable {
+    case seatSelection(MovieModel, String, ShowtimeModel)  // movie, theaterBranch, showtime
+}

@@ -15,6 +15,7 @@ struct MainTabView: View {
             }
             Tab("바로 예매", systemImage: "play.laptopcomputer", value: 1) {
                 ReservationView()
+                    .environment(container.reservationRouter)
             }
 
             Tab("모바일 오더", systemImage: "popcorn", value: 2) {

@@ -16,11 +16,13 @@ class DIContainer {
     // 앱에서 사용할 라우터들
     var homeRouter = NavigationRouter<HomeRoute>()
     var myPageRouter = NavigationRouter<MyPageRoute>()
+    var reservationRouter = NavigationRouter<ReservationRoute>()
 
     // 로그아웃 시 전체 초기화
     func resetAll() {
         homeRouter.reset()
         myPageRouter.reset()
+        reservationRouter.reset()
         selectedTab = 0
     }
 }
