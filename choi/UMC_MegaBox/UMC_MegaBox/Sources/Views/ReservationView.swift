@@ -10,12 +10,11 @@ struct ReservationView: View {
         NavigationStack(path: $bindableRouter.path) {
             ZStack(alignment: .top) {
                 // 배경
-                Color(.purple00).ignoresSafeArea()
+                Color(.white).ignoresSafeArea()
 
                 VStack(spacing: 0) {
                     // 보라색 상단 네비바
                     headerBar
-
                     // 스크롤 콘텐츠
                     ScrollView(.vertical, showsIndicators: false) {
                         VStack(alignment: .leading, spacing: 0) {
@@ -69,12 +68,15 @@ struct ReservationView: View {
     private var headerBar: some View {
         ZStack {
             Color(.purple03)
+                .ignoresSafeArea(edges: .top)
             Text("영화별 예매")
                 .font(.pretendardBold18)
                 .foregroundStyle(.white)
-                .padding(.bottom, 12)
+                .padding(.bottom, 10)
+            
         }
-        .frame(height: 50)
+        .frame(height: 41)
+        
     }
 
     // MARK: - 선택된 영화 정보 + 전체영화 버튼
@@ -87,7 +89,7 @@ struct ReservationView: View {
 
                 Text(movie.title)
                     .font(.pretendardBold18)
-                    .foregroundStyle(Color(.gray07))
+                    .foregroundStyle(Color(.black))
                     .lineLimit(1)
             } else {
                 Text("영화를 선택해주세요")
@@ -101,15 +103,13 @@ struct ReservationView: View {
                 viewModel.isMovieSearchPresented = true
             } label: {
                 Text("전체영화")
-                    .font(.pretendardSemiBold12)
-                    .foregroundStyle(Color(.gray05))
-                    .padding(.horizontal, 12)
-                    .padding(.vertical, 6)
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 4)
-                            .stroke(Color(.gray02), lineWidth: 1)
-                    )
+                    .font(.pretendardSemiBold14)
+                    .foregroundStyle(Color(.black))
+                    .padding(.horizontal, 10)
+                    .padding(.vertical, 5)
             }
+            .glassEffect()
+
         }
     }
 
@@ -121,14 +121,14 @@ struct ReservationView: View {
 
         switch rating {
         case "전체 관람가":
-            label = "ALL"
+            label = "All"
             bgColor = .green
         case "12세 이상 관람가":
             label = "12"
-            bgColor = Color(.blue03)
+            bgColor = .orange
         case "15세 이상 관람가":
             label = "15"
-            bgColor = .orange
+            bgColor = Color(.blue03)
         case "청소년 관람불가":
             label = "19"
             bgColor = .red
@@ -138,9 +138,9 @@ struct ReservationView: View {
         }
 
         return Text(label)
-            .font(.pretendardSemiBold12)
+            .font(.pretendardSemiBold18)
             .foregroundStyle(.white)
-            .frame(width: 28, height: 28)
+            .frame(width: 23, height: 24)
             .background(bgColor)
             .cornerRadius(4)
     }
@@ -149,7 +149,7 @@ struct ReservationView: View {
 
     private var movieCardScroll: some View {
         ScrollView(.horizontal, showsIndicators: false) {
-            LazyHStack(spacing: 10) {
+            LazyHStack(spacing: 8) {
                 ForEach(viewModel.movies) { movie in
                     moviePosterCard(movie)
                         .onTapGesture {
@@ -170,7 +170,7 @@ struct ReservationView: View {
             Image(movie.posterImage)
                 .resizable()
                 .aspectRatio(contentMode: .fill)
-                .frame(width: 100, height: 140)
+                .frame(width: 63, height: 89)
                 .clipped()
                 .cornerRadius(8)
 
@@ -183,17 +183,10 @@ struct ReservationView: View {
                         endPoint: .bottom
                     )
                     .cornerRadius(8)
-
-                    Text(movie.title)
-                        .font(.pretendardSemiBold12)
-                        .foregroundStyle(.white)
-                        .lineLimit(1)
-                        .padding(.horizontal, 4)
-                        .padding(.bottom, 8)
                 }
             }
         }
-        .frame(width: 100, height: 140)
+        .frame(width: 63, height: 89)
         .overlay(
             RoundedRectangle(cornerRadius: 8)
                 .stroke(isSelected ? Color(.purple03) : Color.clear, lineWidth: 3)
@@ -212,13 +205,13 @@ struct ReservationView: View {
     }
 
     private func theaterButton(_ branch: String) -> some View {
-        let isSelected = viewModel.selectedTheater == branch
+        let isSelected = viewModel.selectedTheaters.contains(branch)
         let isEnabled = viewModel.isTheaterEnabled
 
         return Button {
             guard isEnabled else { return }
             withAnimation(.easeInOut(duration: 0.2)) {
-                viewModel.selectTheater(branch)
+                viewModel.toggleTheater(branch)
             }
         } label: {
             Text(branch)
@@ -248,24 +241,25 @@ struct ReservationView: View {
     // MARK: - 날짜 선택 섹션
 
     private var dateSection: some View {
-        HStack(spacing: 0) {
-            ForEach(viewModel.dates) { day in
-                dateCellView(day)
-            }
-            Spacer()
-        }
+        let columns = Array(repeating: GridItem(.flexible(), spacing: 0), count: 7)
+        
+        return LazyVGrid(columns: columns, spacing: 0) {
+                    ForEach(viewModel.dates) { day in
+                        dateCellView(day)
+                    }
+                }
     }
 
     private func dateCellView(_ day: CalendarDay) -> some View {
-        let isSelected = viewModel.selectedDate?.id == day.id
+        // 1. 아무것도 선택 안 됐을 때(nil) + 오늘이면 -> true (기본 보라색 켜짐)
+        // 2. 무언가 선택됐을 때 + 그게 내 날짜면 -> true
+        let isSelected = (viewModel.selectedDate == nil && day.isToday) || (viewModel.selectedDate?.id == day.id)
         let isEnabled = viewModel.isDateEnabled
 
         // 요일 텍스트 색상 결정
         let weekdayColor: Color = {
             if !isEnabled { return Color(.gray02) }
             if isSelected { return .white }
-            if day.isSunday { return Color(.sunday) }
-            if day.isSaturday { return Color(.saturday) }
             return Color(.gray07)
         }()
 
@@ -277,6 +271,16 @@ struct ReservationView: View {
             if day.isSaturday { return Color(.saturday) }
             return Color(.gray07)
         }()
+
+        // 요일 텍스트를 결정하는 변수
+        let weekdayString: String
+                if day.isToday {
+                    weekdayString = "오늘"
+                } else if day.isTomorrow {
+                    weekdayString = "내일"
+                } else {
+                    weekdayString = day.weekdaySymbol
+        }
 
         return Button {
             guard isEnabled else { return }
@@ -296,19 +300,18 @@ struct ReservationView: View {
                         .foregroundStyle(dayNumberColor)
                 }
 
-                // 요일 (오늘은 "오늘")
-                Text(day.isToday ? "오늘" : day.weekdaySymbol)
-                    .font(.pretendardMedium10)
+                // 요일 (오늘은 "오늘", 내일은 "내일")
+                Text(weekdayString)
+                    .font(.pretendardSemiBold14)
                     .foregroundStyle(weekdayColor)
             }
-            .frame(width: 44, height: 56)
+            .frame(maxWidth: .infinity)
+            .frame(height: 60)
             .background(
-                isSelected
-                    ? (day.isToday ? Color(.purple03) : Color(.purple03))
-                    : (day.isToday ? Color(.purple00) : Color.clear)
-            )
+                isSelected ? Color(.purple03) : Color.clear)
             .cornerRadius(8)
         }
+        
         .disabled(!isEnabled)
     }
 
@@ -324,11 +327,11 @@ struct ReservationView: View {
                     .frame(maxWidth: .infinity)
                     .padding(.vertical, 40)
             } else {
-                // 극장별 그룹
+                // 극장별 그룹 — theaterBranch를 ShowtimeModel에서 직접 가져옴
                 ForEach(viewModel.sortedScreenNames, id: \.self) { screenName in
                     if let times = viewModel.showtimes[screenName] {
                         showtimeGroup(
-                            theaterBranch: viewModel.selectedTheater ?? "",
+                            theaterBranch: times.first?.theaterBranch ?? "",
                             screenName: screenName,
                             format: times.first?.format ?? "2D",
                             showtimes: times

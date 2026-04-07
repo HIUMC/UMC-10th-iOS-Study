@@ -134,4 +134,6 @@ struct QuickActionsRow: View {
 #Preview {
     MyPageView()
         .environment(NavigationRouter<MyPageRoute>())
+        .environment(DIContainer())
+        .environment(AuthViewModel())
 }

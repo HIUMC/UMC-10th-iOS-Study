@@ -6,6 +6,7 @@ struct CalendarDay: Identifiable, Hashable {
     let date: Date          // 실제 Date
     let weekdaySymbol: String   // "월", "화", ...
     let isToday: Bool
+    let isTomorrow: Bool
     let isSunday: Bool
     let isSaturday: Bool
 
@@ -29,6 +30,7 @@ struct CalendarDay: Identifiable, Hashable {
                 date: date,
                 weekdaySymbol: symbol,
                 isToday: calendar.isDateInToday(date),
+                isTomorrow: calendar.isDateInTomorrow(date),
                 isSunday: weekday == 1,
                 isSaturday: weekday == 7
             )
