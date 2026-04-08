@@ -4,12 +4,13 @@ struct SeatSelectionView: View {
     @Environment(\.dismiss) private var dismiss
     @State private var viewModel: SeatSelectionViewModel
 
-    init(movie: MovieModel, theaterBranch: String, showtime: ShowtimeModel) {
+    init(movie: MovieModel, theaterBranch: String, showtime: ShowtimeModel, selectedDate: CalendarDay) {
         self._viewModel = State(
             initialValue: SeatSelectionViewModel(
                 movie: movie,
                 theaterBranch: theaterBranch,
-                showtime: showtime
+                showtime: showtime,
+                selectedDate: selectedDate
             )
         )
     }
@@ -25,7 +26,7 @@ struct SeatSelectionView: View {
             paymentBar
         }
         .background(Color(.gray09))
-        .navigationTitle("4.1(수) \(viewModel.showtime.time)")
+        .navigationTitle(viewModel.navigationTitleText)
         .navigationBarTitleDisplayMode(.inline)
         .navigationBarBackButtonHidden(true)
         .toolbarBackground(.white, for: .navigationBar)
@@ -212,7 +213,8 @@ struct RoundedCorner: Shape {
                 endTime: "~13:58",
                 totalSeats: 116,
                 remainingSeats: 109
-            )
+            ),
+            selectedDate: CalendarDay.generateWeek().first!
         )
     }
 }

@@ -19,5 +19,5 @@ enum MyPageRoute: Hashable {
 }
 
 enum ReservationRoute: Hashable {
-    case seatSelection(MovieModel, String, ShowtimeModel)  // movie, theaterBranch, showtime
+    case seatSelection(MovieModel, String, ShowtimeModel, CalendarDay)  // movie, theaterBranch, showtime, CalendarDay
 }

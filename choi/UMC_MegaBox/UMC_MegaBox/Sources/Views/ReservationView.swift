@@ -51,8 +51,8 @@ struct ReservationView: View {
             }
             .navigationDestination(for: ReservationRoute.self) { route in
                 switch route {
-                case .seatSelection(let movie, let branch, let showtime):
-                    SeatSelectionView(movie: movie, theaterBranch: branch, showtime: showtime)
+                case .seatSelection(let movie, let branch, let showtime, let date):
+                    SeatSelectionView(movie: movie, theaterBranch: branch, showtime: showtime, selectedDate: date)
                 }
             }
             .sheet(isPresented: $viewModel.isMovieSearchPresented) {
@@ -406,14 +406,15 @@ struct ReservationView: View {
 
             Divider()
                 .background(Color(.gray01))
-                .padding(.vertical, 8)
+                .padding(.vertical, 20)
         }
     }
 
     private func showtimeCard(_ showtime: ShowtimeModel) -> some View {
         Button {
-            if let movie = viewModel.selectedMovie {
-                router.push(.seatSelection(movie, showtime.theaterBranch, showtime))
+            if let movie = viewModel.selectedMovie,
+               let date = viewModel.selectedDate{
+                router.push(.seatSelection(movie, showtime.theaterBranch, showtime, date))
             }
         } label: {
             VStack(alignment: .leading, spacing: 4) {

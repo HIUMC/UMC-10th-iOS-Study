@@ -17,7 +17,8 @@ class SeatSelectionViewModel {
     let movie: MovieModel
     let theaterBranch: String
     let showtime: ShowtimeModel
-
+    let selectedDate: CalendarDay
+    
     // MARK: - Alert 상태
 
     var showPaymentAlert: Bool = false
@@ -29,10 +30,11 @@ class SeatSelectionViewModel {
 
     // MARK: - Init
 
-    init(movie: MovieModel, theaterBranch: String, showtime: ShowtimeModel) {
+    init(movie: MovieModel, theaterBranch: String, showtime: ShowtimeModel, selectedDate: CalendarDay) {
         self.movie = movie
         self.theaterBranch = theaterBranch
         self.showtime = showtime
+        self.selectedDate = selectedDate
         generateSeats()
         setupPricePipeline()
     }
@@ -77,5 +79,12 @@ class SeatSelectionViewModel {
         let formatter = NumberFormatter()
         formatter.numberStyle = .decimal
         return (formatter.string(from: NSNumber(value: totalPrice)) ?? "0") + "원"
+    }
+    
+    // MARK: - 네비게이션 타이틀 포맷팅
+    var navigationTitleText: String {
+        let calendar = Calendar.current
+        let month = calendar.component(.month, from: selectedDate.date)
+        return "\(month).\(selectedDate.day) (\(selectedDate.weekdaySymbol)) \(showtime.time)"
     }
 }
