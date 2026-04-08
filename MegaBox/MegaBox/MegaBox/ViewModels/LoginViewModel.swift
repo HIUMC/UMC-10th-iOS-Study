@@ -1,26 +1,34 @@
 //
-//  LoginViewModel.swift
+//  AuthViewModel.swift
 //  MegaBox
 //
-//  Created by 김민지 on 4/1/26.
+//  Created by 김민지 on 4/8/26.
 //
 
 import Foundation
-import Observation
+import SwiftUI
 
 @Observable
-class LoginViewModel {
-    // LoginModel 초기화
-    var loginData = LoginModel()
-    
-    // 텍스트필드와 바인딩될 수 있도록 id와 pwd를 직접 제공하거나 모델을 통해 관리
-    var id: String {
-        get { loginData.id }
-        set { loginData.id = newValue }
+class AuthViewModel {
+    var loginModel = LoginModel()
+
+    // computed property: @AppStorage는 View 전용이므로, ViewModel에서는 UserDefaults 직접 사용
+    var isLoggedIn: Bool {
+        get { UserDefaults.standard.bool(forKey: "isLoggedIn") }
+        set { UserDefaults.standard.set(newValue, forKey: "isLoggedIn") }
     }
-    
-    var pwd: String {
-        get { loginData.pwd }
-        set { loginData.pwd = newValue }
+
+    // MARK: - 로그인
+    func login() {
+        UserDefaults.standard.set(loginModel.id, forKey: "id")
+        UserDefaults.standard.set(loginModel.pwd, forKey: "pwd")
+        isLoggedIn = true
+        print("로그인 시도 - ID: \(loginModel.id), PW: \(loginModel.pwd)")
+    }
+
+    // MARK: - 로그아웃
+    func logout(container: DIContainer) {
+        container.resetAll()
+        UserDefaults.standard.set(false, forKey: "isLoggedIn")
     }
 }

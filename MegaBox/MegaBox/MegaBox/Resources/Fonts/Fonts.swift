@@ -67,6 +67,7 @@ extension PretendardStyle {
     static let bold24 = PretendardStyle(type: .bold, size: 24, lineSpacing: 12, tracking: -0.5)
     static let bold22 = PretendardStyle(type: .bold, size: 22, lineSpacing: 8, tracking: -0.5)
     static let bold16 = PretendardStyle(type: .bold, size: 16, lineSpacing: 8, tracking: 0)
+    static let bold18 = PretendardStyle(type: .bold, size: 18, lineSpacing: 8, tracking: 0)
 
     // SemiBold 시리즈
     static let semiBold38 = PretendardStyle(type: .semibold, size: 38, lineSpacing: nil, tracking: 0)
