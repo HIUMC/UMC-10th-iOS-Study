@@ -272,16 +272,23 @@ class ReservationViewModel {
         selectedDate = day
     }
 
-    // 상영관별 정렬된 키 반환 — theaterBranches 순서(강남→홍대→신촌) 기준 정렬
-    var sortedScreenNames: [String] {
-        showtimes.keys.sorted { a, b in
-            let branchA = showtimes[a]?.first?.theaterBranch ?? ""
-            let branchB = showtimes[b]?.first?.theaterBranch ?? ""
-            let indexA = theaterBranches.firstIndex(of: branchA) ?? Int.max
-            let indexB = theaterBranches.firstIndex(of: branchB) ?? Int.max
-            // 같은 극장 내 상영관은 Natural Sort (숫자 인식 정렬: "2관" < "10관")
-            if indexA == indexB { return a.localizedStandardCompare(b) == .orderedAscending }
-            return indexA < indexB
+    // MARK: - 지점별 그룹핑 (View에서 이중 루프용)
+
+    /// 지점별로 그룹핑된 상영관 목록을 theaterBranches 순서대로 반환
+    /// 예: [("강남", ["르 리클라이너 1관"]), ("홍대", ["BTS관 (7층 1관)", "BTS관 (9층 2관)"])]
+    var groupedByBranch: [(branch: String, screenNames: [String])] {
+        // 1. screenName → branch 매핑
+        var branchToScreens: [String: [String]] = [:]
+        for (screenName, times) in showtimes {
+            guard let branch = times.first?.theaterBranch else { continue }
+            branchToScreens[branch, default: []].append(screenName)
+        }
+
+        // 2. theaterBranches 순서대로 정렬, 같은 지점 내 상영관은 Natural Sort
+        return theaterBranches.compactMap { branch in
+            guard var screens = branchToScreens[branch] else { return nil }
+            screens.sort { $0.localizedStandardCompare($1) == .orderedAscending }
+            return (branch: branch, screenNames: screens)
         }
     }
 }

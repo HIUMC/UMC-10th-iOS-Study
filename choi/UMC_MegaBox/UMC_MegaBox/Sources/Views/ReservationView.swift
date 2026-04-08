@@ -77,6 +77,7 @@ struct ReservationView: View {
         }
         .frame(height: 41)
         
+        
     }
 
     // MARK: - 선택된 영화 정보 + 전체영화 버튼
@@ -333,52 +334,71 @@ struct ReservationView: View {
                     .frame(maxWidth: .infinity)
                     .padding(.vertical, 40)
             } else {
-                // 상영시간이 있는 극장별 그룹
-                ForEach(viewModel.sortedScreenNames, id: \.self) { screenName in
-                    if let times = viewModel.showtimes[screenName] {
-                        showtimeGroup(
-                            theaterBranch: times.first?.theaterBranch ?? "",
-                            screenName: screenName,
-                            format: times.first?.format ?? "2D",
-                            showtimes: times
-                        )
+                // 지점별 이중 루프: Branch → ScreenNames
+                ForEach(Array(viewModel.groupedByBranch.enumerated()), id: \.offset) { index, group in
+                    branchGroup(branch: group.branch, screenNames: group.screenNames)
+
+                    // 지점 그룹 간 Divider + 24px
+                    if index < viewModel.groupedByBranch.count - 1 || !viewModel.emptyTheaters.isEmpty {
+                        Divider().background(Color(.gray01))
+                            .padding(.vertical, 24)
                     }
                 }
 
                 // 상영시간표가 없는 극장 Empty State (예: 신촌)
-                ForEach(viewModel.emptyTheaters, id: \.self) { branch in
-                    VStack(alignment: .leading, spacing: 8) {
-                        Text(branch)
-                            .font(.pretendardBold18)
-                            .foregroundStyle(Color(.gray07))
+                ForEach(Array(viewModel.emptyTheaters.enumerated()), id: \.offset) { index, branch in
+                    emptyBranchGroup(branch: branch)
 
-                        Text("선택한 극장에 상영시간표가 없습니다")
-                            .font(.pretendardMedium14)
-                            .foregroundStyle(Color(.gray03))
-                            .padding(.vertical, 20)
-
-                        Divider()
-                            .background(Color(.gray01))
-                            .padding(.vertical, 8)
+                    if index < viewModel.emptyTheaters.count - 1 {
+                        Divider().background(Color(.gray01))
+                            .padding(.vertical, 12)
                     }
                 }
             }
         }
     }
 
-    private func showtimeGroup(
-        theaterBranch: String,
+    // MARK: - 지점 그룹 (지점명 1회 + 내부 상영관 N개)
+
+    private func branchGroup(branch: String, screenNames: [String]) -> some View {
+        VStack(alignment: .leading, spacing: 0) {
+            // 지점명
+            Text(branch)
+                .font(.pretendardBold18)
+                .foregroundStyle(Color(.gray07))
+
+            // 지점명 ↔ 첫 번째 상영관: 16px
+            // 상영관 묶음 간: 20px
+            VStack(alignment: .leading, spacing: 20) {
+                ForEach(screenNames, id: \.self) { screenName in
+                    if let times = viewModel.showtimes[screenName] {
+                        screenGroup(
+                            screenName: screenName,
+                            format: times.first?.format ?? "2D",
+                            showtimes: times
+                        )
+                    }
+                }
+            }
+            .padding(.top, 16)
+        }
+    }
+
+    // MARK: - 상영관 단위 (상영관명 + 시간표 그리드)
+
+    private func screenGroup(
         screenName: String,
         format: String,
         showtimes: [ShowtimeModel]
     ) -> some View {
-        VStack(alignment: .leading, spacing: 12) {
-            // 극장 이름
-            Text(theaterBranch)
-                .font(.pretendardBold18)
-                .foregroundStyle(Color(.gray07))
-                .padding(.bottom, 4)
+        let columns = [
+            GridItem(.flexible(), spacing: 8),
+            GridItem(.flexible(), spacing: 8),
+            GridItem(.flexible(), spacing: 8),
+            GridItem(.flexible(), spacing: 8)
+        ]
 
+        return VStack(alignment: .leading, spacing: 12) {
             // 상영관 + 포맷
             HStack {
                 Text(screenName)
@@ -390,23 +410,27 @@ struct ReservationView: View {
                     .foregroundStyle(Color(.gray04))
             }
 
-            // 상영시간 카드 그리드
-            let columns = [
-                GridItem(.flexible(), spacing: 8),
-                GridItem(.flexible(), spacing: 8),
-                GridItem(.flexible(), spacing: 8),
-                GridItem(.flexible(), spacing: 8)
-            ]
-
-            LazyVGrid(columns: columns, alignment: .leading, spacing: 8) {
+            // 상영관 타이틀 ↔ 시간표 그리드: 12px (spacing)
+            LazyVGrid(columns: columns, alignment: .leading, spacing: 12) {
                 ForEach(showtimes) { showtime in
                     showtimeCard(showtime)
                 }
             }
+        }
+    }
 
-            Divider()
-                .background(Color(.gray01))
-                .padding(.vertical, 20)
+    // MARK: - Empty State 지점 그룹
+
+    private func emptyBranchGroup(branch: String) -> some View {
+        VStack(alignment: .leading, spacing: 8) {
+            Text(branch)
+                .font(.pretendardBold18)
+                .foregroundStyle(Color(.gray07))
+
+            Text("선택한 극장에 상영시간표가 없습니다")
+                .font(.pretendardMedium14)
+                .foregroundStyle(Color(.gray03))
+                .padding(.vertical, 12)
         }
     }
 
