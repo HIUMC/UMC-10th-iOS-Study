@@ -62,7 +62,7 @@ struct HomeView: View {
                 Button(action: {}) {
                     Text(tab)
                         .font(.pretendardSemiBold24)
-                        .foregroundStyle(tab == "홈" ? Color(.purple03) : Color(.gray03))
+                        .foregroundStyle(tab == "홈" ? Color(.black) : Color(.gray03))
                 }
             }
             Spacer()
@@ -86,11 +86,13 @@ struct HomeView: View {
         Button(action: { selectedSegment = type }) {
             Text(title)
                 .font(.pretendardSemiBold14)
-                .foregroundStyle(selectedSegment == type ? .white : Color(.gray03))
+                .foregroundStyle(selectedSegment == type ? .white : Color(.gray04))
+            
                 .padding(.horizontal, 16)
                 .padding(.vertical, 8)
-                .background(selectedSegment == type ? Color(.purple03) : Color.clear)
+                .background(selectedSegment == type ? Color(.gray08) : Color(.gray02))
                 .cornerRadius(16)
+            
                 .overlay(
                     RoundedRectangle(cornerRadius: 16)
                         .stroke(selectedSegment == type ? Color.clear : Color(.gray02), lineWidth: 1)

@@ -14,8 +14,8 @@
             filePath = "UMC_MegaBox/UMC_MegaBox/Sources/Views/ReservationView.swift"
             startingColumnNumber = "38"
             endingColumnNumber = "38"
-            startingLineNumber = "326"
-            endingLineNumber = "326"
+            startingLineNumber = "332"
+            endingLineNumber = "332"
             landmarkName = "showtimeSection"
             landmarkType = "24">
          </BreakpointContent>
@@ -30,8 +30,8 @@
             filePath = "UMC_MegaBox/UMC_MegaBox/Sources/Views/ReservationView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "289"
-            endingLineNumber = "289"
+            startingLineNumber = "295"
+            endingLineNumber = "295"
             landmarkName = "dateCellView(_:)"
             landmarkType = "7">
          </BreakpointContent>

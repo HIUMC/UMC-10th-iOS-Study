@@ -86,7 +86,7 @@ struct ReservationView: View {
             if let movie = viewModel.selectedMovie {
                 // 관람등급 배지
                 ratingBadge(movie.rating)
-
+                    .padding(.trailing, 15)
                 Text(movie.title)
                     .font(.pretendardBold18)
                     .foregroundStyle(Color(.black))
@@ -183,6 +183,14 @@ struct ReservationView: View {
                         endPoint: .bottom
                     )
                     .cornerRadius(8)
+                    
+                    Text(movie.title)
+                        .font(.pretendardSemiBold12)
+                        .foregroundStyle(.white)
+                        .lineLimit(1)
+                        .padding(.horizontal, 4)
+                        .padding(.bottom, 8)
+
                 }
             }
         }
@@ -217,13 +225,13 @@ struct ReservationView: View {
             Text(branch)
                 .font(.pretendardSemiBold14)
                 .foregroundStyle(
-                    !isEnabled ? Color(.gray02)
+                    !isEnabled ? Color(.gray05)
                     : isSelected ? .white
                     : Color(.gray05)
                 )
                 .padding(.horizontal, 16)
                 .padding(.vertical, 8)
-                .background(isSelected ? Color(.purple03) : Color.clear)
+                .background(isSelected ? Color(.purple03) : Color(.gray01))
                 .cornerRadius(16)
                 .overlay(
                     RoundedRectangle(cornerRadius: 16)
@@ -251,9 +259,7 @@ struct ReservationView: View {
     }
 
     private func dateCellView(_ day: CalendarDay) -> some View {
-        // 1. 아무것도 선택 안 됐을 때(nil) + 오늘이면 -> true (기본 보라색 켜짐)
-        // 2. 무언가 선택됐을 때 + 그게 내 날짜면 -> true
-        let isSelected = (viewModel.selectedDate == nil && day.isToday) || (viewModel.selectedDate?.id == day.id)
+        let isSelected = viewModel.selectedDate?.id == day.id
         let isEnabled = viewModel.isDateEnabled
 
         // 요일 텍스트 색상 결정
@@ -319,15 +325,15 @@ struct ReservationView: View {
 
     private var showtimeSection: some View {
         VStack(alignment: .leading, spacing: 0) {
-            // 메시지 표시 (신촌 또는 상영시간 없는 날짜)
-            if let message = viewModel.noShowtimeMessage {
+            // 전체 메시지 (선택된 극장 전부 데이터 없음 or 날짜 없음)
+            if let message = viewModel.noShowtimeMessage, viewModel.showtimes.isEmpty {
                 Text(message)
                     .font(.pretendardMedium14)
                     .foregroundStyle(Color(.gray04))
                     .frame(maxWidth: .infinity)
                     .padding(.vertical, 40)
             } else {
-                // 극장별 그룹 — theaterBranch를 ShowtimeModel에서 직접 가져옴
+                // 상영시간이 있는 극장별 그룹
                 ForEach(viewModel.sortedScreenNames, id: \.self) { screenName in
                     if let times = viewModel.showtimes[screenName] {
                         showtimeGroup(
@@ -336,6 +342,24 @@ struct ReservationView: View {
                             format: times.first?.format ?? "2D",
                             showtimes: times
                         )
+                    }
+                }
+
+                // 상영시간표가 없는 극장 Empty State (예: 신촌)
+                ForEach(viewModel.emptyTheaters, id: \.self) { branch in
+                    VStack(alignment: .leading, spacing: 8) {
+                        Text(branch)
+                            .font(.pretendardBold18)
+                            .foregroundStyle(Color(.gray07))
+
+                        Text("선택한 극장에 상영시간표가 없습니다")
+                            .font(.pretendardMedium14)
+                            .foregroundStyle(Color(.gray03))
+                            .padding(.vertical, 20)
+
+                        Divider()
+                            .background(Color(.gray01))
+                            .padding(.vertical, 8)
                     }
                 }
             }

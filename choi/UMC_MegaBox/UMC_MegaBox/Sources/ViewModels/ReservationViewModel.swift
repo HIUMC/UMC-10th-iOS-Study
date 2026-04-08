@@ -8,20 +8,14 @@ class ReservationViewModel {
 
     var selectedMovie: MovieModel? {
         didSet {
-            // 다른 영화로 변경된 경우에만 하위 의존성 연쇄 초기화
-            if oldValue?.id != selectedMovie?.id {
-                selectedTheaters.removeAll()   // 극장 전체 리셋 → didSet 연쇄로 날짜도 리셋됨
-            }
             movieSubject.send(selectedMovie)
+            // 극장/날짜 유지 → 영화만 바꿔가며 시간표 비교 가능
         }
     }
     var selectedTheaters: Set<String> = [] {
         didSet {
-            // 극장 Set이 변경될 때마다 날짜 초기화
-            if oldValue != selectedTheaters {
-                selectedDate = nil      // 날짜 리셋 → 상영시간도 자동으로 사라짐
-            }
             theatersSubject.send(selectedTheaters)
+            // 날짜 유지 → 극장만 토글하며 시간표 비교 가능
         }
     }
     var selectedDate: CalendarDay? {
@@ -35,6 +29,7 @@ class ReservationViewModel {
     var isShowtimeVisible: Bool = false
     var noShowtimeMessage: String? = nil
     var showtimes: [String: [ShowtimeModel]] = [:]  // screenName -> [ShowtimeModel]
+    var emptyTheaters: [String] = []                 // 상영시간표가 없는 극장 목록
 
     // MARK: - 데이터
 
@@ -198,6 +193,7 @@ class ReservationViewModel {
                     self.generateShowtimes(theaters: theaters, date: date!)
                 } else {
                     self.showtimes = [:]
+                    self.emptyTheaters = []
                     self.noShowtimeMessage = nil
                 }
             }
@@ -207,53 +203,55 @@ class ReservationViewModel {
     // MARK: - 상영시간 데이터 생성 (다중 극장 지원)
 
     private func generateShowtimes(theaters: Set<String>, date: CalendarDay) {
-        // 선택된 극장이 신촌만 있는 경우
-        let onlySinchon = theaters == ["신촌"]
-        if onlySinchon {
-            showtimes = [:]
-            noShowtimeMessage = "선택한 극장에 상영시간표가 없습니다"
-            return
-        }
-
         noShowtimeMessage = nil
 
         // 첫째날(오늘)만 상영시간 데이터가 있다고 가정
         guard date.isToday else {
             showtimes = [:]
+            emptyTheaters = []
             noShowtimeMessage = "선택한 날짜에 상영시간표가 없습니다"
             return
         }
 
-        // 선택된 극장들의 상영시간을 모두 합산
+        // 선택된 극장들의 상영시간을 합산 + 데이터 없는 극장 추적
         var merged: [String: [ShowtimeModel]] = [:]
+        var emptyBranches: [String] = []
 
-        if theaters.contains("강남") {
-            merged["르 리클라이너 1관"] = [
-                ShowtimeModel(theaterBranch: "강남", screenName: "르 리클라이너 1관", format: "2D", time: "11:30", endTime: "~13:58", totalSeats: 116, remainingSeats: 109),
-                ShowtimeModel(theaterBranch: "강남", screenName: "르 리클라이너 1관", format: "2D", time: "14:20", endTime: "~16:48", totalSeats: 116, remainingSeats: 19),
-                ShowtimeModel(theaterBranch: "강남", screenName: "르 리클라이너 1관", format: "2D", time: "17:05", endTime: "~19:28", totalSeats: 116, remainingSeats: 1),
-                ShowtimeModel(theaterBranch: "강남", screenName: "르 리클라이너 1관", format: "2D", time: "19:45", endTime: "~22:02", totalSeats: 116, remainingSeats: 100),
-                ShowtimeModel(theaterBranch: "강남", screenName: "르 리클라이너 1관", format: "2D", time: "22:20", endTime: "~00:04", totalSeats: 116, remainingSeats: 116)
-            ]
+        for branch in theaterBranches where theaters.contains(branch) {
+            switch branch {
+            case "강남":
+                merged["르 리클라이너 1관"] = [
+                    ShowtimeModel(theaterBranch: "강남", screenName: "르 리클라이너 1관", format: "2D", time: "11:30", endTime: "~13:58", totalSeats: 116, remainingSeats: 109),
+                    ShowtimeModel(theaterBranch: "강남", screenName: "르 리클라이너 1관", format: "2D", time: "14:20", endTime: "~16:48", totalSeats: 116, remainingSeats: 19),
+                    ShowtimeModel(theaterBranch: "강남", screenName: "르 리클라이너 1관", format: "2D", time: "17:05", endTime: "~19:28", totalSeats: 116, remainingSeats: 1),
+                    ShowtimeModel(theaterBranch: "강남", screenName: "르 리클라이너 1관", format: "2D", time: "19:45", endTime: "~22:02", totalSeats: 116, remainingSeats: 100),
+                    ShowtimeModel(theaterBranch: "강남", screenName: "르 리클라이너 1관", format: "2D", time: "22:20", endTime: "~00:04", totalSeats: 116, remainingSeats: 116)
+                ]
+            case "홍대":
+                merged["BTS관 (7층 1관 [Laser])"] = [
+                    ShowtimeModel(theaterBranch: "홍대", screenName: "BTS관 (7층 1관 [Laser])", format: "2D", time: "9:30", endTime: "~11:50", totalSeats: 116, remainingSeats: 75),
+                    ShowtimeModel(theaterBranch: "홍대", screenName: "BTS관 (7층 1관 [Laser])", format: "2D", time: "12:00", endTime: "~14:26", totalSeats: 116, remainingSeats: 102),
+                    ShowtimeModel(theaterBranch: "홍대", screenName: "BTS관 (7층 1관 [Laser])", format: "2D", time: "14:45", endTime: "~17:04", totalSeats: 116, remainingSeats: 88)
+                ]
+                merged["BTS관 (9층 2관 [Laser])"] = [
+                    ShowtimeModel(theaterBranch: "홍대", screenName: "BTS관 (9층 2관 [Laser])", format: "2D", time: "11:30", endTime: "~13:58", totalSeats: 116, remainingSeats: 34),
+                    ShowtimeModel(theaterBranch: "홍대", screenName: "BTS관 (9층 2관 [Laser])", format: "2D", time: "14:10", endTime: "~16:32", totalSeats: 116, remainingSeats: 100),
+                    ShowtimeModel(theaterBranch: "홍대", screenName: "BTS관 (9층 2관 [Laser])", format: "2D", time: "16:50", endTime: "~19:00", totalSeats: 116, remainingSeats: 13),
+                    ShowtimeModel(theaterBranch: "홍대", screenName: "BTS관 (9층 2관 [Laser])", format: "2D", time: "19:20", endTime: "~21:40", totalSeats: 116, remainingSeats: 92)
+                ]
+            default:
+                // 신촌 등 상영시간표가 없는 극장
+                emptyBranches.append(branch)
+            }
         }
-
-        if theaters.contains("홍대") {
-            merged["BTS관 (7층 1관 [Laser])"] = [
-                ShowtimeModel(theaterBranch: "홍대", screenName: "BTS관 (7층 1관 [Laser])", format: "2D", time: "9:30", endTime: "~11:50", totalSeats: 116, remainingSeats: 75),
-                ShowtimeModel(theaterBranch: "홍대", screenName: "BTS관 (7층 1관 [Laser])", format: "2D", time: "12:00", endTime: "~14:26", totalSeats: 116, remainingSeats: 102),
-                ShowtimeModel(theaterBranch: "홍대", screenName: "BTS관 (7층 1관 [Laser])", format: "2D", time: "14:45", endTime: "~17:04", totalSeats: 116, remainingSeats: 88)
-            ]
-            merged["BTS관 (9층 2관 [Laser])"] = [
-                ShowtimeModel(theaterBranch: "홍대", screenName: "BTS관 (9층 2관 [Laser])", format: "2D", time: "11:30", endTime: "~13:58", totalSeats: 116, remainingSeats: 34),
-                ShowtimeModel(theaterBranch: "홍대", screenName: "BTS관 (9층 2관 [Laser])", format: "2D", time: "14:10", endTime: "~16:32", totalSeats: 116, remainingSeats: 100),
-                ShowtimeModel(theaterBranch: "홍대", screenName: "BTS관 (9층 2관 [Laser])", format: "2D", time: "16:50", endTime: "~19:00", totalSeats: 116, remainingSeats: 13),
-                ShowtimeModel(theaterBranch: "홍대", screenName: "BTS관 (9층 2관 [Laser])", format: "2D", time: "19:20", endTime: "~21:40", totalSeats: 116, remainingSeats: 92)
-            ]
-        }
-
-        // 신촌은 상영시간표가 없으므로 추가하지 않음 (다른 극장과 함께 선택된 경우 무시)
 
         showtimes = merged
+        emptyTheaters = emptyBranches
+
+        // 선택된 극장 전체가 데이터 없는 경우 (신촌만 선택 등)
+        if merged.isEmpty && !emptyBranches.isEmpty {
+            noShowtimeMessage = "선택한 극장에 상영시간표가 없습니다"
+        }
     }
 
     // MARK: - 액션
@@ -274,8 +272,16 @@ class ReservationViewModel {
         selectedDate = day
     }
 
-    // 상영관별 정렬된 키 반환 (Dictionary 순서 보장용)
+    // 상영관별 정렬된 키 반환 — theaterBranches 순서(강남→홍대→신촌) 기준 정렬
     var sortedScreenNames: [String] {
-        showtimes.keys.sorted()
+        showtimes.keys.sorted { a, b in
+            let branchA = showtimes[a]?.first?.theaterBranch ?? ""
+            let branchB = showtimes[b]?.first?.theaterBranch ?? ""
+            let indexA = theaterBranches.firstIndex(of: branchA) ?? Int.max
+            let indexB = theaterBranches.firstIndex(of: branchB) ?? Int.max
+            // 같은 극장 내 상영관은 이름순
+            if indexA == indexB { return a < b }
+            return indexA < indexB
+        }
     }
 }
