@@ -25,9 +25,11 @@ struct SeatSelectionView: View {
             paymentBar
         }
         .background(Color(.gray09))
-        .navigationTitle("\(viewModel.showtime.time)")
+        .navigationTitle("4.1(수) \(viewModel.showtime.time)")
         .navigationBarTitleDisplayMode(.inline)
         .navigationBarBackButtonHidden(true)
+        .toolbarBackground(.white, for: .navigationBar)
+        .toolbarBackground(.visible, for: .navigationBar)
         .toolbar {
             ToolbarItem(placement: .topBarLeading) {
                 Button {
@@ -53,10 +55,11 @@ struct SeatSelectionView: View {
         VStack(spacing: 20) {
             // SCREEN 라벨
             Text("SCREEN")
-                .font(.pretendardBold22)
-                .foregroundStyle(Color(.saturday))
+                .font(.pretendardBold24)
+                .foregroundStyle(Color(.gray03))
                 .frame(maxWidth: .infinity)
-                .padding(.top, 24)
+                .padding(.top, 26)
+                .padding(.bottom, 80)
 
             // 좌석 그리드
             VStack(spacing: 6) {
@@ -80,18 +83,23 @@ struct SeatSelectionView: View {
             }
         } label: {
             Text(seat.seatLabel)
-                .font(.pretendardMedium10)
-                .foregroundStyle(seat.isSelected ? .white : Color(.gray07))
-                .frame(width: 40, height: 40)
+                .font(.pretendardSemiBold12)
+                .foregroundStyle(.white)
+                .frame(width: 35, height: 35)
                 .background(seat.isSelected ? Color(.purple03) : Color(.saturday))
                 .cornerRadius(6)
                 .overlay(
-                    RoundedRectangle(cornerRadius: 6)
+                    RoundedRectangle(cornerRadius: 4)
                         .stroke(
                             seat.isSelected ? Color(.purple05) : Color(.saturday).opacity(0.7),
                             lineWidth: 1
                         )
                 )
+                .overlay(
+                    RoundedRectangle(cornerRadius: 4)
+                        .stroke(Color.white, lineWidth: 2)
+                )
+
         }
     }
 
@@ -142,14 +150,17 @@ struct SeatSelectionView: View {
                             ? Color(.purple03)
                             : Color(.gray03)
                     )
-                    .cornerRadius(12)
+                    .cornerRadius(10)
             }
             .disabled(viewModel.selectedCount == 0)
             .padding(.horizontal, 20)
-            .padding(.bottom, 20)
+            .padding(.top, 30)
         }
-        .background(Color(.purple00))
-        .cornerRadius(20, corners: [.topLeft, .topRight])
+        .background(
+                Color(.white)
+                    .cornerRadius(20, corners: [.topLeft, .topRight])
+                    .ignoresSafeArea(edges: .bottom)
+            )
     }
 }
 

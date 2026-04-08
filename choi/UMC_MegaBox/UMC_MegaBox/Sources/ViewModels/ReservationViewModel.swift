@@ -279,8 +279,8 @@ class ReservationViewModel {
             let branchB = showtimes[b]?.first?.theaterBranch ?? ""
             let indexA = theaterBranches.firstIndex(of: branchA) ?? Int.max
             let indexB = theaterBranches.firstIndex(of: branchB) ?? Int.max
-            // 같은 극장 내 상영관은 이름순
-            if indexA == indexB { return a < b }
+            // 같은 극장 내 상영관은 Natural Sort (숫자 인식 정렬: "2관" < "10관")
+            if indexA == indexB { return a.localizedStandardCompare(b) == .orderedAscending }
             return indexA < indexB
         }
     }
