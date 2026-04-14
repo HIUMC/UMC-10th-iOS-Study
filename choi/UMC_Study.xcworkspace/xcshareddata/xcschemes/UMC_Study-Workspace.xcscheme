@@ -112,6 +112,34 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
+               BlueprintIdentifier = "73AA1CF32DD7D1AC3B01FE7F"
+               BuildableName = "Week4_Practice.app"
+               BlueprintName = "Week4_Practice"
+               ReferencedContainer = "container:Practice/Week4_Practice/Week4_Practice.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "DD5EE88349855EE4A61F3FA0"
+               BuildableName = "Week4_PracticeTests.xctest"
+               BlueprintName = "Week4_PracticeTests"
+               ReferencedContainer = "container:Practice/Week4_Practice/Week4_Practice.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
                BlueprintIdentifier = "A0DF919DD1E8655B46B704AA"
                BuildableName = "iOS_Workbook_3rd.app"
                BlueprintName = "iOS_Workbook_3rd"
@@ -171,6 +199,17 @@
                BuildableName = "Week3_PracticeTests.xctest"
                BlueprintName = "Week3_PracticeTests"
                ReferencedContainer = "container:Practice/Week3_Practice/Week3_Practice.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO"
+            parallelizable = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "DD5EE88349855EE4A61F3FA0"
+               BuildableName = "Week4_PracticeTests.xctest"
+               BlueprintName = "Week4_PracticeTests"
+               ReferencedContainer = "container:Practice/Week4_Practice/Week4_Practice.xcodeproj">
             </BuildableReference>
          </TestableReference>
          <TestableReference
