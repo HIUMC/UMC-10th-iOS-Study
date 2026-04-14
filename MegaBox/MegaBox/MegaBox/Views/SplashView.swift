@@ -27,5 +27,4 @@ struct SplashView: View {
 
 #Preview {
     SplashView()
-        .previewDevice(PreviewDevice(rawValue: "iPhone 16 Pro Max"))
 }

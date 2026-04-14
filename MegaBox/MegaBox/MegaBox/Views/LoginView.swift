@@ -9,6 +9,15 @@ import Foundation
 import SwiftUI
 
 struct LoginView: View {
+    
+    // Observation 프레임워크의 뷰모델 생성
+    @State private var viewModel = LoginViewModel()
+        
+    // @AppStorage를 사용하여 기기에 데이터 저장
+    @AppStorage("savedId") private var savedId: String = ""
+    @AppStorage("savedPwd") private var savedPwd: String = ""
+    
+    
     var body: some View {
         VStack {
             
@@ -41,13 +50,13 @@ struct LoginView: View {
     // 로그인 정보 입력
     var Info: some View {
         VStack(alignment: .leading) {
-            Text("아이디")
+            TextField("아이디", text: $viewModel.id)
                 .pretendStyle(.regular13)
                 .foregroundColor(Color.gray03)
             Divider()   // 밑줄
                 .padding(.bottom, 30)
             
-            Text("비밀번호")
+            SecureField("비밀번호", text: $viewModel.pwd)   //SecureField 사용하면 입력하는 글자가 가려져서 보이게 됨
                 .pretendStyle(.regular13)
                 .foregroundColor(Color.gray03)
             Divider()
@@ -58,7 +67,11 @@ struct LoginView: View {
     
     // 로그인 버튼
     var LoginButton: some View {
-        Button(action: { /* 로그인 로직 */ }) {
+        Button(action: {
+            savedId = viewModel.id
+            savedPwd = viewModel.pwd
+            print("저장 완료: \(savedId)")
+        }) {
             Text("로그인")
                 .pretendStyle(.semiBold18)
                 .foregroundColor(.white)

@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A544753B2F8545F000EBC54E /* MovieDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A544753A2F8545E100EBC54E /* MovieDetailViewModel.swift */; };
+		A567DB952F7D190300B175E3 /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A567DB942F7D18FD00B175E3 /* MainTabView.swift */; };
+		A567DB972F7D1B8300B175E3 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A567DB962F7D1B7B00B175E3 /* HomeView.swift */; };
+		A567DB9B2F853FBC00B175E3 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A567DB9A2F853FB400B175E3 /* HomeViewModel.swift */; };
 		A5851C942F7BCCBD00F452A1 /* MegaBoxApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5851C932F7BCCBD00F452A1 /* MegaBoxApp.swift */; };
 		A5851C982F7BCCBE00F452A1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A5851C972F7BCCBE00F452A1 /* Assets.xcassets */; };
 		A5851C9B2F7BCCBE00F452A1 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A5851C9A2F7BCCBE00F452A1 /* Preview Assets.xcassets */; };
@@ -23,9 +27,19 @@
 		A5851CBC2F7BE71D00F452A1 /* Pretendard-Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = A5851CB82F7BE71D00F452A1 /* Pretendard-Thin.otf */; };
 		A5851CBD2F7BE71D00F452A1 /* Pretendard-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = A5851CB92F7BE71D00F452A1 /* Pretendard-SemiBold.otf */; };
 		A5851CBE2F7BE71D00F452A1 /* Pretendard-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = A5851CBA2F7BE71D00F452A1 /* Pretendard-Medium.otf */; };
+		A5AE90D42F7C4995001ACF68 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5AE90D32F7C4980001ACF68 /* LoginViewModel.swift */; };
+		A5AE90D72F7C49BA001ACF68 /* LoginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5AE90D62F7C49B0001ACF68 /* LoginModel.swift */; };
+		A5AE90D92F7C506C001ACF68 /* MyPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5AE90D82F7C4FEC001ACF68 /* MyPageView.swift */; };
+		A5AE90DB2F7C6818001ACF68 /* MyInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5AE90DA2F7C67D1001ACF68 /* MyInfoView.swift */; };
+		A5E5C7D72F855143000C1949 /* MovieDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E5C7D62F85513A000C1949 /* MovieDetailView.swift */; };
+		A5E5C7D92F8552A0000C1949 /* MovieModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E5C7D82F8552A0000C1949 /* MovieModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A544753A2F8545E100EBC54E /* MovieDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailViewModel.swift; sourceTree = "<group>"; };
+		A567DB942F7D18FD00B175E3 /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
+		A567DB962F7D1B7B00B175E3 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		A567DB9A2F853FB400B175E3 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		A5851C902F7BCCBD00F452A1 /* MegaBox.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MegaBox.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5851C932F7BCCBD00F452A1 /* MegaBoxApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MegaBoxApp.swift; sourceTree = "<group>"; };
 		A5851C972F7BCCBE00F452A1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -44,6 +58,12 @@
 		A5851CB92F7BE71D00F452A1 /* Pretendard-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Pretendard-SemiBold.otf"; path = "../../../../../Pretendard-1.3.9/public/static/Pretendard-SemiBold.otf"; sourceTree = "<group>"; };
 		A5851CBA2F7BE71D00F452A1 /* Pretendard-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Pretendard-Medium.otf"; path = "../../../../../Pretendard-1.3.9/public/static/Pretendard-Medium.otf"; sourceTree = "<group>"; };
 		A5851CBF2F7BE73300F452A1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		A5AE90D32F7C4980001ACF68 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		A5AE90D62F7C49B0001ACF68 /* LoginModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginModel.swift; sourceTree = "<group>"; };
+		A5AE90D82F7C4FEC001ACF68 /* MyPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageView.swift; sourceTree = "<group>"; };
+		A5AE90DA2F7C67D1001ACF68 /* MyInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyInfoView.swift; sourceTree = "<group>"; };
+		A5E5C7D62F85513A000C1949 /* MovieDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailView.swift; sourceTree = "<group>"; };
+		A5E5C7D82F8552A0000C1949 /* MovieModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,6 +98,8 @@
 			children = (
 				A5851CBF2F7BE73300F452A1 /* Info.plist */,
 				A5851CA92F7BE69F00F452A1 /* Resources */,
+				A5AE90D52F7C499D001ACF68 /* Models */,
+				A5AE90D22F7C4960001ACF68 /* ViewModels */,
 				A5851CA12F7BCCCA00F452A1 /* Views */,
 				A5851C932F7BCCBD00F452A1 /* MegaBoxApp.swift */,
 				A5851C972F7BCCBE00F452A1 /* Assets.xcassets */,
@@ -97,6 +119,11 @@
 		A5851CA12F7BCCCA00F452A1 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				A567DB962F7D1B7B00B175E3 /* HomeView.swift */,
+				A5E5C7D62F85513A000C1949 /* MovieDetailView.swift */,
+				A567DB942F7D18FD00B175E3 /* MainTabView.swift */,
+				A5AE90DA2F7C67D1001ACF68 /* MyInfoView.swift */,
+				A5AE90D82F7C4FEC001ACF68 /* MyPageView.swift */,
 				A5851CA22F7BCCF300F452A1 /* LoginView.swift */,
 				A5851CA42F7BCD0800F452A1 /* SplashView.swift */,
 			);
@@ -127,6 +154,25 @@
 				A5851CA82F7BE69F00F452A1 /* Colors.xcassets */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		A5AE90D22F7C4960001ACF68 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				A567DB9A2F853FB400B175E3 /* HomeViewModel.swift */,
+				A544753A2F8545E100EBC54E /* MovieDetailViewModel.swift */,
+				A5AE90D32F7C4980001ACF68 /* LoginViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		A5AE90D52F7C499D001ACF68 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				A5E5C7D82F8552A0000C1949 /* MovieModel.swift */,
+				A5AE90D62F7C49B0001ACF68 /* LoginModel.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -209,9 +255,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A5AE90DB2F7C6818001ACF68 /* MyInfoView.swift in Sources */,
 				A5851CAC2F7BE6D900F452A1 /* Fonts.swift in Sources */,
+				A5AE90D92F7C506C001ACF68 /* MyPageView.swift in Sources */,
+				A567DB972F7D1B8300B175E3 /* HomeView.swift in Sources */,
+				A544753B2F8545F000EBC54E /* MovieDetailViewModel.swift in Sources */,
+				A5E5C7D72F855143000C1949 /* MovieDetailView.swift in Sources */,
+				A5AE90D72F7C49BA001ACF68 /* LoginModel.swift in Sources */,
 				A5851CA32F7BCCF300F452A1 /* LoginView.swift in Sources */,
+				A567DB9B2F853FBC00B175E3 /* HomeViewModel.swift in Sources */,
 				A5851C942F7BCCBD00F452A1 /* MegaBoxApp.swift in Sources */,
+				A5E5C7D92F8552A0000C1949 /* MovieModel.swift in Sources */,
+				A5AE90D42F7C4995001ACF68 /* LoginViewModel.swift in Sources */,
+				A567DB952F7D190300B175E3 /* MainTabView.swift in Sources */,
 				A5851CA52F7BCD0800F452A1 /* SplashView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
