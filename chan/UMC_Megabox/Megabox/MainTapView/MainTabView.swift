@@ -22,7 +22,7 @@ struct MainTabView: View {
                 }
                 .tag(1)
             
-            // ⭐️ 3. 모바일 오더 (여기가 빠졌었습니다!)
+            // 3. 모바일 오더
             Text("모바일 오더")
                 .tabItem {
                     Label("모바일 오더", systemImage: "popcorn.fill")

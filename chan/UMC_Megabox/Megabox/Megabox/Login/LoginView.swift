@@ -11,7 +11,8 @@ struct LoginView: View {
     @AppStorage("isLoggedIn") private var isLoggedIn: Bool = false
     
     var body: some View {
-            VStack { // 1. 모든 요소를 이 큰 바구니 하나에 담으세요!
+            VStack {
+                // 1. 모든 요소를 이 큰 바구니 하나에 담으세요!
                 navigationSection
                 
                 Spacer()
