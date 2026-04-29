@@ -242,13 +242,54 @@ class HomeViewModel {
                                              actors: "유해진, 박지훈, 유지태, 전미도, 김민, 박지환, 이준혁, 안재홍"
                                          )]
     
-    let specialTheaterDummyList: [SpecialTheater] = [SpecialTheater(specialImage: "special_Dolby_Vision+Atmos"),
-                                                     SpecialTheater(specialImage: "special_MX4D"),
-                                                     SpecialTheater(specialImage: "special_Dolby_Vision+Atmos"),
-                                                     SpecialTheater(specialImage: "special_MX4D"),
-                                                     SpecialTheater(specialImage: "special_Dolby_Vision+Atmos"),
-                                                     SpecialTheater(specialImage: "special_MX4D"),
-                                                     SpecialTheater(specialImage: "special_Dolby_Vision+Atmos"),
-                                                     SpecialTheater(specialImage: "special_Dolby_Vision+Atmos"),
-                                                     SpecialTheater(specialImage: "special_Dolby_Vision+Atmos")]
+    let specialTheaterDummyList: [SpecialTheater] = [
+        SpecialTheater(
+            logoImage: "special_Dolby_Vision+Atmos",
+            theaterImage: "image_theater_Comfort",
+            title: "DOLBY CINEMA",
+            description: "완벽한 영화 관람을 완성하는 하이엔드 시네마"
+        ),
+        SpecialTheater(
+            logoImage: "special_MX4D",
+            theaterImage: "image_theater_MX4D",
+            title: "MX4D",
+            description: "모션과 바람, 진동으로 장면을 생생하게 체감하는 특별관"
+        ),
+        SpecialTheater(
+            logoImage: "special_Boutique",
+            theaterImage: "image_theater_Comfort",
+            title: "BOUTIQUE",
+            description: "더 넓고 안락한 좌석에서 프리미엄 관람을 즐기는 상영관"
+        ),
+        SpecialTheater(
+            logoImage: "special_Dolby_Vision+Atmos",
+            theaterImage: "image_theater_Dolby_atoms",
+            title: "DOLBY ATMOS",
+            description: "공간을 가득 채우는 입체 음향으로 몰입감을 높이는 상영관"
+        ),
+        SpecialTheater(
+            logoImage: "special_Dolby_Vision+Atmos",
+            theaterImage: "image_theater_Comfort",
+            title: "DOLBY CINEMA",
+            description: "완벽한 영화 관람을 완성하는 하이엔드 시네마"
+        ),
+        SpecialTheater(
+            logoImage: "special_MX4D",
+            theaterImage: "image_theater_MX4D",
+            title: "MX4D",
+            description: "모션과 바람, 진동으로 장면을 생생하게 체감하는 특별관"
+        ),
+        SpecialTheater(
+            logoImage: "special_Boutique",
+            theaterImage: "image_theater_Comfort",
+            title: "BOUTIQUE",
+            description: "더 넓고 안락한 좌석에서 프리미엄 관람을 즐기는 상영관"
+        ),
+        SpecialTheater(
+            logoImage: "special_Dolby_Vision+Atmos",
+            theaterImage: "image_theater_Dolby_atoms",
+            title: "DOLBY ATMOS",
+            description: "공간을 가득 채우는 입체 음향으로 몰입감을 높이는 상영관"
+        )
+    ]
 }

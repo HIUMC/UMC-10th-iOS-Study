@@ -10,5 +10,12 @@ import Foundation
 struct SpecialTheater: Identifiable {
     let id: UUID = UUID()
     
-    var specialImage: String
+    let logoImage: String
+    let theaterImage: String
+    let title: String
+    let description: String
+    
+    var specialImage: String {
+        logoImage
+    }
 }

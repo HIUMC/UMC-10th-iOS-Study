@@ -12,7 +12,11 @@ struct HomeView: View {
     @Environment(NavigationRouter.self) private var router
     @State private var isMovieChartSelected: Bool = true
     // 선택된 특별관 id를 저장하는 상태변수
-    @State private var selectedId: UUID? = nil
+    @State private var selectedId: UUID?
+    
+    // 상영관 가로스크롤에서의 클릭으로는 자동 스크롤이 반응하지 않게 하고,
+    // 하단 페이지 슬라이드를 이용할 때만 자동 스크롤이 반응하도록 하기 위한 상태변수
+    @State private var isManualClick: Bool = false
     
     var body: some View {
         NavigationView {
@@ -65,32 +69,73 @@ struct HomeView: View {
                 
                 // MARK: 특별관 가로스크롤
                 ScrollView(.horizontal) {
-                    LazyHStack {
-                        ForEach(homeVM.specialTheaterDummyList) { theater in
-                            
-                            VStack(spacing: 5) {
-                                Button( action: { withAnimation(.easeInOut(duration: 0.1)) {
-                                    selectedId = theater.id }
-                                }) {
-                                    Image(theater.specialImage)
-                                        .resizable()
-                                        .scaledToFit()
-                                        .frame(width: 70, height: 70)
-                                        .opacity(selectedId == theater.id ? 1.0 : 0.4)
-                                }
+                    ScrollViewReader { proxy in
+                        LazyHStack {
+                            ForEach(homeVM.specialTheaterDummyList) { theater in
                                 
-                                Circle()
-                                    .foregroundStyle(selectedId == theater.id ? .purple04 : .clear)
-                                    .frame(width: 10, height: 10)
+                                VStack(spacing: 5) {
+                                    Button( action: {
+                                        isManualClick = true;
+                                        withAnimation(.easeInOut(duration: 0.1)) {
+                                        selectedId = theater.id }
+                                    }) {
+                                        Image(theater.specialImage)
+                                            .resizable()
+                                            .scaledToFit()
+                                            .frame(width: 70, height: 70)
+                                            .opacity(selectedId == theater.id ? 1.0 : 0.4)
+                                    }
+                                    
+                                    Circle()
+                                        .foregroundStyle(selectedId == theater.id ? .purple04 : .clear)
+                                        .frame(width: 10, height: 10)
+                                    
+                                }.id(theater.id)
+                                
                             }
-                            
+                        }.onChange(of: selectedId) {
+                            if isManualClick {
+                                isManualClick = false
+                            } else {
+                                withAnimation(.easeInOut) {
+                                    proxy.scrollTo(selectedId, anchor: .center)
+                                }
+                            }
                         }
                     }
-                    
                 }.scrollIndicators(.hidden)
+                    
                 
-                // MARK: 특별관 하단 이미지
-                Image("Special_Theater_Image")
+                // MARK: 특별관 이미지
+                TabView(selection: $selectedId) {
+                    ForEach(homeVM.specialTheaterDummyList) { theater in
+                        ZStack {
+                            
+                            Image(theater.theaterImage)
+                                .resizable()
+                                .scaledToFill()
+                                .frame(minWidth: 0, maxWidth: .infinity)
+                                .clipShape(RoundedRectangle(cornerRadius: 20))
+                            
+                            VStack(alignment: .leading) {
+                                HStack {
+                                    VStack(alignment: .leading, spacing: 10) {
+                                        Text(theater.title)
+                                            .foregroundStyle(.white)
+                                            .font(.PretendardBold(size: 28))
+                                        Text(theater.description)
+                                            .foregroundStyle(.white)
+                                            .font(.PretendardMedium(size: 18))
+                                    }.frame(width: 210)
+                                    Spacer()
+                                }
+                                Spacer()
+                            }.padding()
+                            
+                        }.tag(theater.id)
+                    }
+                }.tabViewStyle(.page(indexDisplayMode: .always))
+                    .frame(height: 408)
                 
             }.toolbar {
                 ToolbarItem(placement: .topBarLeading) {
@@ -103,12 +148,10 @@ struct HomeView: View {
             .safeAreaPadding(.horizontal)
         }.onAppear() {
             self.isMovieChartSelected = true
-            self.selectedId = nil
+            self.selectedId = homeVM.specialTheaterDummyList.first?.id
         }
     }
 }
-
-
 
 #Preview {
     HomeView()
