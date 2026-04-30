@@ -23,7 +23,7 @@ final class MovieSearchViewModel : ObservableObject {
 
     private var bag = Set<AnyCancellable>()
     
-    
+    // 실시간 검색 시스템
     init() {
         $query
             .debounce(for: .milliseconds(350), scheduler: DispatchQueue.main)
