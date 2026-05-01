@@ -10,3 +10,4 @@ protocol DIContainerProtocol: AnyObject, Observable {
     var selectedTab: Int { get set }
     func resetAll()
 }
+
