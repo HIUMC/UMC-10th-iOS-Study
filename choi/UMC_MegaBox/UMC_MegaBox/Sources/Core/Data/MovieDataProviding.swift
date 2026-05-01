@@ -24,6 +24,9 @@ protocol MovieDataProviding {
     var reservationMovies: [MovieModel] { get }
     var theaterBranches: [String] { get }
 
-    /// 선택된 극장과 날짜에 따른 상영시간 생성
-    func generateShowtimes(theaters: Set<String>, date: CalendarDay) -> ShowtimeResult
+    /// 특정 영화의 상영 가능한 날짜 목록 반환
+    func availableDates(for movie: MovieModel) -> [CalendarDay]
+
+    /// 선택된 영화 + 극장 + 날짜에 따른 상영시간 생성
+    func generateShowtimes(movie: MovieModel?, theaters: Set<String>, date: CalendarDay) -> ShowtimeResult
 }
