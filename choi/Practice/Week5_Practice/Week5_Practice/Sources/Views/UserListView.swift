@@ -1,25 +1,15 @@
 import SwiftUI
 
 struct UserListView: View {
-    @State private var viewModel: UserListViewModel
+    @State private var viewModel = UserListViewModel()
     @State private var showAddUser = false
-
-    private let loadsMockDataOnAppear: Bool
-
-    init(
-        viewModel: UserListViewModel = UserListViewModel(),
-        loadsMockDataOnAppear: Bool = true
-    ) {
-        _viewModel = State(initialValue: viewModel)
-        self.loadsMockDataOnAppear = loadsMockDataOnAppear
-    }
 
     var body: some View {
         NavigationStack {
             ZStack {
-                if viewModel.users.isEmpty && viewModel.isLoading {
+                if viewModel.isLoading {
                     ProgressView("로딩 중...")
-                } else if viewModel.users.isEmpty, let errorMessage = viewModel.errorMessage {
+                } else if let errorMessage = viewModel.errorMessage {
                     ContentUnavailableView(
                         "사용자 정보를 불러오지 못했습니다",
                         systemImage: "exclamationmark.triangle",
@@ -27,14 +17,6 @@ struct UserListView: View {
                     )
                 } else {
                     List {
-                        if viewModel.isLoading {
-                            HStack {
-                                ProgressView()
-                                Text("로컬 JSON을 불러오는 중...")
-                                    .foregroundStyle(.secondary)
-                            }
-                        }
-
                         ForEach(viewModel.users) { user in
                             UserRowView(user: user)
                         }
@@ -60,7 +42,6 @@ struct UserListView: View {
                 }
             }
             .task {
-                guard loadsMockDataOnAppear else { return }
                 await viewModel.fetchUsers()
             }
         }
@@ -133,8 +114,5 @@ private struct AddUserView: View {
 }
 
 #Preview {
-    UserListView(
-        viewModel: .mockDataPreview,
-        loadsMockDataOnAppear: false
-    )
+    UserListView()
 }

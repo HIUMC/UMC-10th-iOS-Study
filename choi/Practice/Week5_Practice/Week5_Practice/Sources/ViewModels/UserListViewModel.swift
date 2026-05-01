@@ -4,36 +4,11 @@ import Observation
 @MainActor
 @Observable
 final class UserListViewModel {
-    var users: [UserModel]
+    var users: [UserModel] = []
     var isLoading = false
     var errorMessage: String?
 
-    private var userStore: [UserModel]
-
-    init(users: [UserModel] = UserListViewModel.defaultUsers) {
-        self.users = users
-        self.userStore = users
-    }
-
-    static var mockDataPreview: UserListViewModel {
-        let users = (try? loadUsersFromMockData()) ?? defaultUsers
-        return UserListViewModel(users: users)
-    }
-
-    private static let defaultUsers: [UserModel] = [
-        UserModel(
-            id: "preview-1",
-            name: "Sophie",
-            profileImageURL: nil,
-            bio: "iOS Developer"
-        ),
-        UserModel(
-            id: "preview-2",
-            name: "David",
-            profileImageURL: nil,
-            bio: "Backend Developer"
-        )
-    ]
+    private var userStore: [UserModel] = []
 
     func fetchUsers() async {
         isLoading = true
@@ -44,7 +19,13 @@ final class UserListViewModel {
         }
 
         do {
-            userStore = try Self.loadUsersFromMockData()
+            guard let url = Bundle.main.url(forResource: "MockData", withExtension: "json") else {
+                throw UserListError.mockDataNotFound
+            }
+
+            let data = try Data(contentsOf: url)
+            let response = try JSONDecoder().decode(APIResponse.self, from: data)
+            userStore = response.data.users.map { $0.toDomain() }
             users = userStore
         } catch {
             errorMessage = error.localizedDescription
@@ -78,16 +59,6 @@ final class UserListViewModel {
     func deleteUser(id: String) {
         userStore.removeAll { $0.id == id }
         users = userStore
-    }
-
-    private static func loadUsersFromMockData(bundle: Bundle = .main) throws -> [UserModel] {
-        guard let url = bundle.url(forResource: "MockData", withExtension: "json") else {
-            throw UserListError.mockDataNotFound
-        }
-
-        let data = try Data(contentsOf: url)
-        let response = try JSONDecoder().decode(APIResponse.self, from: data)
-        return response.data.users.map { $0.toDomain() }
     }
 }
 
