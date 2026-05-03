@@ -9,7 +9,8 @@ class ReservationViewModel {
     var selectedMovie: MovieModel? {
         didSet {
             movieSubject.send(selectedMovie)
-            // 극장/날짜 유지 → 영화만 바꿔가며 시간표 비교 가능
+            // 영화 변경 시 가용 날짜 갱신 (극장/날짜 선택값은 유지 → 비교 UX)
+            updateAvailableDates()
         }
     }
     var selectedTheaters: Set<String> = [] {
@@ -33,9 +34,12 @@ class ReservationViewModel {
 
     // MARK: - 데이터 (Provider에서 주입)
 
-    let movies: [MovieModel]
-    let theaterBranches: [String]
-    let dates: [CalendarDay] = CalendarDay.generateWeek()
+    var movies: [MovieModel] = []
+    var theaterBranches: [String] = []
+    var dates: [CalendarDay] = []   // 영화 선택 시 JSON에서 가용 날짜로 갱신
+
+    /// JSON 데이터 로드 완료 여부
+    var isLoaded: Bool = false
 
     // MARK: - Sheet 상태
 
@@ -50,15 +54,33 @@ class ReservationViewModel {
 
     // MARK: - 의존성
 
-    private let dataProvider: MovieDataProviding
+    private var dataProvider: MovieDataProviding
 
     // MARK: - Init
 
-    init(dataProvider: MovieDataProviding = HardcodedMovieDataProvider()) {
+    init(dataProvider: MovieDataProviding = JSONMovieDataProvider()) {
         self.dataProvider = dataProvider
         self.movies = dataProvider.reservationMovies
         self.theaterBranches = dataProvider.theaterBranches
         setupCombineChain()
+    }
+
+    // MARK: - 비동기 JSON 데이터 로드
+
+    /// View의 .task에서 호출 — JSON을 비동기로 로드하여 데이터 갱신
+    @MainActor
+    func loadScheduleData() async {
+        // 이미 로드 완료된 경우 스킵
+        guard !isLoaded else { return }
+
+        // 비동기로 JSON 로드
+        let provider = await JSONMovieDataProvider.load()
+        self.dataProvider = provider
+        self.movies = provider.reservationMovies
+        self.theaterBranches = provider.theaterBranches
+        self.isLoaded = true
+
+        print("[ReservationViewModel] 비동기 JSON 로드 완료 - 영화 \(movies.count)개, 지점 \(theaterBranches.count)개")
     }
 
     // MARK: - Combine 의존성 체인 설정
@@ -95,7 +117,11 @@ class ReservationViewModel {
                 self.isShowtimeVisible = allSelected
 
                 if allSelected {
-                    let result = self.dataProvider.generateShowtimes(theaters: theaters, date: date!)
+                    let result = self.dataProvider.generateShowtimes(
+                        movie: movie,
+                        theaters: theaters,
+                        date: date!
+                    )
                     self.showtimes = result.showtimes
                     self.emptyTheaters = result.emptyTheaters
                     self.noShowtimeMessage = result.noShowtimeMessage
@@ -124,6 +150,17 @@ class ReservationViewModel {
 
     func selectDate(_ day: CalendarDay) {
         selectedDate = day
+    }
+
+    // MARK: - 날짜 갱신
+
+    /// 선택된 영화에 따라 가용 날짜 목록을 업데이트
+    private func updateAvailableDates() {
+        guard let movie = selectedMovie else {
+            dates = []
+            return
+        }
+        dates = dataProvider.availableDates(for: movie)
     }
 
     // MARK: - 지점별 그룹핑 (View에서 이중 루프용)

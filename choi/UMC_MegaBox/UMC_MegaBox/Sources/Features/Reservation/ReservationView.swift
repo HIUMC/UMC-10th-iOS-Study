@@ -60,6 +60,10 @@ struct ReservationView: View {
                     viewModel.selectMovie(selected)
                 }
             }
+            .task {
+                // 비동기로 JSON 상영 정보 로드
+                await viewModel.loadScheduleData()
+            }
         }
     }
 
@@ -166,14 +170,31 @@ struct ReservationView: View {
 
     private func moviePosterCard(_ movie: MovieModel) -> some View {
         let isSelected = viewModel.selectedMovie?.id == movie.id
+        let hasPoster = !movie.posterImage.isEmpty
 
         return ZStack(alignment: .bottom) {
-            Image(movie.posterImage)
-                .resizable()
-                .aspectRatio(contentMode: .fill)
-                .frame(width: 63, height: 89)
-                .clipped()
-                .cornerRadius(8)
+            if hasPoster {
+                // 포스터 이미지가 있는 경우
+                Image(movie.posterImage)
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+                    .frame(width: 63, height: 89)
+                    .clipped()
+                    .cornerRadius(8)
+            } else {
+                // 포스터 이미지가 없는 경우 (JSON 영화) → placeholder
+                RoundedRectangle(cornerRadius: 8)
+                    .fill(Color(.gray02))
+                    .frame(width: 63, height: 89)
+                    .overlay(
+                        Text(movie.title)
+                            .font(.pretendardSemiBold12)
+                            .foregroundStyle(Color(.gray06))
+                            .multilineTextAlignment(.center)
+                            .lineLimit(3)
+                            .padding(.horizontal, 4)
+                    )
+            }
 
             // 선택된 영화: 하단에 제목 오버레이
             if isSelected {
@@ -184,7 +205,7 @@ struct ReservationView: View {
                         endPoint: .bottom
                     )
                     .cornerRadius(8)
-                    
+
                     Text(movie.title)
                         .font(.pretendardSemiBold12)
                         .foregroundStyle(.white)

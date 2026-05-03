@@ -218,9 +218,15 @@ struct HardcodedMovieDataProvider: MovieDataProviding {
 
     let theaterBranches = ["강남", "홍대", "신촌"]
 
+    // MARK: - 날짜 조회 (하드코딩은 오늘만)
+
+    func availableDates(for movie: MovieModel) -> [CalendarDay] {
+        CalendarDay.generateWeek()
+    }
+
     // MARK: - 상영시간 생성
 
-    func generateShowtimes(theaters: Set<String>, date: CalendarDay) -> ShowtimeResult {
+    func generateShowtimes(movie: MovieModel?, theaters: Set<String>, date: CalendarDay) -> ShowtimeResult {
         // 첫째날(오늘)만 상영시간 데이터가 있다고 가정
         guard date.isToday else {
             return ShowtimeResult(
