@@ -183,19 +183,33 @@ struct TimetableSection: View {
     
     var body: some View {
         VStack(alignment: .leading, spacing: 15) {
-            if vm.selectedTheater == .sinchon {
-                Text("선택한 극장에 상영시간표가 없습니다")
-                    .foregroundColor(.gray).frame(maxWidth: .infinity, alignment: .center)
+            // 필터링된 결과가 없으면 안내 문구 노출
+            if vm.filteredSchedules.isEmpty {
+                Text("선택한 조건에 상영시간표가 없습니다")
+                    .font(.subheadline).foregroundColor(.gray)
+                    .frame(maxWidth: .infinity, alignment: .center).padding(.vertical, 20)
             } else {
+                // 1. 선택된 극장 이름 표시
                 Text(vm.selectedTheater?.rawValue ?? "").font(.headline)
-                LazyVGrid(columns: columns, spacing: 12) {
-                    ForEach(["11:30", "14:20", "17:05", "19:45"], id: \.self) { time in
-                        VStack(spacing: 4) {
-                            Text(time).font(.system(size: 14, weight: .bold))
-                            Text("100 / 150").font(.system(size: 10)).foregroundColor(.gray)
+                
+                // 2. 상영관(auditorium)별로 반복
+                ForEach(vm.filteredSchedules, id: \.auditorium) { auditorium in
+                    VStack(alignment: .leading, spacing: 10) {
+                        Text("\(auditorium.auditorium) (\(auditorium.format))")
+                            .font(.caption).bold().foregroundColor(.megaPurple)
+                        
+                        // 3. 해당 상영관의 시간표(showtimes) 표시
+                        LazyVGrid(columns: columns, spacing: 12) {
+                            ForEach(auditorium.showtimes, id: \.start) { session in
+                                VStack(spacing: 4) {
+                                    Text(session.start).font(.system(size: 14, weight: .bold))
+                                    Text("\(session.available) / \(session.total)")
+                                        .font(.system(size: 10)).foregroundColor(.gray)
+                                }
+                                .frame(maxWidth: .infinity).padding(.vertical, 10)
+                                .background(Color.gray.opacity(0.1)).cornerRadius(8)
+                            }
                         }
-                        .frame(maxWidth: .infinity).padding(.vertical, 10)
-                        .background(Color.gray.opacity(0.1)).cornerRadius(8)
                     }
                 }
             }
