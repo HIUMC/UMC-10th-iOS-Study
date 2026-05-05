@@ -3,21 +3,21 @@ import SwiftUI
 struct EditProfileView: View {
     @Environment(\.dismiss) var dismiss
     
-    
     @AppStorage("savedName") private var savedName: String = "사용자"
-    // EditProfileView.swift 상단
-    @AppStorage("savedId") private var savedId: String = "chanhyuk123" // 👈 테스트용 아이디 입력
     
+    // 💡 아이디는 금고에서 가져올 것이므로 State로 변경
+    @State private var savedId: String = ""
     @State private var inputName: String = ""
+    
+    private let service = "com.chanhyeok.megabox"
 
     var body: some View {
         VStack(spacing: 0) {
-            // 💡 1. 하위 뷰들을 여기서 조립합니다!
             navigationBar
             
             VStack(alignment: .leading, spacing: 0) {
                 infoTitleSection
-                userNameEditSection // 이름 수정 섹션 (ID 섹션 포함)
+                userNameEditSection
             }
             .padding(.horizontal)
             
@@ -25,28 +25,27 @@ struct EditProfileView: View {
         }
         .onAppear {
             inputName = savedName
+            // ✅ 화면 로드 시 금고에서 실제 저장된 아이디를 불러옴
+            if let id = KeychainService.shared.load(account: "savedId", service: service) {
+                self.savedId = id
+            }
         }
         .navigationBarBackButtonHidden(true)
-    } // <- 여기서 EditProfileView의 body가 끝남
-    
-    // --- 💡 여기서부터 하위 뷰들을 struct "안에" 정의합니다 ---
-
-    private var navigationBar : some View {
-        HStack {
-            Button(action: { dismiss() }) {
-                Image(systemName: "arrow.left")
-                    .foregroundColor(.black)
-            }
-            Spacer()
-            Text("회원정보 관리")
-                .font(.megaboxMedium16)
-            Spacer()
-            Image(systemName: "arrow.left").opacity(0)
-        }
-        .padding()
     }
 
-    private var infoTitleSection : some View {
+    private var navigationBar: some View {
+        HStack {
+            Button(action: { dismiss() }) {
+                Image(systemName: "arrow.left").foregroundColor(.black)
+            }
+            Spacer()
+            Text("회원정보 관리").font(.megaboxMedium16)
+            Spacer()
+            Image(systemName: "arrow.left").opacity(0)
+        }.padding()
+    }
+
+    private var infoTitleSection: some View {
         Text("기본 정보")
             .font(.megaboxMedium16)
             .foregroundColor(.megaGraygray03)
@@ -54,12 +53,11 @@ struct EditProfileView: View {
             .padding(.bottom, 15)
     }
 
-    private var userNameEditSection : some View {
+    private var userNameEditSection: some View {
         VStack(alignment: .leading, spacing: 15) {
-            // 회원 아이디 (텍스트 고정)
+            // 회원 아이디 (금고에서 가져온 값 표시)
             VStack(alignment: .leading, spacing: 8) {
-                Text(savedId)
-                    .font(.body)
+                Text(savedId.isEmpty ? "아이디 정보 없음" : savedId)
                     .font(.megaBoxMedium18)
             }
             
@@ -69,35 +67,30 @@ struct EditProfileView: View {
             VStack(alignment: .leading, spacing: 8) {
                 HStack {
                     TextField("이름을 입력하세요", text: $inputName)
-                        .font(.body)
                         .font(.megaBoxMedium18)
                     
                     Button(action: {
                         savedName = inputName
-                        print("이름 \(savedName) 저장!")
                     }) {
                         Text("변경")
-                            .font(.megaBoxMedium10)
                             .font(.caption)
                             .fontWeight(.medium)
-                            .foregroundColor(.black) // 1. 글자색 검은색
+                            .foregroundColor(.black)
                             .padding(.horizontal, 12)
                             .padding(.vertical, 6)
-                            .background(Color.white) // 2. 배경색 흰색
-                            .cornerRadius(5) // 3. 모서리 깎기
+                            .background(Color.white)
+                            .cornerRadius(5)
                             .overlay(
                                 RoundedRectangle(cornerRadius: 16)
-                                    .stroke(Color.megaGraygray03, lineWidth: 1) // 4. 테두리(Stroke) 입히기
+                                    .stroke(Color.megaGraygray03, lineWidth: 1)
                             )
                     }
                 }
             }
-            
             Divider()
         }
     }
-} // <- EditProfileView 구조체의 진짜 끝!
-
+}
 #Preview {
     EditProfileView()
 }
