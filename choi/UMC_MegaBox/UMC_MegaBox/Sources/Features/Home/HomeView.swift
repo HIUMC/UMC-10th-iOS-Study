@@ -49,6 +49,9 @@ struct HomeView: View {
                     MovieDetailView(movie: movie)
                 }
             }
+            .task {
+                await viewModel.loadNowPlayingMovies()
+            }
         }
     }
 
@@ -101,18 +104,35 @@ struct HomeView: View {
     // MARK: - 무비카드 가로 스크롤
 
     private var movieCardScroll: some View {
-        ScrollView(.horizontal, showsIndicators: false) {
-            LazyHStack(spacing: 12) {
-                ForEach(viewModel.currentMovies(for: viewModel.selectedSegment)) { movie in
-                    MovieCardView(movie: movie) {
-                        container.selectedTab = 1
-                    }
-                    .onTapGesture {
-                        router.push(.movieDetail(movie))
+        VStack(alignment: .leading, spacing: 8) {
+            if viewModel.isLoadingMovies && viewModel.selectedSegment == .nowPlaying {
+                HStack(spacing: 8) {
+                    ProgressView()
+                    Text("TMDB 영화 정보를 불러오는 중")
+                        .font(.pretendardRegular12)
+                        .foregroundStyle(Color(.gray04))
+                }
+                .padding(.horizontal, 20)
+            } else if let error = viewModel.movieLoadingError, viewModel.selectedSegment == .nowPlaying {
+                Text(error)
+                    .font(.pretendardRegular12)
+                    .foregroundStyle(Color(.gray04))
+                    .padding(.horizontal, 20)
+            }
+
+            ScrollView(.horizontal, showsIndicators: false) {
+                LazyHStack(spacing: 12) {
+                    ForEach(viewModel.currentMovies(for: viewModel.selectedSegment)) { movie in
+                        MovieCardView(movie: movie) {
+                            container.selectedTab = 1
+                        }
+                        .onTapGesture {
+                            router.push(.movieDetail(movie))
+                        }
                     }
                 }
+                .padding(.horizontal, 20)
             }
-            .padding(.horizontal, 20)
         }
     }
 

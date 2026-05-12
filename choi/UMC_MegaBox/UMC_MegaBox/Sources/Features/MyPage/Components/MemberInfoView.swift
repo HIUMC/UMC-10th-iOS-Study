@@ -1,15 +1,14 @@
 import SwiftUI
 
 struct MemberInfoView: View {
-    @AppStorage("id") private var id: String = ""
-    @AppStorage("name") private var name: String = ""
+    @Environment(AuthViewModel.self) private var authVM
     @State private var editName: String = ""
 
     var body: some View {
         VStack(spacing: 0) {
             // 회원 아이디 행
             HStack {
-                Text(id)
+                Text(authVM.userID)
                     .font(.pretendardMedium14)
                     .foregroundColor(Color(.black))
                 Spacer()
@@ -28,7 +27,7 @@ struct MemberInfoView: View {
                 Spacer()
 
                 Button(action: {
-                    name = editName
+                    authVM.updateName(editName)
                 }) {
                     Text("변경")
                         .font(.pretendardMedium10)
@@ -48,7 +47,7 @@ struct MemberInfoView: View {
                 .background(Color(.gray02))
         }
         .onAppear {
-            editName = name
+            editName = authVM.displayName
         }
     }
 }

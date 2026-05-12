@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ProfileHeaderView: View {
-    @AppStorage("name") private var name: String = ""
+    @Environment(AuthViewModel.self) private var authVM
     @Environment(NavigationRouter<MyPageRoute>.self) private var router
     
     
@@ -16,7 +16,7 @@ struct ProfileHeaderView: View {
         HStack(alignment: .top) {
             VStack(alignment: .leading, spacing: 4) {
                 HStack(spacing: 8) {
-                    Text("\(name)님")
+                    Text("\(authVM.displayName)님")
                         .font(.pretendardBold24)
                     
                     Text("WELCOME")
@@ -62,4 +62,5 @@ struct ProfileHeaderView: View {
 #Preview {
     ProfileHeaderView()
         .environment(NavigationRouter<MyPageRoute>())
+        .environment(AuthViewModel())
 }

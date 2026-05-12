@@ -1,3 +1,4 @@
+import Kingfisher
 import SwiftUI
 
 struct MovieDetailView: View {
@@ -8,10 +9,8 @@ struct MovieDetailView: View {
     var body: some View {
         ScrollView(.vertical, showsIndicators: false) {
             VStack(spacing: 0) {
-                // 포스터
-                Image(movie.posterImage)
-                    .resizable()
-                    .aspectRatio(contentMode: .fill)
+                // TMDB backdrop_path 기반 상단 이미지
+                heroImage
                     .frame(maxWidth: .infinity)
                     .frame(height: 350)
                     .clipped()
@@ -90,6 +89,56 @@ struct MovieDetailView: View {
         }
     }
 
+    @ViewBuilder
+    private var heroImage: some View {
+        if let backdropURL = movie.backdropURL ?? movie.posterURL {
+            KFImage(backdropURL)
+                .placeholder {
+                    ProgressView()
+                        .frame(maxWidth: .infinity)
+                        .frame(height: 350)
+                }
+                .fade(duration: 0.2)
+                .resizable()
+                .aspectRatio(contentMode: .fill)
+        } else if let backdropImage = movie.backdropImage, !backdropImage.isEmpty {
+            Image(backdropImage)
+                .resizable()
+                .aspectRatio(contentMode: .fill)
+        } else if !movie.posterImage.isEmpty {
+            Image(movie.posterImage)
+                .resizable()
+                .aspectRatio(contentMode: .fill)
+        } else {
+            Rectangle()
+                .fill(Color(.gray02))
+                .overlay {
+                    ProgressView()
+                }
+        }
+    }
+
+    @ViewBuilder
+    private var smallPosterImage: some View {
+        if let posterURL = movie.posterURL {
+            KFImage(posterURL)
+                .placeholder {
+                    ProgressView()
+                        .frame(width: 43, height: 61)
+                }
+                .fade(duration: 0.2)
+                .resizable()
+                .aspectRatio(contentMode: .fill)
+        } else if !movie.posterImage.isEmpty {
+            Image(movie.posterImage)
+                .resizable()
+                .aspectRatio(contentMode: .fill)
+        } else {
+            RoundedRectangle(cornerRadius: 8)
+                .fill(Color(.gray02))
+        }
+    }
+
     // MARK: - 세그먼트
 
     private var detailSegment: some View {
@@ -133,11 +182,10 @@ struct MovieDetailView: View {
             
             // 2️⃣ 상단: 포스터 이미지 + 등급/개봉 정보 (HStack)
             HStack(alignment: .top, spacing: 16) {
-                // 영화 이미지
-                Image(movie.posterImage)
-                    .resizable()
-                    .aspectRatio(contentMode: .fill)
-                    .frame(width: 43, height: 61) // 프로젝트 규격에 맞춰 너비/높이 조절
+                // 홈 화면에서 전달받은 포스터 이미지
+                smallPosterImage
+                    .frame(width: 43, height: 61)
+                    .clipped()
                     .cornerRadius(8)
                 
                 // 영화 등급 & 개봉 정보
