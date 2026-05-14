@@ -24,12 +24,26 @@ let project = Project(
                         "Pretendard-Regular.otf",
                         "Pretendard-SemiBold.otf",
                         "Pretendard-Thin.otf"
-                    ]
+                    ],
+                    "KAKAO_REST_API_KEY": "$(KAKAO_REST_API_KEY)",
+                    "KAKAO_CLIENT_SECRET": "$(KAKAO_CLIENT_SECRET)",
+                    "KAKAO_REDIRECT_URI": "$(KAKAO_REDIRECT_URI)",
+                    "TMDB_API_KEY": "$(TMDB_API_KEY)"
                 ]
             ),
             sources: ["UMC_MegaBox/Sources/**"], // 현재 폴더의 Sources 안의 모든 파일
             resources: ["UMC_MegaBox/Resources/**"], // 현재 폴더의 Resources 안의 모든 파일
-            dependencies: []
+            dependencies: [
+                .external(name: "Alamofire"),
+                .external(name: "Moya"),
+                .external(name: "Kingfisher")
+            ],
+            settings: .settings(
+                configurations: [
+                    .debug(name: "Debug", xcconfig: "Secret.xcconfig"),
+                    .release(name: "Release", xcconfig: "Secret.xcconfig")
+                ]
+            )
         ),
         .target(
             name: "UMC_MegaBoxTests",
@@ -42,4 +56,3 @@ let project = Project(
         ),
     ]
 )
-

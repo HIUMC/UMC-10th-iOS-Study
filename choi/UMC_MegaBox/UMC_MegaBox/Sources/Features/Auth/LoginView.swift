@@ -2,6 +2,7 @@ import SwiftUI
 
 public struct LoginView: View {
     @Environment(AuthViewModel.self) private var authVM  // 인증 ViewModel (RootView에서 주입)
+    @State private var isKakaoLoginInProgress = false
 
     public init() {}
     
@@ -13,6 +14,12 @@ public struct LoginView: View {
             VStack(spacing: 30) {
                 inputFieldView
                 loginButtonView
+                if let errorMessage = authVM.errorMessage {
+                    Text(errorMessage)
+                        .font(.pretendardMedium13)
+                        .foregroundColor(.red)
+                        .multilineTextAlignment(.center)
+                }
                 socialLoginView
             }
             .padding(.horizontal, 20) // 양옆 여백
@@ -104,12 +111,19 @@ public struct LoginView: View {
             
             // 카카오 버튼
             Button(action: {
-                print("카카오 로그인 클릭됨")
+                guard !isKakaoLoginInProgress else { return }
+                isKakaoLoginInProgress = true
+                Task {
+                    await authVM.loginWithKakao()
+                    isKakaoLoginInProgress = false
+                }
             }) {
                 Image("LoginBtn 2")
                     .resizable()
                     .frame(width: 40, height: 40)
+                    .opacity(isKakaoLoginInProgress ? 0.5 : 1)
             }
+            .disabled(isKakaoLoginInProgress)
             
             // 애플 버튼
             Button(action: {

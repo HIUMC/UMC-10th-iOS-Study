@@ -24,6 +24,19 @@
       location = "group:UMC_MegaBox/UMC_MegaBox.xcodeproj">
    </FileRef>
    <Group
+      location = "group:UMC_MegaBox/Tuist/.build/tuist-derived"
+      name = "UMC_MegaBox Dependencies">
+      <FileRef
+         location = "group:Alamofire/Alamofire.xcodeproj">
+      </FileRef>
+      <FileRef
+         location = "group:Kingfisher/Kingfisher.xcodeproj">
+      </FileRef>
+      <FileRef
+         location = "group:Moya/Moya.xcodeproj">
+      </FileRef>
+   </Group>
+   <Group
       location = "group:iOS_Workbook"
       name = "iOS_Workbook">
       <FileRef

@@ -15,8 +15,11 @@ import PackageDescription
 let package = Package(
     name: "UMC_MegaBox",
     dependencies: [
-        // Add your own dependencies here:
-        // .package(url: "https://github.com/Alamofire/Alamofire", from: "5.0.0"),
-        // You can read more about dependencies here: https://docs.tuist.io/documentation/tuist/dependencies
+        .package(url: "https://github.com/Alamofire/Alamofire.git", from: "5.12.0"),
+        .package(url: "https://github.com/Moya/Moya.git", from: "15.0.3"),
+        .package(url: "https://github.com/onevcat/Kingfisher.git", from: "8.0.0"),
+        // Kakao SDK is resolved for the week 6 SPM requirement, but Kakao Login
+        // below is implemented through the REST API with Alamofire as requested.
+        .package(url: "https://github.com/kakao/kakao-ios-sdk.git", from: "2.27.3"),
     ]
 )
