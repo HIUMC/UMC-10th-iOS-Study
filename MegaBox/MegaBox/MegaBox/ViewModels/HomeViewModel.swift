@@ -1,32 +1,33 @@
-import Observation
+import Foundation
 
 @Observable
 class HomeViewModel {
-    // 선택된 차트 타입 상태 관리 (변경 시 UI 자동 업데이트)
-    var selectedChartType: MovieChartType = .nowPlaying
+    var movies: [MovieModel] = MovieModel.nowPlayingMovies
+    var upcomingMovies: [MovieModel] = MovieModel.upcomingMovies
     
+    // 무비차트 / 상영예정 구분 enum
     enum MovieChartType {
-        case nowPlaying, upcoming
+        case nowPlaying
+        case upcoming
     }
-    
-    // 연산 프로퍼티: 탭 상태에 따라 보여줄 배열을 결정
-    var currentMovies: [MovieModel] {
-        selectedChartType == .nowPlaying ? movies : upcomingMovies
+
+    // 선택된 차트 타입에 따라 영화 목록 반환
+    func currentMovies(for type: MovieChartType) -> [MovieModel] {
+        switch type {
+        case .nowPlaying: return movies
+        case .upcoming: return upcomingMovies
+        }
     }
-    
-    // 데이터 배열
-    var movies: [MovieModel] = [
-        MovieModel(title: "왕과 사는 남자", posterImage: "kingsWarden", audienceCount: 1475, englishTitle: "The King's Warden", quote: "\"닿은 숲을 보더라도 그 대감을 우리 광전골로 오게 해야지.\"", description: "계유정난이 조선을 뒤흔들고...", rating: "12세 이상 관람가", releaseInfo: "2026.02.04 · 개봉 · 117분", genre: "드라마, 사극", type: "2D", director: "장항준", cast: "유해진, 박지훈, 유지태, 전미도, 안재홍, 김민"),
-        MovieModel(title: "프로젝트 헤일메리", posterImage: "project", audienceCount: 56, englishTitle: "Project Hail Mary", quote: "\"이 미션은 나 혼자만의 것이 아니다.\"", description: "태양이 서서히 죽어가고 있는 위기 속...", rating: "12세 이상 관람가", releaseInfo: "2026.03.18 · 개봉 · 142분", genre: "SF, 스릴러", type: "2D, IMAX, 4DX", director: "필 로드, 크리스토퍼 밀러", cast: "라이언 고슬링, 산드라 휠러"),
-        MovieModel(title: "호퍼스", posterImage: "hoppers", audienceCount: 6, englishTitle: "Hoppers", quote: "\"완벽한 비버의 삶 속으로!\"", description: "동물들의 뇌에 인간의 의식을 전송하는...", rating: "전체 관람가", releaseInfo: "2026.03.04 · 개봉 · 104분", genre: "애니메이션, 코미디", type: "2D, 더빙, 자막", director: "대니얼 총", cast: "성우: 파이퍼 커다, 바비 모니한, 존 햄")
-    ]
-    
-    var upcomingMovies: [MovieModel] = [
-        MovieModel(title: "메소드연기", posterImage: "method", audienceCount: 0, englishTitle: "Method Acting", quote: "\"진짜 나를 연기하라!\"", description: "코미디언 출신으로 정극 연기에 도전하지만...", rating: "12세 이상 관람가", releaseInfo: "2026 · 개봉 예정", genre: "코미디, 드라마", type: "2D", director: "이기혁", cast: "이동휘, 강찬희, 윤경호")
-    ]
-    
-    // 극장 정보 (기존 유지)
+
     let theaters: [TheaterModel] = [
-        TheaterModel(logo: "Dolby Cinema 로고", card: "Dolby Cinema", name: "Dolby Cinema", title: "DOLBY CINEMA", description: "완벽한 영화 관람을 완성하는\n하이엔드 시네마")
+        TheaterModel(logo: "Dolby Cinema 로고", card: "Dolby Cinema", name: "Dolby Cinema", title: "DOLBY CINEMA", description: "완벽한 영화 관람을 완성하는\n하이엔드 시네마"),
+        TheaterModel(logo: "Dolby Atmos 로고", card: "Dolby Vision+Atmos", name: "Dolby Atmos", title: "DOLBY VISION+ATMOS", description: "돌비 시네마의 선명한 영상과 입도 높은 사운드,\n직접마주하는 대형 프리미엄 클래스"),
+        TheaterModel(logo: "MX4D 로고", card: "MX4D", name: "MX4D", title: "MEGA | MX4D", description: "다이나믹 이펙트가 선사하는\n새로운 영화 체험"),
+        TheaterModel(logo: "LED 로고", card: "LED", name: "LED", title: "MEGA | LED", description: "부분대비 명암비, 완벽한 원시 재현력"),
+        TheaterModel(logo: "Boutique Private 로고", card: "Boutique Private", name: "Boutique Private", title: "BOUTIQUE PRIVATE by MEGA", description: "오직 나와 소중한 사람들을 위한\n프라이빗한 극장 경험"),
+        TheaterModel(logo: "Boutique Suite 로고", card: "Boutique Suite", name: "Boutique Suite", title: "BOUTIQUE SUITE by MEGA", description: "별업 패키지가 더해진\n럭셔리한 공간 경험"),
+        TheaterModel(logo: "Boutique 로고", card: "Boutique", name: "Boutique", title: "BOUTIQUE by MEGA", description: "섬세하게 디자인된 감각적인\n극장 경험"),
+        TheaterModel(logo: "Le Recliner 로고", card: "Le Recliner", name: "Le Recliner", title: "LE RECLINER by MEGA", description: "편통한 리클라이너 시스템이 구현하는\n극장의 편안함"),
+        TheaterModel(logo: "Comfort 로고", card: "Comfort", name: "Comfort", title: "COMFORT by MEGA", description: "안으로 배려와 누리는\n더 편리한 영화 경험"),
     ]
 }

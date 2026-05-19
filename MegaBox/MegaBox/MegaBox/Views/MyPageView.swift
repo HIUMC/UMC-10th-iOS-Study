@@ -8,43 +8,56 @@
 import SwiftUI
 
 struct MyPageView: View {
+    @Environment(NavigationRouter<MyPageRoute>.self) private var router
+    @Environment(LoginViewModel.self) private var authVM
     
-    // @AppStorage를 통해 로그인 시 저장한 이름 가져오기
-    @AppStorage("savedId") private var userName: String = ""
+    @AppStorage(AppStorageKeys.userName) private var userName: String = ""
     
     // 이름 일부 가리기
     private var maskedUserName: String {
+        let displayName = authVM.currentUserName.isEmpty ? userName : authVM.currentUserName
+
         // 이름이 2글자 미만이면 마스킹할 필요 없이 그대로 반환
-        if userName.count <= 1 { return userName }
+        if displayName.count <= 1 { return displayName }
             
         // 이름이 2글자이면 성만 반환
-        if userName.count == 2 { return String(userName.first!) }
+        if displayName.count == 2 { return String(displayName.first!) }
         
         // 이름이 3글자 이상이면 가운데를 *로 표현해 반환
-        let first = userName.prefix(1)
-        let last = userName.suffix(1)
+        let first = displayName.prefix(1)
+        let last = displayName.suffix(1)
         // 중간 글자 수만큼 * 만들기
-        let middleCount = userName.count - 2
+        let middleCount = displayName.count - 2
         let stars = String(repeating: "*", count: max(1, middleCount)) // 최소 1개는 나오도록 설정
             
         return "\(first)\(stars)\(last)"
     }
     
     var body: some View {
+        @Bindable var bindableRouter = router
+
         // 조건: 전체 하위 뷰를 VStack으로 조립
-        VStack(spacing: 30) {
-            profileHeader
-            
-            membershipButton
-            
-            statusInfoView
-            
-            reservationMenu
-            
-            Spacer()
+        NavigationStack(path: $bindableRouter.path) {
+            VStack(spacing: 30) {
+                profileHeader
+                
+                membershipButton
+                
+                statusInfoView
+                
+                reservationMenu
+                
+                Spacer()
+            }
+            .padding()
+            .background(Color.white)
+            .navigationDestination(for: MyPageRoute.self) { route in
+                switch route {
+                case .profileManage:
+                    MyInfoView()
+                }
+            }
         }
-        .padding()
-        .background(Color.white)
     }
     
     // 프로필 헤더
@@ -76,7 +89,8 @@ struct MyPageView: View {
             Spacer()
             
             // 조건: 회원정보 버튼은 꼭 버튼으로 구현
-            Button(action: { /* */
+            Button(action: {
+                router.push(.profileManage)
             }) {
                 Text("회원정보")
                     .pretendStyle(.semiBold14)
@@ -169,4 +183,6 @@ struct MyPageView: View {
 
 #Preview {
     MyPageView()
+        .environment(NavigationRouter<MyPageRoute>())
+        .environment(LoginViewModel())
 }

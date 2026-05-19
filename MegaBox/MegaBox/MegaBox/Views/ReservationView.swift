@@ -6,253 +6,507 @@
 //
 
 import SwiftUI
-import Observation
 
-
-
-
-// MARK: - 2. ViewModel (비즈니스 로직)
-@Observable
-class ReservationViewModel {
-    // 영화 리스트 더미 데이터
-    let movies: [ReservationMovieModel] = [
-        ReservationMovieModel(title: "왕과 사는 남자", posterImage: "movie1", ageRating: "12"),
-        ReservationMovieModel(title: "프로젝트 헤일메리", posterImage: "movie2", ageRating: "12"),
-        ReservationMovieModel(title: "호퍼스", posterImage: "movie3", ageRating: "ALL"),
-        ReservationMovieModel(title: "휴민트", posterImage: "movie4", ageRating: "15"),
-        ReservationMovieModel(title: "매드댄스오피스", posterImage: "movie5", ageRating: "12")
-    ]
-    
-    // 선택 상태 관리 (Combine의 역할을 이 변수들이 자동으로 수행합니다)
-    var selectedMovie: ReservationMovieModel? = nil
-    var selectedTheater: String? = nil
-    var selectedDate: DateItem? = nil
-    
-    // 날짜 리스트
-    var availableDates: [DateItem] = []
-    
-    // 극장 리스트
-    let theaters = ["강남", "홍대", "신촌"]
-    
-    init() {
-        // 초기화 시 영화 하나를 기본 선택 상태로 만들려면 아래 주석을 해제하세요.
-        // self.selectedMovie = movies.first
-        generateDates()
-    }
-    
-    // 💡 당일 기준 일주일(7일)의 날짜 데이터를 생성하는 로직
-    private func generateDates() {
-        let calendar = Calendar.current
-        let today = Date()
-        
-        for i in 0..<7 {
-            if let date = calendar.date(byAdding: .day, value: i, to: today) {
-                let day = calendar.component(.day, from: date)
-                let month = calendar.component(.month, from: date)
-                
-                var displayDay = "\(day)"
-                var displayWeekday = ""
-                
-                if i == 0 {
-                    displayDay = "\(month).\(day)"
-                    displayWeekday = "오늘"
-                } else if i == 1 {
-                    displayWeekday = "내일"
-                } else {
-                    // "금", "토" 등의 요일 구하기
-                    let formatter = DateFormatter()
-                    formatter.locale = Locale(identifier: "ko_KR")
-                    formatter.dateFormat = "E"
-                    displayWeekday = formatter.string(from: date)
-                }
-                
-                let item = DateItem(date: date, displayDay: displayDay, displayWeekday: displayWeekday)
-                availableDates.append(item)
-            }
-        }
-        // 기본값으로 오늘 선택
-        self.selectedDate = availableDates.first
-    }
-}
-
-
-// MARK: - 3. View (UI 화면)
 struct ReservationView: View {
+    @Environment(NavigationRouter<ReservationRoute>.self) private var router
     @State private var viewModel = ReservationViewModel()
-    @Environment(\.dismiss) private var dismiss // 뒤로 가기 액션
-    
-    // 보라색 테마 컬러 (피그마 참고)
-    let megaPurple = Color(red: 0.35, green: 0.12, blue: 0.71)
-    
+
     var body: some View {
-        VStack(spacing: 30) {
-            
-            // 1. 영화 선택 섹션 (타이틀 + 가로 스크롤 포스터)
-            movieSelectionSection
-            
-            // 2. 극장 선택 섹션
-            theaterSelectionSection
-            
-            // 3. 날짜 선택 섹션
-            dateSelectionSection
-            
-            Spacer()
-        }
-        .padding(.top, 20)
-        
-        // MARK: 네비게이션 바 설정 (체크리스트 완벽 반영)
-        .navigationTitle("영화별 예매")
-        .navigationBarTitleDisplayMode(.inline)
-        .navigationBarBackButtonHidden(true) // 기본 Back 버튼 숨기기
-        .toolbar {
-            // 커스텀 왼쪽 백 버튼
-            ToolbarItem(placement: .navigationBarLeading) {
-                Button {
-                    dismiss()
-                } label: {
-                    Image(systemName: "chevron.left")
-                        .fontWeight(.bold)
-                        .foregroundColor(.white)
-                }
-            }
-        }
-        // 💡 상태 바까지 보라색으로 꽉 채우는 마법의 모디파이어들
-        .toolbarBackground(megaPurple, for: .navigationBar)
-        .toolbarBackground(.visible, for: .navigationBar)
-        .toolbarColorScheme(.dark, for: .navigationBar) // 텍스트를 흰색으로
-    }
-}
+        @Bindable var bindableRouter = router
 
+        NavigationStack(path: $bindableRouter.path) {
+            ZStack(alignment: .top) {
+                // 배경
+                Color(.white).ignoresSafeArea()
 
-// MARK: - 4. Subviews (컴포넌트 분리)
-private extension ReservationView {
-    
-    // 영화 선택 섹션
-    var movieSelectionSection: some View {
-        VStack(alignment: .leading, spacing: 15) {
-            // 상단 제목 영역 (선택된 영화에 따라 바뀜)
-            HStack {
-                if let selected = viewModel.selectedMovie {
-                    // 연령 뱃지 (주황색 배경)
-                    Text(selected.ageRating)
-                        .font(.caption)
-                        .fontWeight(.bold)
-                        .foregroundColor(.white)
-                        .padding(.horizontal, 6)
-                        .padding(.vertical, 4)
-                        .background(Color.orange)
-                        .cornerRadius(4)
-                    
-                    Text(selected.title)
-                        .font(.headline)
-                        .fontWeight(.bold)
-                } else {
-                    Text("영화를 선택해주세요")
-                        .font(.headline)
-                        .foregroundColor(.gray)
-                }
-                
-                Spacer()
-                
-                // 전체영화 버튼
-                Button("전체영화") { }
-                    .font(.caption)
-                    .foregroundColor(.black)
-                    .padding(.horizontal, 10)
-                    .padding(.vertical, 6)
-                    .background(
-                        Capsule().fill(Color(white: 0.95))
-                    )
-            }
-            .padding(.horizontal)
-            
-            // 영화 포스터 가로 스크롤
-            ScrollView(.horizontal, showsIndicators: false) {
-                LazyHStack(spacing: 12) {
-                    ForEach(viewModel.movies) { movie in
-                        Button {
-                            // 💡 탭하면 해당 영화를 선택 상태로 만듦
-                            viewModel.selectedMovie = movie
-                            viewModel.selectedTheater = nil // 영화가 바뀌면 극장 선택 초기화
-                        } label: {
-                            RoundedRectangle(cornerRadius: 8)
-                                .fill(Color.gray.opacity(0.3)) // Image(movie.posterImage) 로 대체 가능
-                                .frame(width: 80, height: 110)
-                                .overlay(
-                                    // 💡 선택된 영화일 경우 피그마와 동일하게 보라색 테두리 표시
-                                    RoundedRectangle(cornerRadius: 8)
-                                        .stroke(viewModel.selectedMovie == movie ? megaPurple : Color.clear, lineWidth: 3)
-                                )
+                VStack(spacing: 0) {
+                    // 보라색 상단 네비바
+                    headerBar
+                    // 스크롤 콘텐츠
+                    ScrollView(.vertical, showsIndicators: false) {
+                        VStack(alignment: .leading, spacing: 0) {
+                            // 선택된 영화 정보 + 전체영화 버튼
+                            selectedMovieHeader
+                                .padding(.top, 12)
+                                .padding(.horizontal, 20)
+
+                            // 영화 포스터 가로 스크롤
+                            movieCardScroll
+                                .padding(.top, 16)
+
+                            // 극장 선택 버튼
+                            theaterSection
+                                .padding(.top, 20)
+                                .padding(.horizontal, 20)
+
+                            // 날짜 선택
+                            dateSection
+                                .padding(.top, 16)
+                                .padding(.horizontal, 20)
+
+                            // 상영시간 섹션
+                            if viewModel.isShowtimeVisible {
+                                showtimeSection
+                                    .padding(.top, 24)
+                                    .padding(.horizontal, 20)
+                            }
+
+                            Spacer().frame(height: 40)
                         }
                     }
                 }
-                .padding(.horizontal)
+            }
+           /* .navigationDestination(for: ReservationRoute.self) { route in
+                switch route {
+                case .seatSelection(let movie, let branch, let showtime, let date):
+                    SeatSelectionView(movie: movie, theaterBranch: branch, showtime: showtime, selectedDate: date)
+                }
+            } */
+            .sheet(isPresented: $viewModel.isMovieSearchPresented) {
+                MovieSearchView(movies: viewModel.movies) { selected in
+                    viewModel.selectMovie(selected)
+                }
             }
         }
     }
-    
-    // 극장 선택 섹션
-    var theaterSelectionSection: some View {
-        HStack(spacing: 15) {
-            ForEach(viewModel.theaters, id: \.self) { theater in
-                Button {
-                    viewModel.selectedTheater = theater
-                } label: {
-                    Text(theater)
-                        .font(.system(size: 14, weight: viewModel.selectedTheater == theater ? .bold : .medium))
-                        .foregroundColor(viewModel.selectedTheater == theater ? .white : .black)
-                        .padding(.horizontal, 20)
-                        .padding(.vertical, 10)
-                        .background(
-                            Capsule().fill(viewModel.selectedTheater == theater ? megaPurple : Color(white: 0.9))
-                        )
+
+    // MARK: - 상단 보라색 헤더
+
+    private var headerBar: some View {
+        ZStack {
+            Color(.purple03)
+                .ignoresSafeArea(edges: .top)
+            Text("영화별 예매")
+                .pretendStyle(.bold18)
+                .foregroundStyle(.white)
+                .padding(.bottom, 10)
+            
+        }
+        .frame(height: 41)
+        
+        
+    }
+
+    // MARK: - 선택된 영화 정보 + 전체영화 버튼
+
+    private var selectedMovieHeader: some View {
+        HStack {
+            if viewModel.isLoadingSchedules {
+                Text("상영시간표를 불러오는 중입니다")
+                    .pretendStyle(.bold18)
+                    .foregroundStyle(Color(.gray03))
+            } else if let errorMessage = viewModel.scheduleLoadErrorMessage {
+                Text(errorMessage)
+                    .pretendStyle(.medium14)
+                    .foregroundStyle(Color(.red))
+                    .lineLimit(2)
+            } else if let movie = viewModel.selectedMovie {
+                // 관람등급 배지
+                ratingBadge(movie.ageRating)
+                    .padding(.trailing, 15)
+                Text(movie.title)
+                    .pretendStyle(.bold18)
+                    .foregroundStyle(Color(.black))
+                    .lineLimit(1)
+            } else {
+                Text("영화를 선택해주세요")
+                    .pretendStyle(.bold18)
+                    .foregroundStyle(Color(.gray03))
+            }
+
+            Spacer()
+
+            Button {
+                viewModel.isMovieSearchPresented = true
+            } label: {
+                Text("전체영화")
+                    .pretendStyle(.semiBold14)
+                    .foregroundStyle(Color(.black))
+                    .padding(.horizontal, 10)
+                    .padding(.vertical, 5)
+            }
+
+        }
+    }
+
+    // MARK: - 관람등급 배지
+
+    private func ratingBadge(_ rating: String) -> some View {
+        let label: String
+        let bgColor: Color
+
+        switch rating {
+        case "전체 관람가":
+            label = "All"
+            bgColor = .green
+        case "12세 이상 관람가":
+            label = "12"
+            bgColor = .orange
+        case "15세 이상 관람가":
+            label = "15"
+            bgColor = Color(.blue03)
+        case "청소년 관람불가":
+            label = "19"
+            bgColor = .red
+        default:
+            label = "-"
+            bgColor = .gray
+        }
+
+        return Text(label)
+            .pretendStyle(.semiBold18)
+            .foregroundStyle(.white)
+            .frame(width: 23, height: 24)
+            .background(bgColor)
+            .cornerRadius(4)
+    }
+
+    // MARK: - 영화 포스터 가로 스크롤
+
+    private var movieCardScroll: some View {
+        ScrollView(.horizontal, showsIndicators: false) {
+            if viewModel.isLoadingSchedules {
+                ProgressView()
+                    .frame(maxWidth: .infinity)
+                    .padding(.horizontal, 20)
+            } else if viewModel.movies.isEmpty {
+                Text("표시할 영화가 없습니다")
+                    .pretendStyle(.medium14)
+                    .foregroundStyle(Color(.gray03))
+                    .padding(.horizontal, 20)
+            } else {
+                LazyHStack(spacing: 8) {
+                    ForEach(viewModel.movies) { movie in
+                        moviePosterCard(movie)
+                            .onTapGesture {
+                                withAnimation(.easeInOut(duration: 0.2)) {
+                                    viewModel.selectMovie(movie)
+                                }
+                            }
+                    }
                 }
-                // 💡 핵심(Combine 대체): 영화를 선택하지 않았다면 버튼을 비활성화(disabled) 합니다!
-                .disabled(viewModel.selectedMovie == nil)
-                // 비활성화 상태일 때 투명도를 줘서 사용자가 인지하게 함
-                .opacity(viewModel.selectedMovie == nil ? 0.4 : 1.0)
+                .padding(.horizontal, 20)
+            }
+        }
+    }
+
+    private func moviePosterCard(_ movie: MovieModel) -> some View {
+        let isSelected = viewModel.selectedMovie?.id == movie.id
+
+        return ZStack(alignment: .bottom) {
+            Image(movie.posterImage)
+                .resizable()
+                .aspectRatio(contentMode: .fill)
+                .frame(width: 63, height: 89)
+                .clipped()
+                .cornerRadius(8)
+
+            // 선택된 영화: 하단에 제목 오버레이
+            if isSelected {
+                ZStack(alignment: .bottom) {
+                    LinearGradient(
+                        colors: [.clear, .black.opacity(0.7)],
+                        startPoint: .center,
+                        endPoint: .bottom
+                    )
+                    .cornerRadius(8)
+                    
+                    Text(movie.title)
+                        .pretendStyle(.semiBold12)
+                        .foregroundStyle(.white)
+                        .lineLimit(1)
+                        .padding(.horizontal, 4)
+                        .padding(.bottom, 8)
+
+                }
+            }
+        }
+        .frame(width: 63, height: 89)
+        .overlay(
+            RoundedRectangle(cornerRadius: 8)
+                .stroke(isSelected ? Color(.purple03) : Color.clear, lineWidth: 3)
+        )
+    }
+
+    // MARK: - 극장 선택 섹션
+
+    private var theaterSection: some View {
+        HStack(spacing: 10) {
+            ForEach(viewModel.filteredTheaterBranches, id: \.self) { branch in
+                theaterButton(branch)
             }
             Spacer()
         }
-        .padding(.horizontal)
     }
-    
-    // 날짜 선택 섹션
-    var dateSelectionSection: some View {
-        HStack(spacing: 0) {
-            ForEach(viewModel.availableDates) { dateItem in
-                let isSelected = viewModel.selectedDate == dateItem
-                
-                Button {
-                    viewModel.selectedDate = dateItem
-                } label: {
-                    VStack(spacing: 8) {
-                        Text(dateItem.displayDay)
-                            .font(.system(size: 18, weight: .bold))
-                            .foregroundColor(isSelected ? .white : .black)
-                        
-                        Text(dateItem.displayWeekday)
-                            .font(.caption)
-                            .fontWeight(isSelected ? .bold : .medium)
-                            .foregroundColor(isSelected ? .white : .gray)
-                    }
-                    // 스크롤 없이 가로 공간을 7개로 균등 분할
+
+    private func theaterButton(_ branch: String) -> some View {
+        let isSelected = viewModel.selectedTheaters.contains(branch)
+        let isEnabled = viewModel.isTheaterEnabled
+
+        return Button {
+            guard isEnabled else { return }
+            withAnimation(.easeInOut(duration: 0.2)) {
+                viewModel.toggleTheater(branch)
+            }
+        } label: {
+            Text(branch)
+                .pretendStyle(.semiBold14)
+                .foregroundStyle(
+                    !isEnabled ? Color(.gray05)
+                    : isSelected ? .white
+                    : Color(.gray05)
+                )
+                .padding(.horizontal, 16)
+                .padding(.vertical, 8)
+                .background(isSelected ? Color(.purple03) : Color(.gray01))
+                .cornerRadius(16)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 16)
+                        .stroke(
+                            !isEnabled ? Color(.gray01)
+                            : isSelected ? Color.clear
+                            : Color(.gray02),
+                            lineWidth: 1
+                        )
+                )
+        }
+        .disabled(!isEnabled)
+    }
+
+    // MARK: - 날짜 선택 섹션
+
+    private var dateSection: some View {
+        let columns = Array(repeating: GridItem(.flexible(), spacing: 0), count: 7)
+        
+        return LazyVGrid(columns: columns, spacing: 0) {
+            ForEach(viewModel.filteredDates) { day in
+                dateCellView(day)
+            }
+        }
+    }
+
+    private func dateCellView(_ day: CalendarDay) -> some View {
+        let isSelected = viewModel.selectedDate?.id == day.id
+        let isEnabled = viewModel.isDateEnabled
+
+        // 요일 텍스트 색상 결정
+        let weekdayColor: Color = {
+            if !isEnabled { return Color(.gray02) }
+            if isSelected { return .white }
+            return Color(.gray07)
+        }()
+
+        // 날짜 숫자 색상
+        let dayNumberColor: Color = {
+            if !isEnabled { return Color(.gray02) }
+            if isSelected { return .white }
+            if day.isSunday { return Color(.sunday) }
+            if day.isSaturday { return Color(.saturday) }
+            return Color(.gray07)
+        }()
+
+        // 요일 텍스트를 결정하는 변수
+        let weekdayString: String
+                if day.isToday {
+                    weekdayString = "오늘"
+                } else if day.isTomorrow {
+                    weekdayString = "내일"
+                } else {
+                    weekdayString = day.weekdaySymbol
+        }
+
+        return Button {
+            guard isEnabled else { return }
+            withAnimation(.easeInOut(duration: 0.2)) {
+                viewModel.selectDate(day)
+            }
+        } label: {
+            VStack(spacing: 4) {
+                // 날짜 숫자 (월.일 형태 for 오늘, 아니면 숫자만)
+                if day.isToday {
+                    Text("\(Calendar.current.component(.month, from: day.date)).\(day.day)")
+                        .pretendStyle(.bold18)
+                        .foregroundStyle(dayNumberColor)
+                } else {
+                    Text("\(day.day)")
+                        .pretendStyle(.bold18)
+                        .foregroundStyle(dayNumberColor)
+                }
+
+                // 요일 (오늘은 "오늘", 내일은 "내일")
+                Text(weekdayString)
+                    .pretendStyle(.semiBold14)
+                    .foregroundStyle(weekdayColor)
+            }
+            .frame(maxWidth: .infinity)
+            .frame(height: 60)
+            .background(
+                isSelected ? Color(.purple03) : Color.clear)
+            .cornerRadius(8)
+        }
+        
+        .disabled(!isEnabled)
+    }
+
+    // MARK: - 상영시간 섹션
+
+    private var showtimeSection: some View {
+        VStack(alignment: .leading, spacing: 0) {
+            // 전체 메시지 (선택된 극장 전부 데이터 없음 or 날짜 없음)
+            if let message = viewModel.noShowtimeMessage, viewModel.showtimes.isEmpty {
+                Text(message)
+                    .pretendStyle(.medium14)
+                    .foregroundStyle(Color(.gray04))
                     .frame(maxWidth: .infinity)
-                    .padding(.vertical, 10)
-                    .background(
-                        RoundedRectangle(cornerRadius: 12)
-                            .fill(isSelected ? megaPurple : Color.clear)
-                    )
+                    .padding(.vertical, 40)
+            } else {
+                // 지점별 이중 루프: Branch → ScreenNames
+                ForEach(Array(viewModel.groupedByBranch.enumerated()), id: \.offset) { index, group in
+                    branchGroup(branch: group.branch, screenNames: group.screenNames)
+
+                    // 지점 그룹 간 Divider + 24px
+                    if index < viewModel.groupedByBranch.count - 1 || !viewModel.emptyTheaters.isEmpty {
+                        Divider().background(Color(.gray01))
+                            .padding(.vertical, 24)
+                    }
+                }
+
+                // 상영시간표가 없는 극장 Empty State (예: 신촌)
+                ForEach(Array(viewModel.emptyTheaters.enumerated()), id: \.offset) { index, branch in
+                    emptyBranchGroup(branch: branch)
+
+                    if index < viewModel.emptyTheaters.count - 1 {
+                        Divider().background(Color(.gray01))
+                            .padding(.vertical, 12)
+                    }
                 }
             }
         }
-        .padding(.horizontal)
+    }
+
+    // MARK: - 지점 그룹 (지점명 1회 + 내부 상영관 N개)
+
+    private func branchGroup(branch: String, screenNames: [String]) -> some View {
+        VStack(alignment: .leading, spacing: 0) {
+            // 지점명
+            Text(branch)
+                .pretendStyle(.bold18)
+                .foregroundStyle(Color(.gray07))
+
+            // 지점명 ↔ 첫 번째 상영관: 16px
+            // 상영관 묶음 간: 20px
+            VStack(alignment: .leading, spacing: 20) {
+                ForEach(screenNames, id: \.self) { screenName in
+                    if let times = viewModel.showtimes[screenName] {
+                        screenGroup(
+                            screenName: screenName,
+                            format: times.first?.format ?? "2D",
+                            showtimes: times
+                        )
+                    }
+                }
+            }
+            .padding(.top, 16)
+        }
+    }
+
+    // MARK: - 상영관 단위 (상영관명 + 시간표 그리드)
+
+    private func screenGroup(
+        screenName: String,
+        format: String,
+        showtimes: [TimeTableModel]
+    ) -> some View {
+        let columns = [
+            GridItem(.flexible(), spacing: 8),
+            GridItem(.flexible(), spacing: 8),
+            GridItem(.flexible(), spacing: 8),
+            GridItem(.flexible(), spacing: 8)
+        ]
+
+        return VStack(alignment: .leading, spacing: 12) {
+            // 상영관 + 포맷
+            HStack {
+                Text(screenName)
+                    .pretendStyle(.semiBold14)
+                    .foregroundStyle(Color(.gray07))
+                Spacer()
+                Text(format)
+                    .pretendStyle(.semiBold12)
+                    .foregroundStyle(Color(.gray04))
+            }
+
+            // 상영관 타이틀 ↔ 시간표 그리드: 12px (spacing)
+            LazyVGrid(columns: columns, alignment: .leading, spacing: 12) {
+                ForEach(showtimes) { showtime in
+                    showtimeCard(showtime)
+                }
+            }
+        }
+    }
+
+    // MARK: - Empty State 지점 그룹
+
+    private func emptyBranchGroup(branch: String) -> some View {
+        VStack(alignment: .leading, spacing: 8) {
+            Text(branch)
+                .pretendStyle(.bold18)
+                .foregroundStyle(Color(.gray07))
+
+            Text("선택한 극장에 상영시간표가 없습니다")
+                .pretendStyle(.medium14)
+                .foregroundStyle(Color(.gray03))
+                .padding(.vertical, 12)
+        }
+    }
+
+    private func showtimeCard(_ showtime: TimeTableModel) -> some View {
+        Button {
+            /*  if let movie = viewModel.selectedMovie,
+               let date = viewModel.selectedDate{
+               router.push(.seatSelection(movie, showtime.theaterBranch, showtime, date))
+            }*/
+        } label: {
+            VStack(alignment: .leading, spacing: 4) {
+                Text(showtime.time)
+                    .pretendStyle(.bold18)
+                    .foregroundStyle(Color(.gray07))
+
+                Text(showtime.endTime)
+                    .pretendStyle(.regular12)
+                    .foregroundStyle(Color(.gray03))
+
+                HStack(spacing: 2) {
+                    Text("\(showtime.remainingSeats)")
+                        .pretendStyle(.semiBold12)
+                        .foregroundStyle(seatCountColor(remaining: showtime.remainingSeats, total: showtime.totalSeats))
+                    Text("/ \(showtime.totalSeats)")
+                        .pretendStyle(.regular12)
+                        .foregroundStyle(Color(.gray03))
+                }
+            }
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .padding(10)
+            .background(Color(.white))
+            .cornerRadius(8)
+            .overlay(
+                RoundedRectangle(cornerRadius: 8)
+                    .stroke(Color(.gray01), lineWidth: 1)
+            )
+        }
+    }
+
+    // 잔여 좌석 수에 따른 색상
+    private func seatCountColor(remaining: Int, total: Int) -> Color {
+        let ratio = Double(remaining) / Double(total)
+        if ratio <= 0.1 { return .red }
+        if ratio <= 0.3 { return .orange }
+        return Color(.purple03)
     }
 }
 
-
 #Preview {
-    NavigationStack {
-        ReservationView()
-    }
+    ReservationView()
+        .environment(NavigationRouter<ReservationRoute>())
+        .environment(DIContainer())
 }
