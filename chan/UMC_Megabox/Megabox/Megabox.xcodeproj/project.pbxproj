@@ -6,7 +6,17 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		5F9DD3E32FAB042E00308F25 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 5F9DD3E22FAB042E00308F25 /* Alamofire */; };
+		5F9DD3EB2FAB35DE00308F25 /* KakaoSDKAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 5F9DD3EA2FAB35DE00308F25 /* KakaoSDKAuth */; };
+		5F9DD3ED2FAB35DE00308F25 /* KakaoSDKCommon in Frameworks */ = {isa = PBXBuildFile; productRef = 5F9DD3EC2FAB35DE00308F25 /* KakaoSDKCommon */; };
+		5F9DD3EF2FAB35DE00308F25 /* KakaoSDKUser in Frameworks */ = {isa = PBXBuildFile; productRef = 5F9DD3EE2FAB35DE00308F25 /* KakaoSDKUser */; };
+		5F9DD3F22FAB680000308F25 /* Moya in Frameworks */ = {isa = PBXBuildFile; productRef = 5F9DD3F12FAB680000308F25 /* Moya */; };
+		5F9DD3F52FAB680000308F25 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 5F9DD3F42FAB680000308F25 /* Kingfisher */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
+		5F9DD3F62FAB680000308F25 /* Megabox/Secret.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Megabox/Secret.xcconfig; sourceTree = "<group>"; };
 		5FBAF5092F6A6D9C00C12965 /* Megabox.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Megabox.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -15,22 +25,13 @@
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Info.plist,
+				Secret.xcconfig,
 			);
 			target = 5FBAF5082F6A6D9C00C12965 /* Megabox */;
 		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		5F87E34F2F79658200165839 /* MainTapView */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = MainTapView;
-			sourceTree = "<group>";
-		};
-		5F87E36A2F7BB04700165839 /* LiquidGlassComponent */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = LiquidGlassComponent;
-			sourceTree = "<group>";
-		};
 		5FBAF50B2F6A6D9C00C12965 /* Megabox */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
@@ -46,19 +47,32 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5F9DD3EF2FAB35DE00308F25 /* KakaoSDKUser in Frameworks */,
+				5F9DD3E32FAB042E00308F25 /* Alamofire in Frameworks */,
+				5F9DD3F22FAB680000308F25 /* Moya in Frameworks */,
+				5F9DD3F52FAB680000308F25 /* Kingfisher in Frameworks */,
+				5F9DD3ED2FAB35DE00308F25 /* KakaoSDKCommon in Frameworks */,
+				5F9DD3EB2FAB35DE00308F25 /* KakaoSDKAuth in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5F9DD3E92FAB35DE00308F25 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		5FBAF5002F6A6D9C00C12965 = {
 			isa = PBXGroup;
 			children = (
 				5FBAF50B2F6A6D9C00C12965 /* Megabox */,
 				5FBAF50A2F6A6D9C00C12965 /* Products */,
-				5F87E34F2F79658200165839 /* MainTapView */,
-				5F87E36A2F7BB04700165839 /* LiquidGlassComponent */,
+				5F9DD3F62FAB680000308F25 /* Megabox/Secret.xcconfig */,
+				5F9DD3E92FAB35DE00308F25 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -86,12 +100,16 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
-				5F87E34F2F79658200165839 /* MainTapView */,
-				5F87E36A2F7BB04700165839 /* LiquidGlassComponent */,
 				5FBAF50B2F6A6D9C00C12965 /* Megabox */,
 			);
 			name = Megabox;
 			packageProductDependencies = (
+				5F9DD3E22FAB042E00308F25 /* Alamofire */,
+				5F9DD3F12FAB680000308F25 /* Moya */,
+				5F9DD3F42FAB680000308F25 /* Kingfisher */,
+				5F9DD3EA2FAB35DE00308F25 /* KakaoSDKAuth */,
+				5F9DD3EC2FAB35DE00308F25 /* KakaoSDKCommon */,
+				5F9DD3EE2FAB35DE00308F25 /* KakaoSDKUser */,
 			);
 			productName = Megabox;
 			productReference = 5FBAF5092F6A6D9C00C12965 /* Megabox.app */;
@@ -121,6 +139,12 @@
 			);
 			mainGroup = 5FBAF5002F6A6D9C00C12965;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				5F9DD3E12FAB042E00308F25 /* XCRemoteSwiftPackageReference "Alamofire" */,
+				5F9DD3F02FAB680000308F25 /* XCRemoteSwiftPackageReference "Moya" */,
+				5F9DD3F32FAB680000308F25 /* XCRemoteSwiftPackageReference "Kingfisher" */,
+				5F9DD3E82FAB331300308F25 /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 5FBAF50A2F6A6D9C00C12965 /* Products */;
 			projectDirPath = "";
@@ -273,6 +297,7 @@
 		};
 		5FBAF5152F6A6D9E00C12965 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5F9DD3F62FAB680000308F25 /* Megabox/Secret.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -305,6 +330,7 @@
 		};
 		5FBAF5162F6A6D9E00C12965 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5F9DD3F62FAB680000308F25 /* Megabox/Secret.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -357,6 +383,74 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		5F9DD3E12FAB042E00308F25 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.12.0;
+			};
+		};
+		5F9DD3E82FAB331300308F25 /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/kakao/kakao-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.27.3;
+			};
+		};
+		5F9DD3F02FAB680000308F25 /* XCRemoteSwiftPackageReference "Moya" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Moya/Moya";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 15.0.0;
+			};
+		};
+		5F9DD3F32FAB680000308F25 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 8.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		5F9DD3E22FAB042E00308F25 /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5F9DD3E12FAB042E00308F25 /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
+		5F9DD3EA2FAB35DE00308F25 /* KakaoSDKAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5F9DD3E82FAB331300308F25 /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */;
+			productName = KakaoSDKAuth;
+		};
+		5F9DD3EC2FAB35DE00308F25 /* KakaoSDKCommon */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5F9DD3E82FAB331300308F25 /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */;
+			productName = KakaoSDKCommon;
+		};
+		5F9DD3EE2FAB35DE00308F25 /* KakaoSDKUser */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5F9DD3E82FAB331300308F25 /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */;
+			productName = KakaoSDKUser;
+		};
+		5F9DD3F12FAB680000308F25 /* Moya */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5F9DD3F02FAB680000308F25 /* XCRemoteSwiftPackageReference "Moya" */;
+			productName = Moya;
+		};
+		5F9DD3F42FAB680000308F25 /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5F9DD3F32FAB680000308F25 /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 5FBAF5012F6A6D9C00C12965 /* Project object */;
 }
