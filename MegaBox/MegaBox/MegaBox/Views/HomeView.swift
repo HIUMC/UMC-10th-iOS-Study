@@ -1,173 +1,286 @@
-//
-//  HomeView.swift
-//  MegaBox
-//
-//  Created by 김민지 on 4/1/26.
-//
-
 import SwiftUI
 
-// MARK: - 1. HomeView (메인 화면)
 struct HomeView: View {
-    // 💡 뷰모델 연결
+    @Environment(NavigationRouter<HomeRoute>.self) private var router
+    @Environment(DIContainer.self) private var container
     @State private var viewModel = HomeViewModel()
-    @State private var selectedTab: String = "홈"
-    let tabs = ["홈", "이벤트", "스토어", "선호극장"]
-    
-    var body: some View {
-        NavigationStack {
-            // 워크북의 iOS 26.0 설정 유지
-            if #available(iOS 26.0, *) {
-                ScrollView {
-                    VStack(alignment: .leading, spacing: 25) {
-                        movieSection
-                        specialHallSection
-                        bannerSection
-                    }
-                }
-                .toolbarBackground(.hidden, for: .navigationBar)
-                .navigationBarTitleDisplayMode(.inline)
-                // [상단 헤더 1] 로고 영역
-                .toolbar {
-                    ToolbarItem(placement: .topBarLeading) {
-                        Image("meboxLogo1")
-                            .resizable()
-                            .scaledToFit()
-                    }
-                }
-                // [상단 헤더 2] 세그먼트 영역 (애플 공식 수식어인 safeAreaInset 사용)
-                .safeAreaInset(edge: .top) {
-                    HStack(spacing: 20) {
-                        ForEach(tabs, id: \.self) { tab in
-                            Button {
-                                selectedTab = tab
-                            } label: {
-                                Text(tab)
-                                    .font(.system(size: 18, weight: selectedTab == tab ? .bold : .medium))
-                                    .foregroundColor(selectedTab == tab ? .primary : .secondary)
-                            }
-                        }
-                        Spacer()
-                    }
-                    .padding(.horizontal)
-                    .padding(.vertical, 10)
-                    .background(.background) // 배경색을 지정해야 스크롤 시 뒤가 안 비칩니다
-                }
-                // 💡 최신 Navigation 연결: 클릭된 영화 정보를 받아 상세 화면으로 이동
-                .navigationDestination(for: MovieModel.self) { selectedMovie in
-                    MovieDetailView(viewModel: MovieDetailViewModel(movie: selectedMovie))
-                }
-            } else {
-                Text("최신 버전을 지원하는 기기가 필요합니다.")
-            }
-        }
-    }
-}
+    @State private var selectedSegment: HomeViewModel.MovieChartType = .nowPlaying
+    @State private var selectedTheaterIndex: Int = 0
 
-// MARK: - 2. HomeView UI 컴포넌트 분리
-private extension HomeView {
-    
-    // 영화 포스터 가로 스크롤 섹션
-    var movieSection: some View {
-        VStack(alignment: .leading) {
-            HStack {
-                // 💡 뷰모델의 상태 변경 함수 연결
-                Button("무비차트") { viewModel.selectedChartType = .nowPlaying }
-                    .font(.system(size: 16, weight: viewModel.selectedChartType == .nowPlaying ? .bold : .medium))
-                    .foregroundColor(viewModel.selectedChartType == .nowPlaying ? .primary : .gray)
-                
-                Button("상영예정") { viewModel.selectedChartType = .upcoming }
-                    .font(.system(size: 16, weight: viewModel.selectedChartType == .upcoming ? .bold : .medium))
-                    .foregroundColor(viewModel.selectedChartType == .upcoming ? .primary : .gray)
-                
-                Spacer()
-            }
-            .padding(.horizontal)
-            
-            ScrollView(.horizontal, showsIndicators: false) {
-                LazyHStack(spacing: 15) {
-                    // 💡 하드코딩 삭제 -> ViewModel 데이터 순회
-                    ForEach(viewModel.currentMovies) { movie in
-                        NavigationLink(value: movie) {
-                            MoviePoster(movie: movie)
-                        }
-                        .buttonStyle(.plain) // 클릭 시 파란색으로 변하는 기본 버튼 효과 방지
-                    }
-                }
-                .padding(.horizontal)
-            }
-        }
-    }
-    
-    // 빨간 박스로 강조된 특별관 섹션
-    var specialHallSection: some View {
-        VStack(alignment: .leading) {
-            HStack {
-                Text("메가박스의 모든 특별관")
-                    .font(.headline)
-                Spacer()
-                Image(systemName: "chevron.right")
-            }
-            .padding(.horizontal)
-            
-            ScrollView(.horizontal, showsIndicators: false) {
-                HStack(spacing: 12) {
-                    ForEach(["Dolby", "Atmos", "MX4D", "DolbyAtmos", "LED"], id: \.self) { name in
-                        Circle()
-                            .fill(Color(uiColor: .systemGray6))
-                            .frame(width: 60, height: 60)
-                            .overlay(Text(name).font(.caption2))
-                    }
-                }
-                .padding(.horizontal)
-            }
-        }
-    }
-    
-    // 하단 배너 섹션
-    var bannerSection: some View {
-        RoundedRectangle(cornerRadius: 15)
-            .fill(.black)
-            .frame(height: 200)
-            .overlay(
-                Text("DOLBY CINEMA")
-                    .foregroundColor(.white)
-                    .font(.title2).bold()
-            )
-            .padding(.horizontal)
-    }
-}
-
-// MARK: - 3. 개별 영화 포스터 컴포넌트
-struct MoviePoster: View {
-    // 모델 전체를 주입받아 사용합니다.
-    let movie: MovieModel
-    
     var body: some View {
-        VStack(alignment: .leading) {
-            RoundedRectangle(cornerRadius: 10)
-                .fill(.gray.opacity(0.3)) // 실제 이미지 사용 시: Image(movie.posterImage).resizable().scaledToFill()
+        @Bindable var bindableRouter = router
+
+        NavigationStack(path: $bindableRouter.path) {
+            ScrollView(.vertical, showsIndicators: false) {
+                VStack(alignment: .leading, spacing: 0) {
+                    // 무비차트 / 상영예정 토글
+                    movieChartToggle
+                        .padding(.top, 16)
+                        .padding(.horizontal, 20)
+
+                    // 무비카드 가로 스크롤
+                    movieCardScroll
+                        .padding(.top, 16)
+
+                    // 메가박스의 모든 특별관
+                    specialTheaterSection
+                        .padding(.top, 30)
+
+                    // 특별관 카드 (PageControl)
+                    specialTheaterCard
+                        .padding(.top, 16)
+                        .padding(.horizontal, 20)
+                }
+            }
+            .toolbarBackground(.hidden, for: .navigationBar)
+                            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .topBarLeading) {
+                    Image("meboxLogo1")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 149, height: 30)
+                }
+
+
+            }
+            .safeAreaInset(edge: .top) {
+                headerSegment
+            }
+            .navigationDestination(for: HomeRoute.self) { route in
+                switch route {
+                case .movieDetail(let movie):
+                    MovieDetailView(movie: movie)
+                }
+            }
+        }
+    }
+
+    // MARK: - 상단 세그먼트
+
+    private var headerSegment: some View {
+        HStack(spacing: 20) {
+            ForEach(["홈", "이벤트", "스토어", "선호극장"], id: \.self) { tab in
+                Button(action: {}) {
+                    Text(tab)
+                        .pretendStyle(.semiBold24)
+                        .foregroundStyle(tab == "홈" ? Color(.purple03) : Color(.gray03))
+                }
+            }
+            Spacer()
+        }
+        .padding(.horizontal, 20)
+        .padding(.bottom, 10)
+    }
+
+    // MARK: - 무비차트 / 상영예정 토글
+
+    private var movieChartToggle: some View {
+        HStack(spacing: 12) {
+            chartToggleButton(title: "무비차트", type: .nowPlaying)
+            chartToggleButton(title: "상영예정", type: .upcoming)
+            Spacer()
+        }
+    }
+
+    // 토글 버튼 헬퍼 — 중복 코드 제거
+    private func chartToggleButton(title: String, type: HomeViewModel.MovieChartType) -> some View {
+        Button(action: { selectedSegment = type }) {
+            Text(title)
+                .pretendStyle(.semiBold14)
+                .foregroundStyle(selectedSegment == type ? .white : Color(.gray03))
+                .padding(.horizontal, 16)
+                .padding(.vertical, 8)
+                .background(selectedSegment == type ? Color(.purple03) : Color.clear)
+                .cornerRadius(16)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 16)
+                        .stroke(selectedSegment == type ? Color.clear : Color(.gray02), lineWidth: 1)
+                )
+        }
+    }
+
+    // MARK: - 무비카드 가로 스크롤
+
+    private var movieCardScroll: some View {
+        ScrollView(.horizontal, showsIndicators: false) {
+            LazyHStack(spacing: 12) {
+                ForEach(viewModel.currentMovies(for: selectedSegment)) { movie in
+                    makeMovieCard(movie)
+                        .onTapGesture {
+                            router.push(.movieDetail(movie))
+                        }
+                }
+            }
+            .padding(.horizontal, 20)
+        }
+    }
+
+    private func makeMovieCard(_ movie: MovieModel) -> some View {
+        VStack(alignment: .leading, spacing: 0) {
+            Image(movie.posterImage)
+                .resizable()
+                .aspectRatio(contentMode: .fill)
                 .frame(width: 140, height: 200)
                 .clipped()
-            
-            Button("바로 예매") { }
-                .font(.caption).bold()
-                .frame(width: 140)
-                .padding(.vertical, 5)
-                .background(RoundedRectangle(cornerRadius: 5).stroke(Color.purple))
-            
+                .cornerRadius(8)
+
+            Button(action: { container.selectedTab = 1 }) {
+                Text("바로 예매")
+                    .pretendStyle(.semiBold12)
+                    .foregroundStyle(Color(.purple03))
+                    .frame(maxWidth: .infinity)
+                    .padding(.vertical, 6)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 4)
+                            .stroke(Color(.purple03), lineWidth: 1)
+                    )
+            }
+            .padding(.top, 8)
+
             Text(movie.title)
-                .font(.system(size: 15, weight: .bold))
+                .pretendStyle(.semiBold14)
+                .foregroundStyle(Color(.gray07))
                 .lineLimit(1)
-            
-            Text(movie.formattedAudienceCount) // 포맷팅된 관객수 문자열 사용
-                .font(.caption)
-                .foregroundColor(.secondary)
+                .padding(.top, 8)
+
+            Text(movie.formattedAudienceCount)
+                .pretendStyle(.regular12)
+                .foregroundStyle(Color(.gray03))
+                .padding(.top, 2)
         }
+        .frame(width: 140)
+    }
+
+    // MARK: - 메가박스의 모든 특별관
+
+    private var specialTheaterSection: some View {
+        VStack(alignment: .leading, spacing: 12) {
+            HStack {
+                Text("메가박스의 모든 특별관")
+                    .pretendStyle(.bold24)
+                    .foregroundStyle(Color(.black))
+                Spacer()
+                Button(action: {
+                    let next = min(selectedTheaterIndex + 1, viewModel.theaters.count - 1)
+                    withAnimation {
+                        selectedTheaterIndex = next
+                    }
+                }) {
+                    Image(systemName: "chevron.right")
+                        .foregroundStyle(Color(.gray07))
+                }
+            }
+            .padding(.horizontal, 20)
+
+            // 특별관 로고 가로 스크롤
+            ScrollViewReader { proxy in
+                ScrollView(.horizontal, showsIndicators: false) {
+                    LazyHStack(spacing: 10) {
+                        ForEach(Array(viewModel.theaters.enumerated()), id: \.offset) { index, theater in
+                            VStack(spacing: 4) {
+                                let isSelected = (selectedTheaterIndex == index)
+
+                                Image(theater.logo)
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: 60, height: 60)
+                                    .padding(10)
+                                    .background {
+                                        if isSelected {
+                                            Circle()
+                                                .fill(Color.white)
+                                                .shadow(color: Color.black.opacity(0.08), radius: 6, x: 4, y: 4)
+                                                .shadow(color: Color.white.opacity(0.9), radius: 6, x: -4, y: -4)
+                                        } else {
+                                            Circle()
+                                                .fill(
+                                                    Color(.gray02)
+                                                        .shadow(.inner(color: Color.black.opacity(0.2), radius: 5, x: 4, y: 4))
+                                                        .shadow(.inner(color: Color.white.opacity(0.9), radius: 5, x: -4, y: -4))
+                                                )
+                                        }
+                                    }
+                                    .overlay(
+                                        Circle()
+                                            .stroke(
+                                                LinearGradient(
+                                                    colors: isSelected
+                                                        ? [Color.white.opacity(0.8), Color.clear, Color.black.opacity(0.05)]
+                                                        : [Color.black.opacity(0.15), Color.clear, Color.white.opacity(0.8)],
+                                                    startPoint: .topLeading,
+                                                    endPoint: .bottomTrailing
+                                                ),
+                                                lineWidth: 1.5
+                                            )
+                                    )
+
+                                // 선택 시 보라색 동그라미
+                                Circle()
+                                    .fill(selectedTheaterIndex == index ? Color(.purple03) : Color.clear)
+                                    .frame(width: 6, height: 6)
+                            }
+                            .id(index)
+                            .onTapGesture {
+                                withAnimation {
+                                    selectedTheaterIndex = index
+                                }
+                            }
+                        }
+                    }
+                    .padding(.horizontal, 20)
+                }
+                .onChange(of: selectedTheaterIndex) { _, newValue in
+                    withAnimation {
+                        proxy.scrollTo(newValue, anchor: .center)
+                    }
+                }
+            }
+        }
+    }
+
+    // MARK: - 특별관 카드 (PageControl + 로고 연동)
+
+    private var specialTheaterCard: some View {
+        TabView(selection: $selectedTheaterIndex) {
+            ForEach(Array(viewModel.theaters.enumerated()), id: \.offset) { index, theater in
+                ZStack(alignment: .topLeading) {
+                    GeometryReader { geo in
+                        Image(theater.card)
+                            .resizable()
+                            .aspectRatio(contentMode: .fill)
+                            .frame(width: geo.size.width, height: 408)
+                            .clipped()
+                    }
+
+                    LinearGradient(
+                        colors: [.black.opacity(0.7), .clear],
+                        startPoint: .top,
+                        endPoint: .center
+                    )
+
+                    VStack(alignment: .leading, spacing: 11) {
+                        Text(theater.title)
+                            .pretendStyle(.bold28)
+                        Text(theater.description)
+                            .pretendStyle(.medium18)
+                    }
+                    .foregroundStyle(.white)
+                    .padding(20)
+                }
+                .frame(height: 408)
+                .clipShape(RoundedRectangle(cornerRadius: 12))
+                .tag(index)
+            }
+        }
+        .tabViewStyle(.page(indexDisplayMode: .always))
+        .frame(height: 428)
+        .onChange(of: selectedTheaterIndex) { _, _ in }
     }
 }
 
-// MARK: - 4. Preview
 #Preview {
     HomeView()
+        .environment(NavigationRouter<HomeRoute>())
+        .environment(DIContainer())
 }

@@ -8,9 +8,9 @@
 import SwiftUI
 
 struct MyInfoView: View {
-    // AppStorage를 사용하여 저장된 아이디와 이름을 관리
-    @AppStorage("savedId") private var userId: String = ""
-    @AppStorage("savedName") private var userName: String = ""
+    @Environment(LoginViewModel.self) private var authVM
+    @AppStorage(AppStorageKeys.userName) private var userName: String = ""
+    @Environment(\.dismiss) private var dismiss
     
     // TextField에서 입력을 받기 위한 임시 상태 변수 (변경 버튼 클릭 시 AppStorage에 저장)
     @State private var newName: String = ""
@@ -28,7 +28,7 @@ struct MyInfoView: View {
         .padding()
         .onAppear {
             // 초기 진입 시 현재 저장된 이름을 입력창에 넣어줌
-            newName = userName
+            newName = authVM.currentUserName.isEmpty ? userName : authVM.currentUserName
         }
     }
     
@@ -36,7 +36,7 @@ struct MyInfoView: View {
     private var navigationBar: some View {
         HStack {
             Button(action: {
-                // 뒤로가기 액션 (실제 연결은 NavigationStack 필요)
+                dismiss()
             }) {
                 Image(systemName: "arrow.left")
                     .resizable()
@@ -71,8 +71,7 @@ struct MyInfoView: View {
                     .pretendStyle(.medium18)
                     .frame(width: 100, alignment: .leading)
                 
-                // 조건: AppStorage에서 불러온 아이디 표시
-                Text(userId.isEmpty ? "아이디 없음" : userId)
+                Text(authVM.currentUserID.isEmpty ? "아이디 없음" : authVM.currentUserID)
                     .pretendStyle(.medium16)
                     .foregroundColor(.gray02)
                 
@@ -96,9 +95,9 @@ struct MyInfoView: View {
                 Spacer()
                 
                 Button(action: {
-                    // 버튼 클릭 시 AppStorage에 이름 저장
-                    userName = newName
-                    print("이름 변경 완료: \(userName)")
+                    authVM.updateUserName(newName)
+                    userName = authVM.currentUserName
+                    print("이름 변경 완료: \(authVM.currentUserName)")
                 }) {
                     Text("변경")
                         .pretendStyle(.medium16)
@@ -119,4 +118,5 @@ struct MyInfoView: View {
 
 #Preview {
     MyInfoView()
+        .environment(LoginViewModel())
 }
