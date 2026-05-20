@@ -16,9 +16,11 @@ struct MovieDetailView: View {
         ScrollView(.vertical, showsIndicators: false) {
             VStack(spacing: 0) {
                 // 포스터
-                Image(movie.posterImage)
-                    .resizable()
-                    .aspectRatio(contentMode: .fill)
+                RemoteMovieImage(
+                    url: movie.backdropURL,
+                    fallbackImageName: movie.posterImage,
+                    contentMode: .fill
+                )
                     .frame(maxWidth: .infinity)
                     .frame(height: 350)
                     .clipped()
@@ -141,9 +143,11 @@ struct MovieDetailView: View {
             // 2️⃣ 상단: 포스터 이미지 + 등급/개봉 정보 (HStack)
             HStack(alignment: .top, spacing: 16) {
                 // 영화 이미지
-                Image(movie.posterImage)
-                    .resizable()
-                    .aspectRatio(contentMode: .fill)
+                RemoteMovieImage(
+                    url: movie.posterURL,
+                    fallbackImageName: movie.posterImage,
+                    contentMode: .fill
+                )
                     .frame(width: 43, height: 61) // 프로젝트 규격에 맞춰 너비/높이 조절
                     .cornerRadius(8)
                 

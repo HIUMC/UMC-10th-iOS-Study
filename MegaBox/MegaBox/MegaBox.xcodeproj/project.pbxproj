@@ -50,8 +50,12 @@
 		A5E5C8572FBCF02F000C1949 /* KakaoLoginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E5C8562FBCF02F000C1949 /* KakaoLoginModel.swift */; };
 		A5E5C85A2FBCF10A000C1949 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = A5E5C8592FBCF10A000C1949 /* Alamofire */; };
 		A5E5C85F2FBD0C6A000C1949 /* KakaoSDKAuth in Frameworks */ = {isa = PBXBuildFile; productRef = A5E5C85E2FBD0C6A000C1949 /* KakaoSDKAuth */; };
+		A5E5C8602FBE30BB000C1949 /* Moya in Frameworks */ = {isa = PBXBuildFile; productRef = A5E5C85F2FBE30BB000C1949 /* Moya */; };
 		A5E5C8612FBD0C6A000C1949 /* KakaoSDKCommon in Frameworks */ = {isa = PBXBuildFile; productRef = A5E5C8602FBD0C6A000C1949 /* KakaoSDKCommon */; };
 		A5E5C8632FBD0C6A000C1949 /* KakaoSDKUser in Frameworks */ = {isa = PBXBuildFile; productRef = A5E5C8622FBD0C6A000C1949 /* KakaoSDKUser */; };
+		A5E5C8642FBE3B54000C1949 /* Secrets.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = A5E5C8632FBE3B54000C1949 /* Secrets.xcconfig */; };
+		A5E5C8662FBE3B55000C1949 /* TMDBMovieDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E5C8652FBE3B55000C1949 /* TMDBMovieDTO.swift */; };
+		A5E5C86B2FBE3D09000C1949 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = A5E5C86A2FBE3D09000C1949 /* Kingfisher */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -98,6 +102,8 @@
 		A5E5C8352FB24E47000C1949 /* ReservationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservationModel.swift; sourceTree = "<group>"; };
 		A5E5C8382FB25031000C1949 /* MovieSchedule.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = MovieSchedule.json; sourceTree = "<group>"; };
 		A5E5C8562FBCF02F000C1949 /* KakaoLoginModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KakaoLoginModel.swift; sourceTree = "<group>"; };
+		A5E5C8632FBE3B54000C1949 /* Secrets.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Secrets.xcconfig; sourceTree = "<group>"; };
+		A5E5C8652FBE3B55000C1949 /* TMDBMovieDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TMDBMovieDTO.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,9 +111,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A5E5C86B2FBE3D09000C1949 /* Kingfisher in Frameworks */,
 				A5E5C85A2FBCF10A000C1949 /* Alamofire in Frameworks */,
 				A5E5C85F2FBD0C6A000C1949 /* KakaoSDKAuth in Frameworks */,
 				A5E5C8612FBD0C6A000C1949 /* KakaoSDKCommon in Frameworks */,
+				A5E5C8602FBE30BB000C1949 /* Moya in Frameworks */,
 				A5E5C8632FBD0C6A000C1949 /* KakaoSDKUser in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -197,6 +205,7 @@
 				A5851CA72F7BE69F00F452A1 /* Fonts */,
 				A5851CA82F7BE69F00F452A1 /* Colors.xcassets */,
 				A5E5C8372FB24FCC000C1949 /* JSON */,
+				A5E5C8612FBE3B33000C1949 /* Configs */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -240,6 +249,7 @@
 			isa = PBXGroup;
 			children = (
 				A5E5C8332FB24E47000C1949 /* ReservationDTO.swift */,
+				A5E5C8652FBE3B55000C1949 /* TMDBMovieDTO.swift */,
 			);
 			path = DTO;
 			sourceTree = "<group>";
@@ -258,6 +268,14 @@
 				A5E5C8382FB25031000C1949 /* MovieSchedule.json */,
 			);
 			path = JSON;
+			sourceTree = "<group>";
+		};
+		A5E5C8612FBE3B33000C1949 /* Configs */ = {
+			isa = PBXGroup;
+			children = (
+				A5E5C8632FBE3B54000C1949 /* Secrets.xcconfig */,
+			);
+			path = Configs;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -281,6 +299,8 @@
 				A5E5C85E2FBD0C6A000C1949 /* KakaoSDKAuth */,
 				A5E5C8602FBD0C6A000C1949 /* KakaoSDKCommon */,
 				A5E5C8622FBD0C6A000C1949 /* KakaoSDKUser */,
+				A5E5C85F2FBE30BB000C1949 /* Moya */,
+				A5E5C86A2FBE3D09000C1949 /* Kingfisher */,
 			);
 			productName = MegaBox;
 			productReference = A5851C902F7BCCBD00F452A1 /* MegaBox.app */;
@@ -313,6 +333,8 @@
 			packageReferences = (
 				A5E5C8582FBCF10A000C1949 /* XCRemoteSwiftPackageReference "Alamofire" */,
 				A5E5C85D2FBCF764000C1949 /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */,
+				A5E5C85E2FBE30BB000C1949 /* XCRemoteSwiftPackageReference "Moya" */,
+				A5E5C8692FBE3D09000C1949 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 			);
 			productRefGroup = A5851C912F7BCCBD00F452A1 /* Products */;
 			projectDirPath = "";
@@ -328,6 +350,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A5E5C8642FBE3B54000C1949 /* Secrets.xcconfig in Resources */,
 				A5851CBD2F7BE71D00F452A1 /* Pretendard-SemiBold.otf in Resources */,
 				A5851CB42F7BE71300F452A1 /* Pretendard-ExtraLight.otf in Resources */,
 				A5851CBC2F7BE71D00F452A1 /* Pretendard-Thin.otf in Resources */,
@@ -356,6 +379,7 @@
 				A5AE90DB2F7C6818001ACF68 /* MyInfoView.swift in Sources */,
 				A5E5C7FB2F8568F3000C1949 /* NaviationRouter.swift in Sources */,
 				A5851CAC2F7BE6D900F452A1 /* Fonts.swift in Sources */,
+				A5E5C8662FBE3B55000C1949 /* TMDBMovieDTO.swift in Sources */,
 				A5AE90D92F7C506C001ACF68 /* MyPageView.swift in Sources */,
 				A567DB972F7D1B8300B175E3 /* HomeView.swift in Sources */,
 				A5AE90D72F7C49BA001ACF68 /* LoginModel.swift in Sources */,
@@ -606,6 +630,22 @@
 				kind = branch;
 			};
 		};
+		A5E5C85E2FBE30BB000C1949 /* XCRemoteSwiftPackageReference "Moya" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Moya/Moya";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 15.0.3;
+			};
+		};
+		A5E5C8692FBE3D09000C1949 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 8.9.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -619,6 +659,11 @@
 			package = A5E5C85D2FBCF764000C1949 /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */;
 			productName = KakaoSDKAuth;
 		};
+		A5E5C85F2FBE30BB000C1949 /* Moya */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A5E5C85E2FBE30BB000C1949 /* XCRemoteSwiftPackageReference "Moya" */;
+			productName = Moya;
+		};
 		A5E5C8602FBD0C6A000C1949 /* KakaoSDKCommon */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = A5E5C85D2FBCF764000C1949 /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */;
@@ -628,6 +673,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = A5E5C85D2FBCF764000C1949 /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */;
 			productName = KakaoSDKUser;
+		};
+		A5E5C86A2FBE3D09000C1949 /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A5E5C8692FBE3D09000C1949 /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
