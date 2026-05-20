@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>CFBundleURLTypes</key>
+    <array>
+        <dict>
+            <key>CFBundleTypeRole</key>
+            <string>Editor</string>
+            <key>CFBundleURLSchemes</key>
+            <array>
+                <string>kakao$(KAKAO_NATIVE_APP_KEY)</string>
+            </array>
+        </dict>
+    </array>
+    <key>KakaoClientSecret</key>
+    <string>$(KAKAO_CLIENT_SECRET)</string>
+    <key>KakaoNativeAppKey</key>
+    <string>$(KAKAO_NATIVE_APP_KEY)</string>
+    <key>KakaoRESTKey</key>
+    <string>$(KAKAO_REST_KEY)</string>
+    <key>TMDBAPIKey</key>
+    <string>$(TMDB_API_KEY)</string>
+    
+    <!-- 이 부분을 아래와 같이 확인해 주세요 -->
+    <key>LSApplicationQueriesSchemes</key>
+    <array>
+        <string>kakaokompassauth</string>
+        <string>kakaolink</string>
+        <string>kakaotalk</string>
+    </array>
+    
+    <key>UIAppFonts</key>
+    <array>
+        <string>Pretendard_Black.otf</string>
+        <string>Pretendard_Bold.otf</string>
+        <string>Pretendard_ExtraBold.otf</string>
+        <string>Pretendard_xtraLight.otf</string>
+        <string>Pretendard_Light.otf</string>
+        <string>Pretendard_Medium.otf</string>
+        <string>Pretendard_Regular.otf</string>
+        <string>Pretendard_SemiBold.otf</string>
+        <string>Pretendard_Thin.otf</string>
+    </array>
+</dict>
+</plist>

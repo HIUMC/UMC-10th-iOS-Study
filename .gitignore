@@ -19,3 +19,9 @@ build/
 # Secrets.swift
 # config.json
 *.xcconfig
+# macOS system files
+.DS_Store
+**/.DS_Store*.xcuserstate
+
+# Workbook documents
+choi/workbook/

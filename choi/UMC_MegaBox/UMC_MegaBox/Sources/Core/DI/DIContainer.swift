@@ -1,0 +1,29 @@
+//
+//  DIContainer.swift
+//  UMC_MegaBox
+//
+//  Created by 최민혁 on 3/31/26.
+//
+
+import SwiftUI
+import Observation
+
+@Observable
+class DIContainer: DIContainerProtocol {
+    // 탭 선택 상태
+    var selectedTab: Int = 0
+
+    // 앱에서 사용할 라우터들
+    var homeRouter = NavigationRouter<HomeRoute>()
+    var myPageRouter = NavigationRouter<MyPageRoute>()
+    var reservationRouter = NavigationRouter<ReservationRoute>()
+
+    // 로그아웃 시 전체 초기화
+    func resetAll() {
+        homeRouter.reset()
+        myPageRouter.reset()
+        reservationRouter.reset()
+        selectedTab = 0
+    }
+}
+
