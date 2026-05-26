@@ -6,6 +6,8 @@ struct MovieModel: Identifiable, Hashable {
     // 홈 화면
     let title: String
     let posterImage: String
+    let posterURL: URL?
+    let backdropURL: URL?
     let audienceCount: Int
     
     // 영화 상세 화면
@@ -18,6 +20,40 @@ struct MovieModel: Identifiable, Hashable {
     let type: String
     let director: String
     let cast: String
+
+    init(
+        id: String,
+        title: String,
+        posterImage: String,
+        posterURL: URL? = nil,
+        backdropURL: URL? = nil,
+        audienceCount: Int,
+        englishTitle: String,
+        quote: String,
+        description: String,
+        ageRating: String,
+        releaseInfo: String,
+        genre: String,
+        type: String,
+        director: String,
+        cast: String
+    ) {
+        self.id = id
+        self.title = title
+        self.posterImage = posterImage
+        self.posterURL = posterURL
+        self.backdropURL = backdropURL
+        self.audienceCount = audienceCount
+        self.englishTitle = englishTitle
+        self.quote = quote
+        self.description = description
+        self.ageRating = ageRating
+        self.releaseInfo = releaseInfo
+        self.genre = genre
+        self.type = type
+        self.director = director
+        self.cast = cast
+    }
 
     
     // 관객수를 "누적관객수 1000만" 형식으로 포맷팅

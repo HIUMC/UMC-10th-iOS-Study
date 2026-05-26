@@ -4,6 +4,10 @@ import Foundation
 class HomeViewModel {
     var movies: [MovieModel] = MovieModel.nowPlayingMovies
     var upcomingMovies: [MovieModel] = MovieModel.upcomingMovies
+    var isLoadingNowPlayingMovies = false
+    var movieLoadingErrorMessage: String?
+
+    private let movieService = TMDBMovieService()
     
     // 무비차트 / 상영예정 구분 enum
     enum MovieChartType {
@@ -17,6 +21,25 @@ class HomeViewModel {
         case .nowPlaying: return movies
         case .upcoming: return upcomingMovies
         }
+    }
+
+    @MainActor
+    func fetchNowPlayingMovies() async {
+        guard !isLoadingNowPlayingMovies else {
+            return
+        }
+
+        isLoadingNowPlayingMovies = true
+        movieLoadingErrorMessage = nil
+
+        do {
+            movies = try await movieService.fetchNowPlayingMovies()
+        } catch {
+            movieLoadingErrorMessage = error.localizedDescription
+            print("TMDB Now Playing 호출 실패: \(error.localizedDescription)")
+        }
+
+        isLoadingNowPlayingMovies = false
     }
 
     let theaters: [TheaterModel] = [

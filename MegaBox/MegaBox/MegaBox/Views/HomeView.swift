@@ -1,4 +1,5 @@
 import SwiftUI
+import Kingfisher
 
 struct HomeView: View {
     @Environment(NavigationRouter<HomeRoute>.self) private var router
@@ -52,6 +53,9 @@ struct HomeView: View {
                 case .movieDetail(let movie):
                     MovieDetailView(movie: movie)
                 }
+            }
+            .task {
+                await viewModel.fetchNowPlayingMovies()
             }
         }
     }
@@ -118,9 +122,11 @@ struct HomeView: View {
 
     private func makeMovieCard(_ movie: MovieModel) -> some View {
         VStack(alignment: .leading, spacing: 0) {
-            Image(movie.posterImage)
-                .resizable()
-                .aspectRatio(contentMode: .fill)
+            RemoteMovieImage(
+                url: movie.posterURL,
+                fallbackImageName: movie.posterImage,
+                contentMode: .fill
+            )
                 .frame(width: 140, height: 200)
                 .clipped()
                 .cornerRadius(8)
@@ -276,6 +282,48 @@ struct HomeView: View {
         .tabViewStyle(.page(indexDisplayMode: .always))
         .frame(height: 428)
         .onChange(of: selectedTheaterIndex) { _, _ in }
+    }
+}
+
+struct RemoteMovieImage: View {
+    let url: URL?
+    let fallbackImageName: String
+    let contentMode: SwiftUI.ContentMode
+
+    var body: some View {
+        if let url {
+            remoteImage(url: url)
+        } else {
+            fallbackImage
+        }
+    }
+
+    @ViewBuilder
+    private func remoteImage(url: URL) -> some View {
+        KFImage(url)
+            .placeholder {
+                ProgressView()
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+            }
+            .resizable()
+            .aspectRatio(contentMode: contentMode)
+    }
+
+    private var fallbackImage: some View {
+        Group {
+            if fallbackImageName.isEmpty {
+                Rectangle()
+                    .fill(Color(.gray02))
+                    .overlay {
+                        Image(systemName: "photo")
+                            .foregroundStyle(Color(.gray03))
+                    }
+            } else {
+                Image(fallbackImageName)
+                    .resizable()
+                    .aspectRatio(contentMode: contentMode)
+            }
+        }
     }
 }
 
