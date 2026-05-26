@@ -17,6 +17,10 @@ enum MyPageRoute: Hashable {
     case profileManage
 }
 
+enum MobileOrderRoute: Hashable {
+    case detail(MenuItemModel.ID)
+}
+
 /// 좌석 선택 화면에 전달할 파라미터를 구조체로 묶어 가독성 향상
 struct SeatSelectionParams: Hashable {
     let movie: MovieModel
