@@ -20,6 +20,7 @@ struct MainTabView: View {
 
             Tab("모바일 오더", systemImage: "popcorn", value: 2) {
                 MobileOrderView()
+                    .environment(container.mobileOrderRouter)
             }
 
             Tab("마이페이지", systemImage: "person", value: 3) {

@@ -20,5 +20,8 @@ enum MyPageRoute: Hashable {
 
 enum ReservationRoute: Hashable {
     case seatSelection(MovieModel, String, TimeTableModel, CalendarDay)
- }
- 
+}
+
+enum MobileOrderRoute: Hashable {
+    case menuDetail(MenuItemModel)
+}
