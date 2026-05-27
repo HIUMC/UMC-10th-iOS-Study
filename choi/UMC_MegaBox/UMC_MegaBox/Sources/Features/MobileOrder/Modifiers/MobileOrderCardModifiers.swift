@@ -55,7 +55,6 @@ struct LiquidGlassButtonModifier: ViewModifier {
         content
             .background(fillColor)
             .clipShape(RoundedRectangle(cornerRadius: cornerRadius, style: .continuous))
-            .glassEffect(in: .rect(cornerRadius: cornerRadius))
             .overlay(
                 RoundedRectangle(cornerRadius: cornerRadius, style: .continuous)
                     .stroke(strokeColor, lineWidth: 1)

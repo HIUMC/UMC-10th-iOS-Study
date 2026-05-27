@@ -14,8 +14,9 @@ struct ClubMembershipButton: View {
                 Spacer()
             }
             .padding(.leading, 15)
-            .padding(.vertical, 15)
+            .padding(.vertical, 12)
             .frame(maxWidth: .infinity, alignment: .leading)
+            .frame(height: 46)
             .background(
                 LinearGradient(
                     stops: [
@@ -27,7 +28,7 @@ struct ClubMembershipButton: View {
                     endPoint: UnitPoint(x: 1, y: 0.5)
                 )
             )
-            .cornerRadius(8)
+            .cornerRadius(24)
             }
     }
 }

@@ -67,7 +67,7 @@ struct MovieDetailView: View {
                             .foregroundStyle(Color(.black))
                             .multilineTextAlignment(.center)
                             .frame(width: 408, height: 165)
-                            .glassEffect(in: .rect(cornerRadius: 24.0))
+                            .background(Color(.systemBackground), in: RoundedRectangle(cornerRadius: 24.0))
                             .shadow(color: .black.opacity(0.05), radius: 24, x: 0, y: 8)
                     }
                     

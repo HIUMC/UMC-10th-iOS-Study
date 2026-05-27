@@ -113,7 +113,8 @@ struct ReservationView: View {
                     .padding(.horizontal, 10)
                     .padding(.vertical, 5)
             }
-            .glassEffect()
+            .background(Color(.systemBackground), in: Capsule())
+            .overlay(Capsule().stroke(Color(.gray02), lineWidth: 1))
 
         }
     }

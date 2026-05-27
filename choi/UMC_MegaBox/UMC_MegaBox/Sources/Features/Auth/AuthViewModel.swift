@@ -116,6 +116,11 @@ class AuthViewModel {
         container.resetAll()
         credentialStore.delete()
         tokenService.deleteToken()
+        do {
+            try ProfileImageStore().delete()
+        } catch {
+            print("프로필 이미지 삭제 실패:", error)
+        }
         clearLegacyUserDefaults()
         loginModel = LoginModel()
         currentSession = nil

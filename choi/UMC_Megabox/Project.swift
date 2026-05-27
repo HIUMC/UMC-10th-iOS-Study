@@ -28,7 +28,8 @@ let project = Project(
                     "KAKAO_REST_API_KEY": "$(KAKAO_REST_API_KEY)",
                     "KAKAO_CLIENT_SECRET": "$(KAKAO_CLIENT_SECRET)",
                     "KAKAO_REDIRECT_URI": "$(KAKAO_REDIRECT_URI)",
-                    "TMDB_API_KEY": "$(TMDB_API_KEY)"
+                    "TMDB_API_KEY": "$(TMDB_API_KEY)",
+                    "NSPhotoLibraryUsageDescription": "프로필 사진을 선택하기 위해 사진 보관함 접근이 필요합니다."
                 ]
             ),
             sources: ["UMC_MegaBox/Sources/**"], // 현재 폴더의 Sources 안의 모든 파일
