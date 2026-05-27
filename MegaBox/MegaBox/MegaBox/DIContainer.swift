@@ -17,12 +17,14 @@ class DIContainer {
     var homeRouter = NavigationRouter<HomeRoute>()
     var myPageRouter = NavigationRouter<MyPageRoute>()
     var reservationRouter = NavigationRouter<ReservationRoute>()
+    var mobileOrderRouter = NavigationRouter<MobileOrderRoute>()
 
     // 로그아웃 시 전체 초기화
     func resetAll() {
         homeRouter.reset()
         myPageRouter.reset()
         reservationRouter.reset()
+        mobileOrderRouter.reset()
         selectedTab = 0
     }
 }
