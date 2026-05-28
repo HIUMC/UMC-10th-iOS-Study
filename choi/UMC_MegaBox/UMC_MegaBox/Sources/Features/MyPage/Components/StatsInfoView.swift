@@ -3,13 +3,13 @@ import SwiftUI
 struct StatsInfoView: View {
     var body: some View {
         HStack(spacing: 0) {
-            StatItemView(title: "쿠폰", value: "3")
+            StatItemView(title: "쿠폰", value: "2")
             Divider()
                 .frame(height: 40)
             StatItemView(title: "스토어 교환권", value: "0")
             Divider()
                 .frame(height: 40)
-            StatItemView(title: "모바일 티켓", value: "1")
+            StatItemView(title: "모바일 티켓", value: "0")
         }
         .padding(.vertical, 16)
         .background(Color(.systemBackground))
